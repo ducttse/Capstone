@@ -1,9 +1,10 @@
-import { Button, notification } from "antd";
-const openNotification = () => {
+import { notification } from "antd";
+import { useEffect, useState } from "react";
+import { getFireBaseToken, onMessageListener } from "./firebase";
+const openNotification = (message, description) => {
 	notification.open({
-		message: "Notification Title",
-		description:
-			"This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+		message: message,
+		description: description,
 		onClick: () => {
 			console.log("Notification Clicked!");
 		}
@@ -11,14 +12,23 @@ const openNotification = () => {
 };
 
 const App = () => {
+	const [isTokenFound, setTokenFound] = useState(false);
+	useEffect(() => {
+		getFireBaseToken(setTokenFound);
+	}, []);
+	onMessageListener()
+		.then((payload) => {
+			openNotification(payload.notification.title, payload.notification.body);
+			console.log(payload);
+		})
+		.catch((err) => console.log("failed: ", err));
+	// inside the jsx being returned:
+
 	return (
 		<>
-			<div>
-				<Button type="primary" onClick={openNotification}>
-					Open the notification box
-				</Button>
-			</div>
-			;
+			{isTokenFound && " Notification permission enabled 👍🏻 "}
+			{!isTokenFound && " Need notification permission ❗️ "}
+			<div>Test, notification will appear at right</div>;
 		</>
 	);
 };
