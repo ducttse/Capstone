@@ -1,5 +1,5 @@
-{
-	"compilerOptions": {
-		"lib": ["webworker"]
-	}
-}
+// {
+// 	"compilerOptions": {
+// 		"lib": ["webworker"]
+// 	}
+// }

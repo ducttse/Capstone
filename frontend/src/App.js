@@ -1,5 +1,6 @@
 import { notification } from "antd";
 import { useEffect, useState } from "react";
+import CustomLayout from "./common/CustomLayout";
 import { getFireBaseToken, onMessageListener } from "./firebase";
 const openNotification = (message, description) => {
 	notification.open({
@@ -26,9 +27,7 @@ const App = () => {
 
 	return (
 		<>
-			{isTokenFound && " Notification permission enabled 👍🏻 "}
-			{!isTokenFound && " Need notification permission ❗️ "}
-			<div>Test, notification will appear at right</div>;
+			<CustomLayout />
 		</>
 	);
 };
