@@ -5,6 +5,7 @@ import {
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
 import React from "react";
+import "./CustomeLayout.css";
 const { Header, Content, Sider } = Layout;
 const items1 = ["1", "2", "3"].map((key) => ({
 	key,
@@ -16,28 +17,16 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
 		return {
 			key: `sub${key}`,
 			icon: React.createElement(icon),
-			label: `subnav ${key}`,
-			children: new Array(4).fill(null).map((_, j) => {
-				const subKey = index * 4 + j + 1;
-				return {
-					key: subKey,
-					label: `option${subKey}`
-				};
-			})
+			label: `subnav ${key}`
 		};
 	}
 );
 
-const CustomLayout = () => (
+const CustomLayout = (props) => (
 	<Layout>
 		<Header className="header">
 			<div className="logo" />
-			<Menu
-				theme="dark"
-				mode="horizontal"
-				defaultSelectedKeys={["2"]}
-				items={items1}
-			/>
+			<Menu mode="horizontal" defaultSelectedKeys={["2"]} items={items1} />
 		</Header>
 		<Layout>
 			<Sider width={200} className="site-layout-background">
@@ -57,7 +46,7 @@ const CustomLayout = () => (
 					padding: "0 24px 24px"
 				}}
 			>
-				<Breadcrumb
+				{/* <Breadcrumb
 					style={{
 						margin: "16px 0"
 					}}
@@ -65,7 +54,7 @@ const CustomLayout = () => (
 					<Breadcrumb.Item>Home</Breadcrumb.Item>
 					<Breadcrumb.Item>List</Breadcrumb.Item>
 					<Breadcrumb.Item>App</Breadcrumb.Item>
-				</Breadcrumb>
+				</Breadcrumb> */}
 				<Content
 					className="site-layout-background"
 					style={{
@@ -74,7 +63,7 @@ const CustomLayout = () => (
 						minHeight: 280
 					}}
 				>
-					Content
+					{props.content ? props.content : <h2>No content</h2>}
 				</Content>
 			</Layout>
 		</Layout>
