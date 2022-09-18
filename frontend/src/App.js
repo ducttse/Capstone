@@ -1,6 +1,8 @@
 import { notification } from "antd";
 import { useEffect, useState } from "react";
 import CustomLayout from "./common/CustomLayout";
+import QuestionCard from "./components/question/QuestionCard";
+import QuestionCardPage from "./components/question/QuestionCardPage.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
 const openNotification = (message, description) => {
 	notification.open({
@@ -13,6 +15,8 @@ const openNotification = (message, description) => {
 };
 
 const App = () => {
+	// TODO: implement notification
+	// eslint-disable-next-line no-unused-vars
 	const [isTokenFound, setTokenFound] = useState(false);
 	useEffect(() => {
 		getFireBaseToken(setTokenFound);
@@ -27,7 +31,7 @@ const App = () => {
 
 	return (
 		<>
-			<CustomLayout />
+			<CustomLayout content={<QuestionCardPage />} />
 		</>
 	);
 };
