@@ -1,9 +1,8 @@
 import { notification } from "antd";
 import { useEffect, useState } from "react";
 import CustomLayout from "./common/CustomLayout";
-import QuestionCard from "./components/question/QuestionCard";
-import QuestionCardPage from "./components/question/QuestionCardPage.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
+import CreateQuestionPage from "./page/question/CreateQuestionPage.jsx";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -31,7 +30,7 @@ const App = () => {
 
 	return (
 		<>
-			<CustomLayout content={<QuestionCardPage />} />
+			<CustomLayout content={<CreateQuestionPage />} />
 		</>
 	);
 };

@@ -3,14 +3,11 @@ import {
 	NotificationOutlined,
 	UserOutlined
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu } from "antd";
+import { Col, Layout, Menu, Row, Input } from "antd";
 import React from "react";
 import "./CustomeLayout.css";
 const { Header, Content, Sider } = Layout;
-const items1 = ["1", "2", "3"].map((key) => ({
-	key,
-	label: `nav ${key}`
-}));
+const { Search } = Input;
 const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
 	(icon, index) => {
 		const key = String(index + 1);
@@ -22,11 +19,21 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
 	}
 );
 
+const onSearch = (value) => console.log(value);
+
 const CustomLayout = (props) => (
 	<Layout>
 		<Header className="header">
-			<div className="logo" />
-			<Menu mode="horizontal" defaultSelectedKeys={["2"]} items={items1} />
+			<Row>
+				<Col offset={6} span={10}>
+					<Search
+						size="large"
+						placeholder="Tìm kiếm câu hỏi"
+						onSearch={onSearch}
+						style={{ width: "100%", marginTop: 10 }}
+					/>
+				</Col>
+			</Row>
 		</Header>
 		<Layout>
 			<Sider width={200} className="site-layout-background">

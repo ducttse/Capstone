@@ -1,7 +1,7 @@
-import QuestionCard from "./QuestionCard.js";
+import QuestionCard from "./components/QuestionCard.jsx";
 import { Col, Pagination, Row } from "antd";
 import { useEffect, useState } from "react";
-import MultiSelection from "./MultiSelection.js";
+import MultiSelection from "./components/MultiSelection.jsx/index.js.js";
 const questions = [
 	{
 		id: "1",
@@ -91,8 +91,8 @@ const QuestionCardPage = () => {
 
 	return (
 		<>
-			<Row>
-				<Col span={18}>
+			<Row style={{ padding: 30, backgroundColor: "#fff" }}>
+				<Col span={16}>
 					{item ? item : <h2>No content</h2>}
 					<Pagination
 						total={questions.length}
@@ -101,7 +101,7 @@ const QuestionCardPage = () => {
 						onChange={onChangeCurrentPage}
 					/>
 				</Col>
-				<Col span={6}>
+				<Col span={6} offset={2} style={{ padding: 10 }}>
 					<MultiSelection />
 				</Col>
 			</Row>

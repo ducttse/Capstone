@@ -1,3 +1,5 @@
 .header {
-	background: #fff;
+	background: #fff !important;
+	border-bottom: 1px;
+	border-color: black;
 }
