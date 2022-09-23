@@ -2,9 +2,11 @@ import { notification } from "antd";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomLayout from "./common/CustomLayout";
+import Counter from "./counter.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
 import CreateQuestionPage from "./page/question/CreateQuestionPage.jsx";
 import QuestionCardPage from "./page/question/QuestionCardPage.jsx";
+import store from "./redux/store/store.js";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -14,6 +16,8 @@ const openNotification = (message, description) => {
 		}
 	});
 };
+
+const action = (type) => store.dispatch({ type });
 
 const App = () => {
 	// TODO: implement notification
@@ -39,6 +43,15 @@ const App = () => {
 					</Route>
 					<Route path="/questions">
 						<QuestionCardPage />
+					</Route>
+					<Route path="/counter">
+						<Counter
+							value={store.getState()}
+							onIncrement={() => action("INCREMENT")}
+							onDecrement={() => action("DECREMENT")}
+							onIncrementIfOdd={() => action("INCREMENT_IF_ODD")}
+							onIncrementAsync={() => action("INCREMENT_ASYNC")}
+						/>
 					</Route>
 				</CustomLayout>
 			</Switch>
