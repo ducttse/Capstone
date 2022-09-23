@@ -1,7 +1,8 @@
 import QuestionCard from "./components/QuestionCard.jsx";
-import { Col, Pagination, Row } from "antd";
+import { Button, Col, Pagination, Row } from "antd";
 import { useEffect, useState } from "react";
-import MultiSelection from "./components/MultiSelection.jsx/index.js.js";
+import MultiSelection from "./components/MultiSelection.jsx";
+import { Link } from "react-router-dom";
 const questions = [
 	{
 		id: "1",
@@ -91,7 +92,12 @@ const QuestionCardPage = () => {
 
 	return (
 		<>
-			<Row style={{ padding: 30, backgroundColor: "#fff" }}>
+			<Row style={{ marginBottom: 20 }}>
+				<Button type="primary">
+					<Link to="/create-question">Đặt câu hỏi</Link>
+				</Button>
+			</Row>
+			<Row>
 				<Col span={16}>
 					{item ? item : <h2>No content</h2>}
 					<Pagination

@@ -5,19 +5,30 @@ import {
 } from "@ant-design/icons";
 import { Col, Layout, Menu, Row, Input } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
 import "./CustomeLayout.css";
 const { Header, Content, Sider } = Layout;
 const { Search } = Input;
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-	(icon, index) => {
-		const key = String(index + 1);
-		return {
-			key: `sub${key}`,
-			icon: React.createElement(icon),
-			label: `subnav ${key}`
-		};
+
+const SideBarItemsArr = [
+	{
+		name: "Tất cả câu hỏi",
+		path: "/questions"
+	},
+	{
+		name: "Câu hỏi đã đăng",
+		path: "/questions"
 	}
-);
+];
+const getSideBarItems = () =>
+	SideBarItemsArr.map((item, index) => {
+		const key = String(index + 1);
+		return (
+			<Menu.Item key={`sub${key}`}>
+				<Link to={item.path}>{item.name}</Link>
+			</Menu.Item>
+		);
+	});
 
 const onSearch = (value) => console.log(value);
 
@@ -45,32 +56,25 @@ const CustomLayout = (props) => (
 						height: "100%",
 						borderRight: 0
 					}}
-					items={items2}
-				/>
+				>
+					{getSideBarItems()}
+				</Menu>
 			</Sider>
 			<Layout
 				style={{
 					padding: "0 24px 24px"
 				}}
 			>
-				{/* <Breadcrumb
-					style={{
-						margin: "16px 0"
-					}}
-				>
-					<Breadcrumb.Item>Home</Breadcrumb.Item>
-					<Breadcrumb.Item>List</Breadcrumb.Item>
-					<Breadcrumb.Item>App</Breadcrumb.Item>
-				</Breadcrumb> */}
 				<Content
 					className="site-layout-background"
 					style={{
 						padding: 24,
-						margin: 0,
-						minHeight: 280
+						margin: 24,
+						minHeight: 280,
+						background: "#fff"
 					}}
 				>
-					{props.content ? props.content : <h2>No content</h2>}
+					{props.children}
 				</Content>
 			</Layout>
 		</Layout>

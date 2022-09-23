@@ -1,8 +1,10 @@
 import { notification } from "antd";
 import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomLayout from "./common/CustomLayout";
 import { getFireBaseToken, onMessageListener } from "./firebase";
 import CreateQuestionPage from "./page/question/CreateQuestionPage.jsx";
+import QuestionCardPage from "./page/question/QuestionCardPage.jsx";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -29,9 +31,18 @@ const App = () => {
 	// inside the jsx being returned:
 
 	return (
-		<>
-			<CustomLayout content={<CreateQuestionPage />} />
-		</>
+		<BrowserRouter>
+			<Switch>
+				<CustomLayout>
+					<Route path="/create-question">
+						<CreateQuestionPage />
+					</Route>
+					<Route path="/questions">
+						<QuestionCardPage />
+					</Route>
+				</CustomLayout>
+			</Switch>
+		</BrowserRouter>
 	);
 };
 
