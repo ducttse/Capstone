@@ -1,27 +1,19 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-
+import React from "react";
 const Counter = ({
 	value,
-	onIncrement,
-	onIncrementAsync,
-	onDecrement,
-	onIncrementIfOdd
-}) => (
-	<p>
-		Clicked: {value} times <button onClick={onIncrement}>+</button>{" "}
-		<button onClick={onDecrement}>-</button>{" "}
-		<button onClick={onIncrementIfOdd}>Increment if odd</button>{" "}
-		<button onClick={onIncrementAsync}>Increment async</button>
-	</p>
-);
-
-Counter.propTypes = {
-	value: PropTypes.number.isRequired,
-	onIncrement: PropTypes.func.isRequired,
-	onDecrement: PropTypes.func.isRequired,
-	onIncrementAsync: PropTypes.func.isRequired,
-	onIncrementIfOdd: PropTypes.func.isRequired
+	increment,
+	decrement,
+	incrementIfOdd,
+	incrementAsync
+}) => {
+	return (
+		<p>
+			Clicked: {value} times <button onClick={increment}>+</button>{" "}
+			<button onClick={decrement}>-</button>{" "}
+			<button onClick={incrementIfOdd}>Increment if odd</button> //{" "}
+			<button onClick={incrementAsync}>Increment async</button>
+		</p>
+	);
 };
 
 export default Counter;
