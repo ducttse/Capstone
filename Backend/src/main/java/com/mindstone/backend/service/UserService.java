@@ -8,4 +8,6 @@ public interface UserService {
     Optional<User> getUserProfileById(Integer userId);
 
     void saveUser(User user);
+
+    boolean checkExistEmail(String email);
 }

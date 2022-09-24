@@ -28,6 +28,9 @@ public class User {
     @Column(name = "id", nullable = false, length = 10)
     private Integer id;
 
+    @Column(name = "walletId", nullable = false, length = 10)
+    private Integer walletId;
+
     @Column(name = "fullName", nullable = false, length = 40)
     private String fullName;
 

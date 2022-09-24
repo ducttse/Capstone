@@ -3,18 +3,24 @@ package com.mindstone.backend.api;
 import com.mindstone.backend.constant.StringConstant;
 import com.mindstone.backend.dto.UserDTO;
 import com.mindstone.backend.entity.User;
+import com.mindstone.backend.entity.Wallet;
+import com.mindstone.backend.exception.CustomException;
 import com.mindstone.backend.request.UserAddRequest;
 import com.mindstone.backend.request.UserUpdateRequest;
 import com.mindstone.backend.response.ResponseJson;
 import com.mindstone.backend.service.UserService;
+import com.mindstone.backend.service.WalletService;
 import com.mindstone.backend.util.EncryptSHA256;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
@@ -23,9 +29,13 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserController {
 
+    private final Integer ZERO = 0;
+
     private ModelMapper modelMapper;
 
     final UserService userService;
+
+    final WalletService walletService;
 
     @GetMapping("/view-profile")
     public ResponseEntity<ResponseJson<UserDTO>> getUserProfileById(Integer userId) {
@@ -108,14 +118,47 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping
+    @PostMapping("/add-user")
+    @Transactional(rollbackFor = {Exception.class, Throwable.class})
     public ResponseEntity<ResponseJson<UserDTO>> addUser(@RequestBody @Valid UserAddRequest request) {
+
+        ResponseJson<UserDTO> response = new ResponseJson<>();
+
         //Check exist email
+        if (userService.checkExistEmail(request.getEmail())) {
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            response.setMessage(StringConstant.MESSAGE.USER.DUPLICATED_EMAIL);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
 
         //TRANSACTION
-        //create wallet
-        //create user
+        try {
+            //create wallet
+            Wallet wallet = new Wallet();
+            wallet.setBalance(BigDecimal.valueOf(ZERO, ZERO));
+            wallet.setId(walletService.saveWallet(wallet));
 
-        return null;
+            //create user
+            User user = modelMapper.map(request, User.class);
+            user.setWalletId(wallet.getId());
+            user.setPassword(EncryptSHA256.toHexString(EncryptSHA256.getSHA(user.getPassword())));
+            user.setStatus(StringConstant.STATUS.ACTIVE);
+            user.setQuestionAnswered(ZERO);
+            user.setReputation(ZERO);
+
+            userService.saveUser(user);
+        } catch (Exception ex) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            response.setMessage(StringConstant.MESSAGE.USER.CREATE_ACCOUNT_FAILED);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping
+    public String test() throws NoSuchAlgorithmException {
+        return EncryptSHA256.toHexString(EncryptSHA256.getSHA("1234"));
     }
 }

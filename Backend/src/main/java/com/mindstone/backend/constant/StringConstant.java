@@ -1,6 +1,7 @@
 package com.mindstone.backend.constant;
 
 public class StringConstant {
+
     public class STATUS {
         public static final String ACTIVE = "ACTIVE";
     }
@@ -10,6 +11,14 @@ public class StringConstant {
             public static final String NOT_FOUND = "Không tìm thấy thông tin tài khoản!";
             public static final String WRONG_OLD_PASSWORD = "Mật khẩu cũ không đúng!";
             public static final String CONFIRMPASSWORD_NOT_MATCH_NEWPASSWORD = "Xác nhận mật khẩu không đúng!";
+            public static final String DUPLICATED_EMAIL = "Email đã được sử dụng!";
+
+            public static final String CREATE_ACCOUNT_FAILED = "Tạo tài khoản không thành công!";
+            public static final String UPDATE_USER_FAILED = "Cập nhật tài khoản không thành công!";
+        }
+
+        public class WALLET {
+            public static final String CREATE_WALLET_FAILED = "Tạo ví không thành công!";
         }
     }
 }

@@ -31,7 +31,12 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
         } catch (Exception ex) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            throw new CustomException(400, "Update failed!");
+            throw new CustomException(400, StringConstant.MESSAGE.USER.UPDATE_USER_FAILED);
         }
+    }
+
+    @Override
+    public boolean checkExistEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 }
