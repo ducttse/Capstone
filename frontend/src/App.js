@@ -1,12 +1,18 @@
 import { notification } from "antd";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomLayout from "./common/CustomLayout";
 import Counter from "./counter.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
 import CreateQuestionPage from "./page/question/CreateQuestionPage.jsx";
 import QuestionCardPage from "./page/question/QuestionCardPage.jsx";
-import store from "./redux/store/store.js";
+import {
+	decrementCounter,
+	incrementAsyncCounter,
+	incrementCounter,
+	incrementIfOddCounter
+} from "./redux/actions/index.js";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -17,12 +23,16 @@ const openNotification = (message, description) => {
 	});
 };
 
-const action = (type) => store.dispatch({ type });
-
 const App = () => {
 	// TODO: implement notification
 	// eslint-disable-next-line no-unused-vars
 	const [isTokenFound, setTokenFound] = useState(false);
+	const dispatch = useDispatch();
+	const counter = useSelector((state) => state);
+	const dispatchIncrement = () => dispatch(incrementCounter());
+	const dispatchDecrement = () => dispatch(decrementCounter());
+	const dispatchIncrementIfOdd = () => dispatch(incrementIfOddCounter());
+	const dispatchIncrementAsync = () => dispatch(incrementAsyncCounter());
 	useEffect(() => {
 		getFireBaseToken(setTokenFound);
 	}, []);
@@ -46,11 +56,11 @@ const App = () => {
 					</Route>
 					<Route path="/counter">
 						<Counter
-							value={store.getState()}
-							onIncrement={() => action("INCREMENT")}
-							onDecrement={() => action("DECREMENT")}
-							onIncrementIfOdd={() => action("INCREMENT_IF_ODD")}
-							onIncrementAsync={() => action("INCREMENT_ASYNC")}
+							value={counter}
+							increment={dispatchIncrement}
+							decrement={dispatchDecrement}
+							incrementIfOdd={dispatchIncrementIfOdd}
+							incrementAsync={dispatchIncrementAsync}
 						/>
 					</Route>
 				</CustomLayout>
