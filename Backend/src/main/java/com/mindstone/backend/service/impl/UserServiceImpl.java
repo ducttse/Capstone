@@ -1,5 +1,6 @@
 package com.mindstone.backend.service.impl;
 
+import com.mindstone.backend.constant.StringConstant;
 import com.mindstone.backend.entity.User;
 import com.mindstone.backend.exception.CustomException;
 import com.mindstone.backend.repository.UserRepository;
@@ -17,13 +18,11 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final String ACTIVE = "ACTIVE";
-
     final UserRepository userRepository;
 
     @Override
     public Optional<User> getUserProfileById(Integer userId) {
-        return userRepository.getUserProfileById(userId, ACTIVE);
+        return userRepository.getUserProfileById(userId, StringConstant.STATUS.ACTIVE);
     }
 
     @Override

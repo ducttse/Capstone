@@ -24,11 +24,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, length = 10)
-    private String id;
-
-//    @Column(name = "walletId", nullable = false, length = 10)
-//    private String walletId;
+    private Integer id;
 
     @Column(name = "fullName", nullable = false, length = 40)
     private String fullName;

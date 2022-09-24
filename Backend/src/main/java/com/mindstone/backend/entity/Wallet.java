@@ -23,13 +23,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Wallet {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, length = 10)
-    private String id;
+    private Integer id;
 
     @Column(name = "balance", precision = 18, scale = 0)
     private BigDecimal balance;
-
-    //Relationship
-//    @OneToOne(mappedBy = "wallet")
-//    private User user;
 }
