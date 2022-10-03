@@ -10,4 +10,6 @@ public interface UserService {
     void saveUser(User user);
 
     boolean checkExistEmail(String email);
+
+    Optional<User> getUserProfileByEmail(String email);
 }

@@ -15,6 +15,12 @@ public class StringConstant {
 
             public static final String CREATE_ACCOUNT_FAILED = "Tạo tài khoản không thành công!";
             public static final String UPDATE_USER_FAILED = "Cập nhật tài khoản không thành công!";
+
+            public static final String SEND_OTP_SUCCESS= "Gửi OTP thành công!";
+
+            public static final String WRONG_OTP= "Mã OTP sai!";
+
+            public static final String UPDATE_PASSWORD_SUCCESS= "Cập nhật mật khẩu thành công!";
         }
 
         public class WALLET {

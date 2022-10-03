@@ -63,6 +63,9 @@ public class User {
     @Column(name = "reputation")
     private Integer reputation;
 
+    @Column(name = "otp", length = 6)
+    private String otp;
+
     //Relationship
     @OneToOne
     @MapsId("id")

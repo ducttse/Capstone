@@ -1,17 +1,19 @@
 package com.mindstone.backend.api;
 
 import com.mindstone.backend.constant.StringConstant;
+import com.mindstone.backend.dto.EmailDetails;
 import com.mindstone.backend.dto.UserDTO;
 import com.mindstone.backend.entity.User;
 import com.mindstone.backend.entity.Wallet;
-import com.mindstone.backend.exception.CustomException;
 import com.mindstone.backend.request.UserAddRequest;
 import com.mindstone.backend.request.UserUpdateRequest;
 import com.mindstone.backend.response.ResponseJson;
+import com.mindstone.backend.service.EmailService;
 import com.mindstone.backend.service.UserService;
 import com.mindstone.backend.service.WalletService;
 import com.mindstone.backend.util.EncryptSHA256;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +32,16 @@ import java.util.Optional;
 public class UserController {
 
     private final Integer ZERO = 0;
+    private final Integer SIX_DIGITS = 6;
 
     private ModelMapper modelMapper;
 
     final UserService userService;
 
     final WalletService walletService;
+
+
+    final EmailService emailService;
 
     @GetMapping("/view-profile")
     public ResponseEntity<ResponseJson<UserDTO>> getUserProfileById(Integer userId) {
@@ -157,8 +163,66 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping
-    public String test() throws NoSuchAlgorithmException {
-        return EncryptSHA256.toHexString(EncryptSHA256.getSHA("1234"));
+    @PostMapping("/sendOTP")
+    public ResponseEntity<ResponseJson<String>> sendOTP(String email) {
+
+        ResponseJson<String> response = new ResponseJson<>();
+
+        //Generate OTP
+        String otp = RandomStringUtils.randomNumeric(SIX_DIGITS);
+
+        //Save OTP to DB
+        Optional<User> result = userService.getUserProfileByEmail(email);
+        if (!result.isPresent()) {
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            response.setMessage(StringConstant.MESSAGE.USER.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        User user = result.get();
+        user.setOtp(otp);
+
+        userService.saveUser(user);
+
+        //Send OTP to Email
+        EmailDetails emailDetails = new EmailDetails();
+        emailDetails.setRecipient(user.getEmail());
+        emailDetails.setSubject("Mã OTP");
+        emailDetails.setMsgBody("Mã OTP: " + otp);
+
+        if (!emailService.sendEmail(emailDetails)) {
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            response.setMessage(StringConstant.MESSAGE.USER.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        response.setMessage(StringConstant.MESSAGE.USER.SEND_OTP_SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/change-password-by-otp")
+    public ResponseEntity<ResponseJson<String>> changePasswordByOTP(String email, String newPassword, String otp) throws NoSuchAlgorithmException {
+
+        ResponseJson<String> response = new ResponseJson<>();
+
+        Optional<User> result = userService.getUserProfileByEmail(email);
+        if (!result.isPresent()) {
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            response.setMessage(StringConstant.MESSAGE.USER.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        User user = result.get();
+        if (user.getOtp().equals(otp)) {
+            user.setPassword(EncryptSHA256.toHexString(EncryptSHA256.getSHA(newPassword)));
+            userService.saveUser(user);
+        } else {
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            response.setMessage(StringConstant.MESSAGE.USER.WRONG_OTP);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        response.setMessage(StringConstant.MESSAGE.USER.UPDATE_PASSWORD_SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

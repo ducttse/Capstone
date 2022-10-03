@@ -12,4 +12,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> getUserProfileById(Integer id, String status);
 
     boolean existsByEmail(String email);
+
+    @Query(value = "SELECT * FROM user WHERE status = :status AND email = :email",
+            nativeQuery = true)
+    Optional<User> getUserProfileByEmail(String email, String status);
 }
