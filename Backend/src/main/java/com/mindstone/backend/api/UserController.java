@@ -27,7 +27,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 @AllArgsConstructor
 public class UserController {
 
@@ -43,10 +43,10 @@ public class UserController {
 
     final EmailService emailService;
 
-    @GetMapping("/get-profile")
-    public ResponseEntity<ResponseJson<UserDTO>> getUserProfileById(Integer userId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseJson<UserDTO>> getUserProfileById(@PathVariable Integer id) {
         // Get data
-        Optional<User> result = userService.getUserProfileById(userId);
+        Optional<User> result = userService.getUserProfileById(id);
 
         UserDTO userDTO = null;
         if (result.isPresent()) {
@@ -58,12 +58,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping("/update-profile")
-    public ResponseEntity<ResponseJson<UserDTO>> updateUserProfileById(Integer userId,
+    @PutMapping("/{id}/update-profile")
+    public ResponseEntity<ResponseJson<UserDTO>> updateUserProfileById(@PathVariable Integer id,
                                                                        @RequestBody @Valid UserUpdateRequest request) {
         ResponseJson<UserDTO> response = new ResponseJson<>();
 
-        Optional<User> result = userService.getUserProfileById(userId);
+        Optional<User> result = userService.getUserProfileById(id);
 
         if (!result.isPresent()) {
             response.setStatusCode(HttpStatus.BAD_REQUEST.value());
@@ -87,8 +87,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping("/change-password")
-    public ResponseEntity<ResponseJson<UserDTO>> changePassword(Integer userId, String oldPassword, String newPassword, String confirmPassword) throws NoSuchAlgorithmException {
+    @PutMapping("/{id}/change-password")
+    public ResponseEntity<ResponseJson<UserDTO>> changePassword(@PathVariable Integer id, String oldPassword, String newPassword, String confirmPassword) throws NoSuchAlgorithmException {
 
         ResponseJson<UserDTO> response = new ResponseJson<>();
 
@@ -98,7 +98,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-        Optional<User> result = userService.getUserProfileById(userId);
+        Optional<User> result = userService.getUserProfileById(id);
 
         if (!result.isPresent()) {
             response.setStatusCode(HttpStatus.BAD_REQUEST.value());

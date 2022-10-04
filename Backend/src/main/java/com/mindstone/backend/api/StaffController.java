@@ -2,9 +2,7 @@ package com.mindstone.backend.api;
 
 import com.mindstone.backend.constant.StringConstant;
 import com.mindstone.backend.dto.StaffDTO;
-import com.mindstone.backend.dto.UserDTO;
 import com.mindstone.backend.entity.Staff;
-import com.mindstone.backend.entity.User;
 import com.mindstone.backend.request.StaffAddRequest;
 import com.mindstone.backend.request.StaffUpdateRequest;
 import com.mindstone.backend.response.ResponseJson;
@@ -32,7 +30,7 @@ public class StaffController {
 
     final StaffService staffService;
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<ResponseJson<StaffDTO>> addStaff(@RequestBody @Valid StaffAddRequest request) throws NoSuchAlgorithmException {
 
         ResponseJson<StaffDTO> response = new ResponseJson<>();
@@ -56,12 +54,12 @@ public class StaffController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<ResponseJson<StaffDTO>> updateStaff(Integer staffId, @RequestBody @Valid StaffUpdateRequest request) {
+    @PutMapping("/{id}")
+    public ResponseEntity<ResponseJson<StaffDTO>> updateStaff(@PathVariable Integer id, @RequestBody @Valid StaffUpdateRequest request) {
 
         ResponseJson<StaffDTO> response = new ResponseJson<>();
 
-        Optional<Staff> result = staffService.getStaffProfileById(staffId);
+        Optional<Staff> result = staffService.getStaffProfileById(id);
 
         if (!result.isPresent()) {
             response.setStatusCode(HttpStatus.BAD_REQUEST.value());
@@ -82,10 +80,10 @@ public class StaffController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/get-profile")
-    public ResponseEntity<ResponseJson<StaffDTO>> getStaffProfileById(Integer staffId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseJson<StaffDTO>> getStaffProfileById(@PathVariable Integer id) {
         // Get data
-        Optional<Staff> result = staffService.getStaffProfileById(staffId);
+        Optional<Staff> result = staffService.getStaffProfileById(id);
 
         StaffDTO staffDTO = null;
         if (result.isPresent()) {
@@ -112,5 +110,25 @@ public class StaffController {
 //        return ResponseEntity.status(HttpStatus.OK).body(response);
 //    }
 
-    
+    @DeleteMapping("/{id}")
+    ResponseEntity<ResponseJson<StaffDTO>> disableStaff(@PathVariable Integer id) {
+        ResponseJson<StaffDTO> response = new ResponseJson<>();
+
+        Optional<Staff> result = staffService.getStaffProfileById(id);
+
+        if (!result.isPresent()) {
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            response.setMessage(StringConstant.MESSAGE.USER.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        Staff staff = result.get();
+        staff.setStatus(StringConstant.STATUS.INACTIVE);
+
+        staffService.saveStaff(staff);
+
+        StaffDTO staffDTO = modelMapper.map(staff, StaffDTO.class);
+        response = new ResponseJson<>(staffDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

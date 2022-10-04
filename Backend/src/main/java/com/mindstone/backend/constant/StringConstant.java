@@ -4,6 +4,7 @@ public class StringConstant {
 
     public class STATUS {
         public static final String ACTIVE = "ACTIVE";
+        public static final String INACTIVE = "INACTIVE";
     }
 
     public class MESSAGE {
