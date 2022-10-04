@@ -43,7 +43,7 @@ public class UserController {
 
     final EmailService emailService;
 
-    @GetMapping("/view-profile")
+    @GetMapping("/get-profile")
     public ResponseEntity<ResponseJson<UserDTO>> getUserProfileById(Integer userId) {
         // Get data
         Optional<User> result = userService.getUserProfileById(userId);

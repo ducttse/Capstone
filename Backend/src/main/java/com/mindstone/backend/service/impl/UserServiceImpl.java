@@ -6,7 +6,6 @@ import com.mindstone.backend.exception.CustomException;
 import com.mindstone.backend.repository.UserRepository;
 import com.mindstone.backend.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
