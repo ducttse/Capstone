@@ -1,4 +1,6 @@
 import { Button, Col, Form, Input, Row, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { updateQuestionForm } from "../../redux/actions/questionForm.action.js";
 import BackButton from "../questions/components/BackButton.jsx";
 import RichTextEditor from "../questions/components/RichTextEditor.jsx";
 import UploadFileButton from "../questions/components/UploadFileButton.jsx";
@@ -7,16 +9,24 @@ import "./QuestionForm.css";
 const initValue = {
 	name: "buibiu",
 	content: "<p>bhbu</p>",
-	tags: ["test1", "test2"]
+	tags: ["test1", "test2"],
+	file: []
 };
 
 const CreateQuestionPage = () => {
 	const [form] = Form.useForm();
-
+	const QuestionForm = useSelector((state) => state.questionForm);
+	const dispatch = useDispatch();
 	const onFinish = (values) => {
-		console.log(form);
 		console.log(values);
+		console.log(QuestionForm);
 	};
+
+	const onValuesChange = (_, values) => {
+		dispatchUpdate(values);
+	};
+
+	const dispatchUpdate = (value) => dispatch(updateQuestionForm(value));
 
 	return (
 		<Row>
@@ -29,7 +39,8 @@ const CreateQuestionPage = () => {
 					layout="vertical"
 					autoComplete="off"
 					onFinish={onFinish}
-					initialValues={{ ...initValue }}
+					onValuesChange={onValuesChange}
+					initialValues={{ ...QuestionForm.data }}
 				>
 					<Form.Item
 						className="bold"

@@ -5,8 +5,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomLayout from "./common/CustomLayout";
 import Counter from "./counter.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
-import CreateQuestionPage from "./page/question/CreateQuestionPage.jsx";
-import QuestionCardPage from "./page/question/QuestionCardPage.jsx";
+import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
+import QuestionCardPage from "./page/questions/QuestionCardPage.jsx";
 import {
 	decrementCounter,
 	incrementAsyncCounter,
@@ -28,11 +28,12 @@ const App = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [isTokenFound, setTokenFound] = useState(false);
 	const dispatch = useDispatch();
-	const counter = useSelector((state) => state);
+	const counter = useSelector((state) => state.counter);
 	const dispatchIncrement = () => dispatch(incrementCounter());
 	const dispatchDecrement = () => dispatch(decrementCounter());
 	const dispatchIncrementIfOdd = () => dispatch(incrementIfOddCounter());
 	const dispatchIncrementAsync = () => dispatch(incrementAsyncCounter());
+
 	useEffect(() => {
 		getFireBaseToken(setTokenFound);
 	}, []);
@@ -63,6 +64,7 @@ const App = () => {
 							incrementAsync={dispatchIncrementAsync}
 						/>
 					</Route>
+					<Route path="/question/:id"></Route>
 				</CustomLayout>
 			</Switch>
 		</BrowserRouter>
