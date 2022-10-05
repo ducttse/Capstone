@@ -5,6 +5,7 @@ import MultiSelection from "./components/MultiSelection.jsx";
 import { Link } from "react-router-dom";
 import { getQuestions } from "../../api/questions.js";
 
+
 const getItems = (data, currentPage) =>
 	truncateData(data, currentPage).map((question, i) => {
 		return (

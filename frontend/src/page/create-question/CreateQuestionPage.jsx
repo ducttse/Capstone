@@ -1,6 +1,7 @@
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { updateQuestionForm } from "../../redux/actions/questionForm.action.js";
+
 import BackButton from "../questions/components/BackButton.jsx";
 import RichTextEditor from "../questions/components/RichTextEditor.jsx";
 import UploadFileButton from "../questions/components/UploadFileButton.jsx";
@@ -27,7 +28,6 @@ const CreateQuestionPage = () => {
 	};
 
 	const dispatchUpdate = (value) => dispatch(updateQuestionForm(value));
-
 	return (
 		<Row>
 			<Col span={4}>
