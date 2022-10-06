@@ -3,13 +3,16 @@ package com.mindstone.backend.api;
 import com.mindstone.backend.constant.StringConstant;
 import com.mindstone.backend.dto.StaffDTO;
 import com.mindstone.backend.entity.Staff;
+import com.mindstone.backend.request.PagedFilterRequest;
 import com.mindstone.backend.request.StaffAddRequest;
 import com.mindstone.backend.request.StaffUpdateRequest;
+import com.mindstone.backend.response.MetaData;
 import com.mindstone.backend.response.ResponseJson;
 import com.mindstone.backend.service.StaffService;
 import com.mindstone.backend.util.EncryptSHA256;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,7 @@ import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("staff")
@@ -95,20 +99,21 @@ public class StaffController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-//    @GetMapping("/get-all")
-//    public ResponseEntity<ResponseJson<List<StaffDTO>>> getAll(Integer staffId) {
-//        // Get data
-//        Optional<Staff> result = staffService.getStaffProfileById(staffId);
-//
-//        StaffDTO staffDTO = null;
-//        if (result.isPresent()) {
-//            staffDTO = modelMapper.map(result.get(), StaffDTO.class);
-//        }
-//
-//        // Response
-//        ResponseJson<StaffDTO> response = new ResponseJson<>(staffDTO);
-//        return ResponseEntity.status(HttpStatus.OK).body(response);
-//    }
+    @GetMapping("/get-all")
+    public ResponseEntity<ResponseJson<List<StaffDTO>>> getAll(@Valid PagedFilterRequest request) {
+        Page<Staff> result = staffService.getAllActiveStaff(request);
+
+        MetaData metaData = new MetaData(result.getNumber(), result.getSize(), result.getTotalPages(), result.getTotalElements());
+
+        List<StaffDTO> staffDTOList = result
+                .stream()
+                .map(staff -> modelMapper.map(staff, StaffDTO.class))
+                .collect(Collectors.toList());
+
+        // Response
+        ResponseJson<List<StaffDTO>> response = new ResponseJson<>(staffDTOList, metaData);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
     @DeleteMapping("/{id}")
     ResponseEntity<ResponseJson<StaffDTO>> disableStaff(@PathVariable Integer id) {
