@@ -3,46 +3,47 @@ import { Button, Col, Pagination, Row } from "antd";
 import { useEffect, useState } from "react";
 import MultiSelection from "./components/MultiSelection.jsx";
 import { Link } from "react-router-dom";
-import { getQuestions } from "../../api/questions.js";
+import { useDispatch, useSelector } from "react-redux";
+import { loadQuestionsListAsync } from "../../redux/actions/questionList.action.js";
+import CustomSpin from "../../common/CustomSpin.jsx";
 
+const ITEM_PER_PAGE = 10;
 
-const getItems = (data, currentPage) =>
-	truncateData(data, currentPage).map((question, i) => {
-		return (
-			<QuestionCard
-				key={i}
-				title={question.title + " " + question.id}
-				content={question.content}
-				to={`/question/${question.id}`}
-				questionId={question.id}
-			/>
-		);
-	});
-
-const ITEM_PER_PAGE = 5;
-
-const truncateData = (data = [], currentPage) => {
-	const a = data.slice(
-		(currentPage - 1) * ITEM_PER_PAGE,
-		currentPage * ITEM_PER_PAGE
-	);
-	return a;
+const QuestionCards = ({ questions }) => {
+	return Array.isArray(questions)
+		? questions.map((question, i) => {
+				return (
+					<QuestionCard
+						key={i}
+						title={question.title + " " + question.id}
+						content={question.content}
+						to={`/question/${question.id}`}
+						questionId={question.id}
+					/>
+				);
+		  })
+		: [];
 };
 
 const QuestionCardPage = () => {
-	const [item, setItem] = useState([]);
+	const { data, loading, pagination, error } = useSelector(
+		(state) => state.questionsList
+	);
+	const dispatch = useDispatch();
+	const dispatchLoadQuestions = () => dispatch(loadQuestionsListAsync());
+	useEffect(() => {
+		dispatchLoadQuestions();
+	}, []);
+
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const onChangeCurrentPage = (page, pageSize) => {
-		console.log("change fn current page", page);
 		setCurrentPage(page);
 	};
 
-	useEffect(() => {
-		setItem(getItems(getQuestions(), currentPage));
-	}, [currentPage]);
-
-	return (
+	return loading ? (
+		<CustomSpin />
+	) : (
 		<>
 			<Row style={{ marginBottom: 20 }}>
 				<Button type="primary">
@@ -51,9 +52,9 @@ const QuestionCardPage = () => {
 			</Row>
 			<Row>
 				<Col span={16}>
-					{item ? item : <h2>No content</h2>}
+					<QuestionCards questions={data} />
 					<Pagination
-						total={item.length}
+						total={data.length}
 						defaultCurrent={currentPage}
 						pageSize={ITEM_PER_PAGE}
 						onChange={onChangeCurrentPage}
