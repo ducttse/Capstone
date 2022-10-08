@@ -1,3 +1,5 @@
+import { fakeCallApi } from "./fakeCallApi.js";
+
 const questions = [
 	{
 		id: "1",
@@ -50,9 +52,13 @@ const questions = [
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?"
 	}
 ];
-export const getQuestions = () => {
-	setTimeout(1000, () => {
-		console.log("call api");
-	});
+
+export const getQuestions = async () => {
+	await fakeCallApi(1000);
 	return questions ? questions : [];
+};
+
+export const getQuestionByID = async (id) => {
+	await fakeCallApi(1000);
+	return questions.filter((q) => q.id == id)[0];
 };

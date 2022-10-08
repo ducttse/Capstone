@@ -6,6 +6,7 @@ import CustomLayout from "./common/CustomLayout";
 import Counter from "./counter.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
 import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
+import QuestionDetail from "./page/question/QuestionDetail.jsx";
 import QuestionCardPage from "./page/questions/QuestionCardPage.jsx";
 import {
 	decrementCounter,
@@ -64,7 +65,9 @@ const App = () => {
 							incrementAsync={dispatchIncrementAsync}
 						/>
 					</Route>
-					<Route path="/question/:id"></Route>
+					<Route path="/question/:id">
+						<QuestionDetail />
+					</Route>
 				</CustomLayout>
 			</Switch>
 		</BrowserRouter>
