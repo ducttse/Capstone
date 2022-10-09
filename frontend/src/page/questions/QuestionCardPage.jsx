@@ -16,7 +16,7 @@ const QuestionCards = ({ questions }) => {
 					<QuestionCard
 						key={i}
 						title={question.title + " " + question.id}
-						content={question.content}
+						content={question.shortContent}
 						to={`/question/${question.id}`}
 						questionId={question.id}
 					/>
