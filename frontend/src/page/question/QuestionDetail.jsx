@@ -6,14 +6,11 @@ import { useParams } from "react-router-dom";
 import CustomSpin from "../../common/CustomSpin.jsx";
 import { loadDetailAsync } from "../../redux/actions/question.action.js";
 import UserInfo from "./components/UserInfo.jsx";
-
 const { Title } = Typography;
-
 const QuestionDetail = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const { data, loading, error } = useSelector((state) => state.question);
-
 	const dispatchLoadQuestions = (id) => dispatch(loadDetailAsync(id));
 	useEffect(() => {
 		dispatchLoadQuestions(id);
