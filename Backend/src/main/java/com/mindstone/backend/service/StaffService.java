@@ -15,4 +15,6 @@ public interface StaffService {
     Optional<Staff> getStaffProfileById(Integer staffId);
 
     Page<Staff> getAllActiveStaff(PagedFilterRequest request);
+
+    Page<Staff> searchStaff(PagedFilterRequest request, String searchText);
 }

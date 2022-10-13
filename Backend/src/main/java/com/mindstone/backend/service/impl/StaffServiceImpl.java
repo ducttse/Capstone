@@ -50,4 +50,11 @@ public class StaffServiceImpl implements StaffService {
 
         return pagedStaff;
     }
+
+    @Override
+    public Page<Staff> searchStaff(PagedFilterRequest request, String searchText) {
+        Pageable pageable = PageRequest.of(request.getPageNumber() - 1, request.getPageSize());
+        Page<Staff> pagedUser = staffRepository.searchStaff(pageable ,'%' + searchText + '%');
+        return pagedUser;
+    }
 }

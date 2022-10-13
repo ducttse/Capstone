@@ -2,7 +2,9 @@ package com.mindstone.backend.api;
 
 import com.mindstone.backend.constant.StringConstant;
 import com.mindstone.backend.dto.StaffDTO;
+import com.mindstone.backend.dto.UserDTO;
 import com.mindstone.backend.entity.Staff;
+import com.mindstone.backend.entity.User;
 import com.mindstone.backend.request.PagedFilterRequest;
 import com.mindstone.backend.request.StaffAddRequest;
 import com.mindstone.backend.request.StaffUpdateRequest;
@@ -134,6 +136,21 @@ public class StaffController {
 
         StaffDTO staffDTO = modelMapper.map(staff, StaffDTO.class);
         response = new ResponseJson<>(staffDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping()
+    public ResponseEntity<ResponseJson<List<StaffDTO>>> searchStaff(@Valid PagedFilterRequest request, String SearchText) {
+        Page<Staff> result = staffService.searchStaff(request, SearchText);
+
+        MetaData metaData = new MetaData(result.getNumber(), result.getSize(), result.getTotalPages(), result.getTotalElements());
+
+        List<StaffDTO> staffDTOList = result
+                .stream()
+                .map(staff -> modelMapper.map(staff, StaffDTO.class))
+                .collect(Collectors.toList());
+
+        ResponseJson<List<StaffDTO>> response = new ResponseJson<>(staffDTOList, metaData);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

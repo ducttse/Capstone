@@ -18,4 +18,10 @@ public interface StaffRepository extends JpaRepository<Staff, Integer> {
     @Query(value = "SELECT * FROM staff WHERE status = :status",
             nativeQuery = true)
     Page<Staff> getAllActiveStaff(Pageable pageable, String status);
+
+    @Query(value = "SELECT *\n" +
+            "FROM staff\n" +
+            "WHERE email LIKE :searchText\n" +
+            "\tOR díplayName LIKE :searchText", nativeQuery = true)
+    Page<Staff> searchStaff(Pageable pageable, String searchText);
 }

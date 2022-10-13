@@ -2,11 +2,15 @@ package com.mindstone.backend.api;
 
 import com.mindstone.backend.constant.StringConstant;
 import com.mindstone.backend.dto.EmailDetails;
+import com.mindstone.backend.dto.StaffDTO;
 import com.mindstone.backend.dto.UserDTO;
+import com.mindstone.backend.entity.Staff;
 import com.mindstone.backend.entity.User;
 import com.mindstone.backend.entity.Wallet;
+import com.mindstone.backend.request.PagedFilterRequest;
 import com.mindstone.backend.request.UserAddRequest;
 import com.mindstone.backend.request.UserUpdateRequest;
+import com.mindstone.backend.response.MetaData;
 import com.mindstone.backend.response.ResponseJson;
 import com.mindstone.backend.service.EmailService;
 import com.mindstone.backend.service.UserService;
@@ -15,6 +19,9 @@ import com.mindstone.backend.util.EncryptSHA256;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
+import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +31,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("users")
-@AllArgsConstructor
 public class UserController {
 
     private final Integer ZERO = 0;
@@ -36,12 +44,23 @@ public class UserController {
 
     private ModelMapper modelMapper;
 
-    final UserService userService;
+    private final UserService userService;
 
-    final WalletService walletService;
+    private final WalletService walletService;
 
 
-    final EmailService emailService;
+    private final EmailService emailService;
+
+    public UserController(ModelMapper modelMapper, UserService userService, WalletService walletService, EmailService emailService) {
+        this.modelMapper = modelMapper;
+        this.userService = userService;
+        this.walletService = walletService;
+        this.emailService = emailService;
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        TypeMap<User, UserDTO> typeMap = modelMapper.createTypeMap(User.class, UserDTO.class);
+        typeMap.addMappings(mapper -> mapper.map(src -> src.getWalletId(), UserDTO::setWalletId));
+        typeMap.addMappings(mapper -> mapper.map(src -> src.getWallet(), UserDTO::setWalletDTO));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseJson<UserDTO>> getUserProfileById(@PathVariable Integer id) {
@@ -223,6 +242,58 @@ public class UserController {
         }
 
         response.setMessage(StringConstant.MESSAGE.USER.UPDATE_PASSWORD_SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<ResponseJson<List<UserDTO>>> getAll (@Valid PagedFilterRequest request) {
+        Page<User> result = userService.getAllActiveUser(request);
+
+        MetaData metaData = new MetaData(result.getNumber(), result.getSize(), result.getTotalPages(), result.getTotalElements());
+
+        List<UserDTO> userDTOList = result
+                .stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+
+        ResponseJson<List<UserDTO>> response = new ResponseJson<>(userDTOList, metaData);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<ResponseJson<UserDTO>> disableUser(@PathVariable Integer id) {
+        ResponseJson<UserDTO> response = new ResponseJson<>();
+
+        Optional<User> result = userService.getUserProfileById(id);
+
+        if (!result.isPresent()) {
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            response.setMessage(StringConstant.MESSAGE.USER.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        User user = result.get();
+        user.setStatus(StringConstant.STATUS.INACTIVE);
+
+        userService.saveUser(user);
+
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        response = new ResponseJson<>(userDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping()
+    public ResponseEntity<ResponseJson<List<UserDTO>>> searchUser(@Valid PagedFilterRequest request, String SearchText) {
+        Page<User> result = userService.searchUser(request, SearchText);
+
+        MetaData metaData = new MetaData(result.getNumber(), result.getSize(), result.getTotalPages(), result.getTotalElements());
+
+        List<UserDTO> userDTOList = result
+                .stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+
+        ResponseJson<List<UserDTO>> response = new ResponseJson<>(userDTOList, metaData);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 public class UserDTO implements Serializable {
-    private String id;
+    private Integer id;
     private String walletId;
     private String fullName;
     private String email;
