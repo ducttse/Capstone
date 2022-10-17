@@ -6,7 +6,7 @@ import CustomLayout from "./common/CustomLayout";
 import Counter from "./counter.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
 import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
-import QuestionDetail from "./page/question/QuestionDetail.jsx";
+import QuestionPage from "./page/question/QuestionPage.jsx";
 import QuestionCardPage from "./page/questions/QuestionCardPage.jsx";
 import {
 	decrementCounter,
@@ -53,6 +53,9 @@ const App = () => {
 					<Route path="/create-question">
 						<CreateQuestionPage />
 					</Route>
+					<Route path="/edit-question">
+						<CreateQuestionPage />
+					</Route>
 					<Route path="/questions">
 						<QuestionCardPage />
 					</Route>
@@ -66,7 +69,7 @@ const App = () => {
 						/>
 					</Route>
 					<Route path="/question/:id">
-						<QuestionDetail />
+						<QuestionPage />
 					</Route>
 				</CustomLayout>
 			</Switch>

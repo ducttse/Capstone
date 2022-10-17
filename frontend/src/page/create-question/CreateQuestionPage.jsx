@@ -1,34 +1,46 @@
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { updateQuestionForm } from "../../redux/actions/questionForm.action.js";
+import {
+	loadForm,
+	resetForm,
+	updateQuestionForm
+} from "../../redux/actions/questionForm.action.js";
 
 import BackButton from "../questions/components/BackButton.jsx";
-import RichTextEditor from "../questions/components/RichTextEditor.jsx";
+import RichTextEditor from "../../common/RichTextEditor.jsx";
 import UploadFileButton from "../questions/components/UploadFileButton.jsx";
 import "./QuestionForm.css";
-
-const initValue = {
-	name: "buibiu",
-	content: "<p>bhbu</p>",
-	tags: ["test1", "test2"],
-	file: []
-};
+import CustomSpin from "../../common/CustomSpin.jsx";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const CreateQuestionPage = () => {
 	const [form] = Form.useForm();
-	const QuestionForm = useSelector((state) => state.questionForm);
+	const { data, loading } = useSelector((state) => state.questionForm);
 	const dispatch = useDispatch();
+	const dispatchUpdate = (value) => dispatch(updateQuestionForm(value));
+	const dispatchLoadForm = (value) => dispatch(loadForm(value));
+	const location = useLocation();
+
+	useEffect(() => {
+		// eslint-disable-next-line eqeqeq
+		if (location.pathname == "/edit-question") {
+			dispatchLoadForm();
+		}
+	}, [loading]);
+
 	const onFinish = (values) => {
 		console.log(values);
-		console.log(QuestionForm);
+		console.log(data);
 	};
 
 	const onValuesChange = (_, values) => {
 		dispatchUpdate(values);
 	};
 
-	const dispatchUpdate = (value) => dispatch(updateQuestionForm(value));
-	return (
+	return loading ? (
+		<CustomSpin />
+	) : (
 		<Row>
 			<Col span={4}>
 				<BackButton to="questions" />
@@ -40,12 +52,12 @@ const CreateQuestionPage = () => {
 					autoComplete="off"
 					onFinish={onFinish}
 					onValuesChange={onValuesChange}
-					initialValues={{ ...QuestionForm.data }}
+					initialValues={{ ...data }}
 				>
 					<Form.Item
 						className="bold"
 						rules={[{ required: true, message: "Tiêu đề không được bỏ trống" }]}
-						name="name"
+						name="title"
 						label="Tiêu đề"
 					>
 						<Input />
