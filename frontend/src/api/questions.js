@@ -11,7 +11,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "2",
@@ -23,7 +39,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "3",
@@ -35,7 +67,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "4",
@@ -47,7 +95,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "5",
@@ -59,7 +123,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "6",
@@ -71,7 +151,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "7",
@@ -83,7 +179,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "8",
@@ -95,7 +207,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "9",
@@ -107,7 +235,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	},
 	{
 		id: "10",
@@ -119,7 +263,23 @@ const questions = [
 			id: "1",
 			name: "Từ Trọng Đức"
 		},
-		createdTime: "2022-09-08 03:13:10"
+		createdTime: "2022-09-08 03:13:10",
+		comments: [
+			{
+				id: "1",
+				name: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			},
+			{
+				id: "2",
+				name: "Trần Bảo Long",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+			}
+		]
 	}
 ];
 
