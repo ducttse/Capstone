@@ -11,6 +11,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,5 +32,21 @@ public class WalletServiceImpl implements WalletService {
             throw new CustomException(400, StringConstant.MESSAGE.WALLET.CREATE_WALLET_FAILED);
         }
         return wallet.getId();
+    }
+
+    @Override
+    public Optional<Wallet> getWalletById(Integer walletId) {
+        return walletRepository.findById(walletId);
+    }
+
+    @Override
+    @Transactional
+    public void changeMoney(Wallet wallet, String message) {
+        try {
+            walletRepository.save(wallet);
+        } catch (Exception ex) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            throw new CustomException(400, message);
+        }
     }
 }

@@ -27,6 +27,11 @@ public class StringConstant {
 
         public class WALLET {
             public static final String CREATE_WALLET_FAILED = "Tạo ví không thành công!";
+            public static final String DEPOSIT_FAILED = "Gửi tiền không thành công!";
+            public static final String WITHDRAW_FAILED = "Rút tiền không thành công!";
+            public static final String DEPOSIT_SUCCESS = "Gửi tiền thành công!";
+            public static final String WITHDRAW_SUCCESS = "Rút tiền thành công!";
+            public static final String NOT_FOUND = "Không tìm thấy thông tin ví!";
         }
 
         public class STAFF {
