@@ -1,43 +1,21 @@
-import { Form , Input, Select, Button} from "antd";
-import { useState } from "react";
-import axios from 'axios';
-import { useHistory } from 'react-router';
+import {Row, Col, Form , Input, Select, Button, Typography, message} from "antd";
+const {Title} = Typography;
 
-const API_URL = 'https://60cdfb0691cc8e00178dc448.mockapi.io/Crud/';
+const UpdateModeratorForm = () => {
 
-const Create = () => {
-    let history = useHistory();
-
-    const [moderatorAccount, setModeratorAccount] = useState({
-        displayName: '',
-        email: '',
-        password: '',
-        roleId: 0
-    });
-
-    const sendToCreateAPI = () => {
-        axios.put(CREATE_API_URL, moderatorAccount).then(() => {
-            history.push('/ViewList')
-        })
+    const success = () => {
+      message.success("Cập nhật thành công")
     }
 
     return (
     <>
-        <Form layout="vertical"
-            wrapperCol={{ span: 4 }}
+    <Row justify="center" align="middle">
+      <Col span={20}>
+        <Title level={1} align="middle">Cập nhật thông tin nhân viên</Title>
+      <Form layout="vertical"
             autoComplete="off"
-
-            onFinish={(value) => {
-                console.log({value});
-                console.log(moderatorAccount);
-            }}
-
-            onValuesChange = {(pros) => {
-                const name = Object.keys(pros);
-                setModeratorAccount({...moderatorAccount, [name[0]]: pros[name[0]]})
-            }}
+            onFinish={success}
         >
-
         <Form.Item
             name="displayName"
             label="Tên hiển thị"
@@ -67,7 +45,7 @@ const Create = () => {
             ]}
             hasFeedback
           >
-            <Input placeholder="Nhập email" />
+        <Input placeholder="Nhập email" />
           </Form.Item>
 
           <Form.Item
@@ -106,14 +84,16 @@ const Create = () => {
           </Form.Item>
 
           <Form.Item >
-            <Button block type="primary" htmlType="submit" onClick={sendToCreateAPI}>
+            <Button block type="primary" htmlType="submit" >
               Tạo tài khoản
             </Button>
           </Form.Item>
         </Form>
+      </Col>
+    </Row>
     
     </>
     )
 }
 
-export default Create;
+export default UpdateModeratorForm;
