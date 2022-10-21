@@ -14,9 +14,6 @@ public class QuestionImageUrl {
   @Basic
   @Column(name = "url", nullable = true, length = 512)
   private String url;
-  @ManyToOne
-  @JoinColumn(name = "questionId", referencedColumnName = "id", nullable = false)
-  private Question questionByQuestionId;
 
   public String getId() {
     return id;
@@ -63,13 +60,5 @@ public class QuestionImageUrl {
     result = 31 * result + (questionId != null ? questionId.hashCode() : 0);
     result = 31 * result + (url != null ? url.hashCode() : 0);
     return result;
-  }
-
-  public Question getQuestionByQuestionId() {
-    return questionByQuestionId;
-  }
-
-  public void setQuestionByQuestionId(Question questionByQuestionId) {
-    this.questionByQuestionId = questionByQuestionId;
   }
 }

@@ -1,31 +1,20 @@
 package com.mindstone.backend.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-@Entity
-@IdClass(UserQuestionPK.class)
-public class UserQuestion {
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Id
+public class UserQuestionPK implements Serializable {
   @Column(name = "userId", nullable = false)
-  private int userId;
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int userId;
   @Column(name = "questionId", nullable = false)
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long questionId;
-  @Basic
-  @Column(name = "status", nullable = false)
-  private int status;
-
-  public UserQuestion(int userId, long questionId) {
-    this.userId = userId;
-    this.questionId = questionId;
-    this.status = 0;
-  }
-
-  public UserQuestion() {
-
-  }
 
   public int getUserId() {
     return userId;
@@ -43,12 +32,9 @@ public class UserQuestion {
     this.questionId = questionId;
   }
 
-  public int getStatus() {
-    return status;
-  }
-
-  public void setStatus(int status) {
-    this.status = status;
+  public UserQuestionPK(int userId, long questionId) {
+    this.userId = userId;
+    this.questionId = questionId;
   }
 
   @Override
@@ -56,11 +42,10 @@ public class UserQuestion {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    UserQuestion that = (UserQuestion) o;
+    UserQuestionPK that = (UserQuestionPK) o;
 
     if (userId != that.userId) return false;
     if (questionId != that.questionId) return false;
-    if (status != that.status) return false;
 
     return true;
   }
@@ -69,7 +54,6 @@ public class UserQuestion {
   public int hashCode() {
     int result = userId;
     result = 31 * result + (int) (questionId ^ (questionId >>> 32));
-    result = 31 * result + status;
     return result;
   }
 }

@@ -1,41 +1,82 @@
 package com.mindstone.backend.service.impl;
 
+import com.mindstone.backend.dto.CUQuestionDTO;
+import com.mindstone.backend.model.Question;
+import com.mindstone.backend.model.UserQuestion;
+import com.mindstone.backend.model.UserQuestionPK;
+import com.mindstone.backend.repositories.QuestionRepository;
+import com.mindstone.backend.repositories.UserQuestionRepository;
 import com.mindstone.backend.service.QuestionService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class QuestionServiceImpl implements QuestionService {
 
-  @Override
-  public void GetQuestions() {
+  @Autowired
+  QuestionRepository questionRepository;
 
+  @Autowired
+  UserQuestionRepository userQuestionRepository;
+  @Autowired
+  ModelMapper modelMapper;
+
+  @Override
+  public List<Question> GetQuestions() {
+    return questionRepository.findAll();
   }
 
   @Override
-  public void GetQuestionDetail(int id) {
-
+  public Question GetQuestionDetail(Long id) {
+    var result = questionRepository.findById(id);
+    return (result == null ? null : result.get());
   }
 
   @Override
-  public void CreateQuestion() {
-
+  public Question CreateQuestion(CUQuestionDTO questionDto) {
+    var question = modelMapper.map(questionDto, Question.class);
+    var result = questionRepository.save(question);
+    return result;
   }
 
   @Override
-  public void EditQuestion() {
-
+  public Question EditQuestion(Long id, CUQuestionDTO questionDto) {
+    var question = modelMapper.map(questionDto, Question.class);
+    question.setId(id);
+    var result = questionRepository.save(question);
+    return result;
   }
 
   @Override
-  public void RemoveQuestion() {
-
+  public boolean RemoveQuestion(Long id) {
+    try {
+      questionRepository.delete(GetQuestionDetail(id));
+      return true;
+    } catch (Exception exception) {
+      return false;
+    }
   }
 
   @Override
-  public void RegisterAnswerQuestion() {
-
+  public boolean RegisterAnswerQuestion(long questionId, int userId) {
+    try {
+      userQuestionRepository.saveAndFlush(new UserQuestion(userId, questionId));
+      return true;
+    } catch (Exception exception) {
+      return false;
+    }
   }
 
   @Override
-  public void CancelRegisterAnswerQuestion() {
-
+  public boolean CancelRegisterAnswerQuestion(long questionId, int userId) {
+    try {
+      userQuestionRepository.deleteById(new UserQuestionPK(userId, questionId));
+      return true;
+    } catch (Exception exception) {
+      return false;
+    }
   }
 }

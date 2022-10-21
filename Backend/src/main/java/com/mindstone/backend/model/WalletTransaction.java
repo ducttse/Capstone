@@ -1,27 +1,25 @@
 package com.mindstone.backend.model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class WalletTransaction {
+public class WalletTransaction implements Serializable {
   @Basic
+  @Id
   @Column(name = "senderWalletId", nullable = false, length = 10)
   private String senderWalletId;
   @Basic
+  @Id
   @Column(name = "receiverWalletId", nullable = false, length = 10)
   private String receiverWalletId;
   @Basic
+  @Id
   @Column(name = "transactionId", nullable = false, length = 10)
   private String transactionId;
-  @ManyToOne
-  @JoinColumn(name = "senderWalletId", referencedColumnName = "id", nullable = false)
-  private Wallet walletBySenderWalletId;
-  @ManyToOne
-  @JoinColumn(name = "receiverWalletId", referencedColumnName = "id", nullable = false)
-  private Wallet walletByReceiverWalletId;
-  @ManyToOne
-  @JoinColumn(name = "transactionId", referencedColumnName = "id", nullable = false)
-  private Transaction transactionByTransactionId;
 
   public String getSenderWalletId() {
     return senderWalletId;
@@ -70,29 +68,5 @@ public class WalletTransaction {
     result = 31 * result + (receiverWalletId != null ? receiverWalletId.hashCode() : 0);
     result = 31 * result + (transactionId != null ? transactionId.hashCode() : 0);
     return result;
-  }
-
-  public Wallet getWalletBySenderWalletId() {
-    return walletBySenderWalletId;
-  }
-
-  public void setWalletBySenderWalletId(Wallet walletBySenderWalletId) {
-    this.walletBySenderWalletId = walletBySenderWalletId;
-  }
-
-  public Wallet getWalletByReceiverWalletId() {
-    return walletByReceiverWalletId;
-  }
-
-  public void setWalletByReceiverWalletId(Wallet walletByReceiverWalletId) {
-    this.walletByReceiverWalletId = walletByReceiverWalletId;
-  }
-
-  public Transaction getTransactionByTransactionId() {
-    return transactionByTransactionId;
-  }
-
-  public void setTransactionByTransactionId(Transaction transactionByTransactionId) {
-    this.transactionByTransactionId = transactionByTransactionId;
   }
 }

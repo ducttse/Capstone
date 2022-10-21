@@ -2,7 +2,8 @@ package com.mindstone.backend.model;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Collection;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 @Entity
 public class User {
@@ -24,7 +25,7 @@ public class User {
   private String password;
   @Basic
   @Column(name = "createdTime", nullable = false)
-  private Object createdTime;
+  private Timestamp createdTime;
   @Basic
   @Column(name = "dateOfBirth", nullable = true)
   private Date dateOfBirth;
@@ -43,21 +44,6 @@ public class User {
   @Basic
   @Column(name = "reputation", nullable = true)
   private Integer reputation;
-  @OneToMany(mappedBy = "userByUserId")
-  private Collection<Comment> commentsById;
-  @OneToMany(mappedBy = "userByUserId")
-  private Collection<Notification> notificationsById;
-  @OneToMany(mappedBy = "userByCreatorId")
-  private Collection<Report> reportsById;
-  @OneToMany(mappedBy = "userByReportedUserId")
-  private Collection<Report> reportsById_0;
-  @ManyToOne
-  @JoinColumn(name = "walletId", referencedColumnName = "id", nullable = false)
-  private Wallet walletByWalletId;
-  @OneToMany(mappedBy = "userByUserId")
-  private Collection<UserMeeting> userMeetingsById;
-  @OneToMany(mappedBy = "userByUserId")
-  private Collection<UserQuestion> userQuestionsById;
 
   public String getId() {
     return id;
@@ -103,7 +89,7 @@ public class User {
     return createdTime;
   }
 
-  public void setCreatedTime(Object createdTime) {
+  public void setCreatedTime(Timestamp createdTime) {
     this.createdTime = createdTime;
   }
 
@@ -198,61 +184,5 @@ public class User {
     result = 31 * result + (avatarUrl != null ? avatarUrl.hashCode() : 0);
     result = 31 * result + (reputation != null ? reputation.hashCode() : 0);
     return result;
-  }
-
-  public Collection<Comment> getCommentsById() {
-    return commentsById;
-  }
-
-  public void setCommentsById(Collection<Comment> commentsById) {
-    this.commentsById = commentsById;
-  }
-
-  public Collection<Notification> getNotificationsById() {
-    return notificationsById;
-  }
-
-  public void setNotificationsById(Collection<Notification> notificationsById) {
-    this.notificationsById = notificationsById;
-  }
-
-  public Collection<Report> getReportsById() {
-    return reportsById;
-  }
-
-  public void setReportsById(Collection<Report> reportsById) {
-    this.reportsById = reportsById;
-  }
-
-  public Collection<Report> getReportsById_0() {
-    return reportsById_0;
-  }
-
-  public void setReportsById_0(Collection<Report> reportsById_0) {
-    this.reportsById_0 = reportsById_0;
-  }
-
-  public Wallet getWalletByWalletId() {
-    return walletByWalletId;
-  }
-
-  public void setWalletByWalletId(Wallet walletByWalletId) {
-    this.walletByWalletId = walletByWalletId;
-  }
-
-  public Collection<UserMeeting> getUserMeetingsById() {
-    return userMeetingsById;
-  }
-
-  public void setUserMeetingsById(Collection<UserMeeting> userMeetingsById) {
-    this.userMeetingsById = userMeetingsById;
-  }
-
-  public Collection<UserQuestion> getUserQuestionsById() {
-    return userQuestionsById;
-  }
-
-  public void setUserQuestionsById(Collection<UserQuestion> userQuestionsById) {
-    this.userQuestionsById = userQuestionsById;
   }
 }

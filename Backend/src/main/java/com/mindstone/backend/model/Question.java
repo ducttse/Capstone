@@ -1,17 +1,17 @@
 package com.mindstone.backend.model;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.sql.Timestamp;
 
 @Entity
 public class Question {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
-  @Column(name = "id", nullable = false, length = 10)
-  private String id;
+  @Column(name = "id", nullable = false)
+  private long id;
   @Basic
-  @Column(name = "userId", nullable = false, length = 10)
-  private String userId;
+  @Column(name = "userId", nullable = false)
+  private int userId;
   @Basic
   @Column(name = "title", nullable = false, length = 100)
   private String title;
@@ -20,36 +20,24 @@ public class Question {
   private String description;
   @Basic
   @Column(name = "createdTime", nullable = false)
-  private Object createdTime;
+  private Timestamp createdTime;
   @Basic
-  @Column(name = "status", nullable = false, length = 30)
-  private String status;
-  @OneToMany(mappedBy = "questionByQuestionId")
-  private Collection<Comment> commentsById;
-  @OneToMany(mappedBy = "questionByQuestionId")
-  private Collection<Meeting> meetingsById;
-  @OneToMany(mappedBy = "questionByQuestionId")
-  private Collection<QuestionImageUrl> questionImageUrlsById;
-  @OneToMany(mappedBy = "questionByQuestionId")
-  private Collection<QuestionTag> questionTagsById;
-  @OneToMany(mappedBy = "questionByQuestionId")
-  private Collection<Transaction> transactionsById;
-  @OneToMany(mappedBy = "questionByQuestionId")
-  private Collection<UserQuestion> userQuestionsById;
+  @Column(name = "status", nullable = true)
+  private Integer status;
 
-  public String getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(long id) {
     this.id = id;
   }
 
-  public String getUserId() {
+  public int getUserId() {
     return userId;
   }
 
-  public void setUserId(String userId) {
+  public void setUserId(int userId) {
     this.userId = userId;
   }
 
@@ -69,19 +57,19 @@ public class Question {
     this.description = description;
   }
 
-  public Object getCreatedTime() {
+  public Timestamp getCreatedTime() {
     return createdTime;
   }
 
-  public void setCreatedTime(Object createdTime) {
+  public void setCreatedTime(Timestamp createdTime) {
     this.createdTime = createdTime;
   }
 
-  public String getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 
@@ -92,8 +80,8 @@ public class Question {
 
     Question question = (Question) o;
 
-    if (id != null ? !id.equals(question.id) : question.id != null) return false;
-    if (userId != null ? !userId.equals(question.userId) : question.userId != null) return false;
+    if (id != question.id) return false;
+    if (userId != question.userId) return false;
     if (title != null ? !title.equals(question.title) : question.title != null) return false;
     if (description != null ? !description.equals(question.description) : question.description != null)
       return false;
@@ -106,60 +94,12 @@ public class Question {
 
   @Override
   public int hashCode() {
-    int result = id != null ? id.hashCode() : 0;
-    result = 31 * result + (userId != null ? userId.hashCode() : 0);
+    int result = (int) (id ^ (id >>> 32));
+    result = 31 * result + userId;
     result = 31 * result + (title != null ? title.hashCode() : 0);
     result = 31 * result + (description != null ? description.hashCode() : 0);
     result = 31 * result + (createdTime != null ? createdTime.hashCode() : 0);
     result = 31 * result + (status != null ? status.hashCode() : 0);
     return result;
-  }
-
-  public Collection<Comment> getCommentsById() {
-    return commentsById;
-  }
-
-  public void setCommentsById(Collection<Comment> commentsById) {
-    this.commentsById = commentsById;
-  }
-
-  public Collection<Meeting> getMeetingsById() {
-    return meetingsById;
-  }
-
-  public void setMeetingsById(Collection<Meeting> meetingsById) {
-    this.meetingsById = meetingsById;
-  }
-
-  public Collection<QuestionImageUrl> getQuestionImageUrlsById() {
-    return questionImageUrlsById;
-  }
-
-  public void setQuestionImageUrlsById(Collection<QuestionImageUrl> questionImageUrlsById) {
-    this.questionImageUrlsById = questionImageUrlsById;
-  }
-
-  public Collection<QuestionTag> getQuestionTagsById() {
-    return questionTagsById;
-  }
-
-  public void setQuestionTagsById(Collection<QuestionTag> questionTagsById) {
-    this.questionTagsById = questionTagsById;
-  }
-
-  public Collection<Transaction> getTransactionsById() {
-    return transactionsById;
-  }
-
-  public void setTransactionsById(Collection<Transaction> transactionsById) {
-    this.transactionsById = transactionsById;
-  }
-
-  public Collection<UserQuestion> getUserQuestionsById() {
-    return userQuestionsById;
-  }
-
-  public void setUserQuestionsById(Collection<UserQuestion> userQuestionsById) {
-    this.userQuestionsById = userQuestionsById;
   }
 }
