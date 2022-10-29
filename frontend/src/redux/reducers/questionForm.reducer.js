@@ -26,18 +26,6 @@ export default function questionForm(state = initState, action) {
 					...action.payload
 				}
 			};
-		case LOAD_EDIT_QUESTION:
-			return {
-				loading: false,
-				data: {
-					...action.payload
-				}
-			};
-		case LOAD_EDIT_QUESTION_ASYNC:
-			return {
-				loading: true,
-				...state
-			};
 		case RESET_FORM:
 			return {
 				...initState

@@ -14,22 +14,9 @@ export function updateQuestionForm(payload) {
 	};
 }
 
-export function loadForm() {
-	return {
-		type: LOAD_FORM
-	};
-}
-
 export function resetForm() {
 	return {
 		type: RESET_FORM
-	};
-}
-
-export function loadEditQuestionForm(payload) {
-	return {
-		type: LOAD_EDIT_QUESTION,
-		payload: payload
 	};
 }
 

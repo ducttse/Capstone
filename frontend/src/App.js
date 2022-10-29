@@ -5,15 +5,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomLayout from "./common/CustomLayout";
 import Counter from "./counter.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
+import EditQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
 import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
 import QuestionPage from "./page/question/QuestionPage.jsx";
 import QuestionCardPage from "./page/questions/QuestionCardPage.jsx";
-import {
-	decrementCounter,
-	incrementAsyncCounter,
-	incrementCounter,
-	incrementIfOddCounter
-} from "./redux/actions/index.js";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -30,10 +25,6 @@ const App = () => {
 	const [isTokenFound, setTokenFound] = useState(false);
 	const dispatch = useDispatch();
 	const counter = useSelector((state) => state.counter);
-	const dispatchIncrement = () => dispatch(incrementCounter());
-	const dispatchDecrement = () => dispatch(decrementCounter());
-	const dispatchIncrementIfOdd = () => dispatch(incrementIfOddCounter());
-	const dispatchIncrementAsync = () => dispatch(incrementAsyncCounter());
 
 	useEffect(() => {
 		getFireBaseToken(setTokenFound);
@@ -53,20 +44,11 @@ const App = () => {
 					<Route path="/create-question">
 						<CreateQuestionPage />
 					</Route>
-					<Route path="/edit-question">
-						<CreateQuestionPage />
+					<Route path="/edit-question/:id">
+						<EditQuestionPage />
 					</Route>
 					<Route path="/questions">
 						<QuestionCardPage />
-					</Route>
-					<Route path="/counter">
-						<Counter
-							value={counter}
-							increment={dispatchIncrement}
-							decrement={dispatchDecrement}
-							incrementIfOdd={dispatchIncrementIfOdd}
-							incrementAsync={dispatchIncrementAsync}
-						/>
 					</Route>
 					<Route path="/question/:id">
 						<QuestionPage />

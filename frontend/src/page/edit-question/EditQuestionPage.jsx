@@ -13,7 +13,7 @@ import CustomSpin from "../../common/CustomSpin.jsx";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const EditQuestionPage = () => {
+const CreateQuestionPage = () => {
 	const [form] = Form.useForm();
 	const { data, loading } = useSelector((state) => state.questionForm);
 	const dispatch = useDispatch();
@@ -45,6 +45,7 @@ const EditQuestionPage = () => {
 					initialValues={{ ...data }}
 				>
 					<Form.Item
+						className="bold"
 						rules={[{ required: true, message: "Tiêu đề không được bỏ trống" }]}
 						name="title"
 						label="Tiêu đề"
@@ -52,6 +53,7 @@ const EditQuestionPage = () => {
 						<Input />
 					</Form.Item>
 					<Form.Item
+						className="bold"
 						rules={[{ required: false, message: "Phải chọn ít nhất 1 thẻ" }]}
 						name="tags"
 						label="Thẻ"
@@ -66,6 +68,7 @@ const EditQuestionPage = () => {
 						></Select>
 					</Form.Item>
 					<Form.Item
+						className="bold"
 						rules={[
 							{ required: true, message: "Nội dung không được để trống" }
 						]}
@@ -74,7 +77,12 @@ const EditQuestionPage = () => {
 					>
 						<RichTextEditor />
 					</Form.Item>
-					<Form.Item rules={[{ required: false }]} name="file" label="">
+					<Form.Item
+						className="bold"
+						rules={[{ required: false }]}
+						name="file"
+						label=""
+					>
 						<UploadFileButton />
 					</Form.Item>
 					<Button type="primary" htmlType="submit">
@@ -85,4 +93,4 @@ const EditQuestionPage = () => {
 		</Row>
 	);
 };
-export default EditQuestionPage;
+export default CreateQuestionPage;
