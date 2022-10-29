@@ -18,14 +18,14 @@ const questions = [
 				name: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
-				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+				content: `<p><span>auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
 			},
 			{
 				id: "2",
 				name: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
-				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+				content: `<p><span >auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
 			}
 		]
 	},
@@ -46,14 +46,14 @@ const questions = [
 				name: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
-				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+				content: `<p><span>auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
 			},
 			{
 				id: "2",
 				name: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
-				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
+				content: `<p><span >auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
 			}
 		]
 	},

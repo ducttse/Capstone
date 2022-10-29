@@ -17,7 +17,7 @@ const initState = {
 	data: formData
 };
 
-export default function questionForm(state = initState, action) {
+export default function editQuestionForm(state = initState, action) {
 	switch (action.type) {
 		case EDIT_FORM_QUESTION_UPDATE:
 			return {

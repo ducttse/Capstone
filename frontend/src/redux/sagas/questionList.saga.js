@@ -9,6 +9,6 @@ export function* loadListAsync() {
 	yield put(loadQuestionsList(questions));
 }
 
-export function* watchloadListAsync() {
+export function* watchLoadListAsync() {
 	yield takeEvery(LOAD_QUESTIONS_LIST_ASYNC, loadListAsync);
 }

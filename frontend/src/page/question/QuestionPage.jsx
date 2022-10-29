@@ -4,24 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import CustomSpin from "../../common/CustomSpin.jsx";
 import { loadDetailAsync } from "../../redux/actions/question.action.js";
-import { loadEditQuestionFormAsync } from "../../redux/actions/questionForm.action.js";
 import CommentSection from "./components/CommentSection.jsx";
 import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";
 
 const QuestionPage = () => {
 	const { id } = useParams();
+	const { data, loading, error } = useSelector((state) => state.question);
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { data, loading, error } = useSelector((state) => state.question);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const dispatchLoadQuestions = (id) => dispatch(loadDetailAsync(id));
-	const dispatchloadEditQuestionForm = (id) =>
-		dispatch(loadEditQuestionFormAsync(id));
 
-	const handleEdit = async () => {
-		dispatchloadEditQuestionForm(id);
-		history.push("/edit-question");
+	const handleEdit = () => {
+		history.push(`/edit-question/${id}`);
 	};
 
 	const showModal = () => {
@@ -45,7 +41,7 @@ const QuestionPage = () => {
 	) : (
 		<Row>
 			<Col span={20}>
-				<QuestionDetail data={data} />
+				<QuestionDetail data={data} loading={loading} />
 				<CommentSection comments={data.comments} />
 			</Col>
 			<Col span={3}>

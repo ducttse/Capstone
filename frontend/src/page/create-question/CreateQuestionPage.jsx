@@ -8,17 +8,13 @@ import {
 import BackButton from "../questions/components/BackButton.jsx";
 import RichTextEditor from "../../common/RichTextEditor.jsx";
 import UploadFileButton from "../questions/components/UploadFileButton.jsx";
-import "./QuestionForm.css";
 import CustomSpin from "../../common/CustomSpin.jsx";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
-const EditQuestionPage = () => {
+const CreateQuestionPage = () => {
 	const [form] = Form.useForm();
 	const { data, loading } = useSelector((state) => state.questionForm);
 	const dispatch = useDispatch();
 	const dispatchUpdate = (value) => dispatch(updateQuestionForm(value));
-
 	const onFinish = (values) => {
 		console.log(values);
 		console.log(data);
@@ -85,4 +81,4 @@ const EditQuestionPage = () => {
 		</Row>
 	);
 };
-export default EditQuestionPage;
+export default CreateQuestionPage;

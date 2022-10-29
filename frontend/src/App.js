@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomLayout from "./common/CustomLayout";
 import Counter from "./counter.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
-import EditQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
+import EditQuestionPage from "./page/edit-question/EditQuestionPage.jsx";
 import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
 import QuestionPage from "./page/question/QuestionPage.jsx";
 import QuestionCardPage from "./page/questions/QuestionCardPage.jsx";

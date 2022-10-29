@@ -1,12 +1,12 @@
 import { all } from "redux-saga/effects";
+import { watchLoadEditQuestionAsync } from "./editQuestionForm.saga.js";
 import { watchLoadQuestionAsync } from "./question.saga.js";
-import { watchloadLoadQuestionAsync } from "./editQuestionForm.saga.js";
-import { watchloadListAsync } from "./questionList.saga.js";
+import { watchLoadListAsync } from "./questionList.saga.js";
 
 export default function* rootSaga() {
 	yield all([
-		watchloadListAsync(),
+		watchLoadListAsync(),
 		watchLoadQuestionAsync(),
-		watchloadLoadQuestionAsync()
+		watchLoadEditQuestionAsync()
 	]);
 }

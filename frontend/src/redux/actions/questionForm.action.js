@@ -1,8 +1,4 @@
-import { LOAD_QUESTION_DETAIL_ASYNC } from "../constants/question.constant.js";
 import {
-	LOAD_EDIT_QUESTION,
-	LOAD_EDIT_QUESTION_ASYNC,
-	LOAD_FORM,
 	QUESTION_FORM_UPDATE,
 	RESET_FORM
 } from "../constants/questionForm.constant.js";
@@ -17,12 +13,5 @@ export function updateQuestionForm(payload) {
 export function resetForm() {
 	return {
 		type: RESET_FORM
-	};
-}
-
-export function loadEditQuestionFormAsync(id) {
-	return {
-		type: LOAD_EDIT_QUESTION_ASYNC,
-		questionId: id
 	};
 }
