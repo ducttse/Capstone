@@ -1,9 +1,7 @@
 import { notification } from "antd";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomLayout from "./common/CustomLayout";
-import Counter from "./counter.js";
 import { getFireBaseToken, onMessageListener } from "./firebase";
 import EditQuestionPage from "./page/edit-question/EditQuestionPage.jsx";
 import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
@@ -23,8 +21,6 @@ const App = () => {
 	// TODO: implement notification
 	// eslint-disable-next-line no-unused-vars
 	const [isTokenFound, setTokenFound] = useState(false);
-	const dispatch = useDispatch();
-	const counter = useSelector((state) => state.counter);
 
 	useEffect(() => {
 		getFireBaseToken(setTokenFound);
