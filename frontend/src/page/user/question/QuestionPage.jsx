@@ -3,12 +3,12 @@ import { Col, Modal, Row } from "antd";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getMeetingId } from "../../api/meetingApi.js";
-import CustomSpin from "../../common/CustomSpin.jsx";
+import { getMeetingId } from "../../../api/meetingApi.js";
+import CustomSpin from "../../../common/CustomSpin.jsx";
 import {
 	createCommentAsync,
 	loadDetailAsync
-} from "../../redux/actions/question.action.js";
+} from "../../../redux/actions/question.action.js";
 import CommentSection from "./components/CommentSection.jsx";
 import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";

@@ -1,5 +1,5 @@
 import { Avatar, Col, Row, Typography } from "antd";
-import { vnMoment } from "../../../utils/vnMoment.js";
+import { vnMoment } from "../../../../utils/vnMoment.js";
 
 const { Text, Title } = Typography;
 

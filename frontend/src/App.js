@@ -3,17 +3,13 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomLayout from "./common/CustomLayout";
 import { getFireBaseToken, onMessageListener } from "./firebase";
-import EditQuestionPage from "./page/edit-question/EditQuestionPage.jsx";
-import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
-import QuestionPage from "./page/question/QuestionPage.jsx";
-import QuestionCardPage from "./page/questions/QuestionCardPage.jsx";
-import { getMeetingId } from "./api/meetingApi.js";
 import LoginPage from "./page/auth/LoginPage";
 import AdminTest from "./page/auth/page-nav-test/AdminTest";
 import UserTest from "./page/auth/page-nav-test/UserTest";
 import StaffTest from "./page/auth/page-nav-test/StaffTest";
 import AdminLayout from "./page/admin/AdminLayout";
 import ModeratorManagementPage from "./page/admin/ModeratorManagementPage";
+import UserComponents from "./page/user/UserComponents.jsx";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -22,25 +18,6 @@ const openNotification = (message, description) => {
 			console.log("Notification Clicked!");
 		}
 	});
-};
-
-const UserComponents = () => {
-	return (
-		<CustomLayout>
-			<Route path="/create-question">
-				<CreateQuestionPage />
-			</Route>
-			<Route path="/edit-question/:id">
-				<EditQuestionPage />
-			</Route>
-			<Route path="/questions">
-				<QuestionCardPage />
-			</Route>
-			<Route path="/question/:id">
-				<QuestionPage />
-			</Route>
-		</CustomLayout>
-	);
 };
 
 const componentsBaseOnRole = (role) => {

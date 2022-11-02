@@ -1,7 +1,7 @@
 import { Button, Col, Divider, Form, Row } from "antd";
 import { useEffect } from "react";
 import { useState } from "react";
-import RichTextEditor from "../../../common/RichTextEditor.jsx";
+import RichTextEditor from "../../../../common/RichTextEditor.jsx";
 import ListComments from "./ListComments.jsx";
 
 const CommentSection = ({ comments, handleComment, loading }) => {

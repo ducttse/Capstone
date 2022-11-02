@@ -1,6 +1,6 @@
 import { Comment, List } from "antd";
 import { Interweave } from "interweave";
-import { vnMoment } from "../../../utils/vnMoment.js";
+import { vnMoment } from "../../../../utils/vnMoment.js";
 import dummyAva from "./ava.jpeg";
 
 const formatRawData = (data) => {

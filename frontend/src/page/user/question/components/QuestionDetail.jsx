@@ -3,7 +3,7 @@ import { Interweave } from "interweave";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import CustomSpin from "../../../common/CustomSpin.jsx";
+import CustomSpin from "../../../../common/CustomSpin.jsx";
 import UserInfo from "./UserInfo.jsx";
 const { Title } = Typography;
 const QuestionDetail = ({ data, loading }) => {
