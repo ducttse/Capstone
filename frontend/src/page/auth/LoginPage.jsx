@@ -1,38 +1,47 @@
 
 import { Layout, Row, Col, Typography ,Card, Form, Input, Button, message} from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {authHeader, login, logout} from "../../api/auth.service.js";
+import { login} from "../../api/auth.service.js";
 import "./LoginPage.css";
 import { useDispatch,useSelector } from 'react-redux';
+import ForgotPasswordModal from './FogotPasswordModal.jsx';
+import RegisterModal from './RegisterModal.jsx';
+import { loginFail, loginSuccess } from '../../redux/actions/auth.action.js';
 
 const { Content, Footer }  = Layout;
 const { Title, Text, Link } = Typography;
 
 
 const LoginPage = () => {
+
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const [isFogotPasswordModalOpen, setIsFogotPasswordModalOpen] = useState(false);
+
     const history = useHistory();
     const dispatch = useDispatch();
+    const authState = useSelector((state) => state.auth);
     
 
     const onFinish = (data) => {
-        let user = login();
-        console.log(user);
-        console.log(authHeader());
+        let user = login(data);
         if( !user) {
             message.error("Tên đăng nhập hoặc mật khẩu sai");
+            dispatch(loginFail);
         }
         else{
             message.success("Đăng nhập thành công");
-            // if(user.roleId === 1){
-            //     history.push('/user');
-            // }
-            // if(user.roleId === 2){
-            //     history.push('/admin');
-            // }
-            // if(user.roleId === 3){
-            //     history.push('/staff');
-            // }
+            dispatch(loginSuccess(user));
+            if(user.roleId === 1){
+                history.push('/questions');
+            }
+            if(user.roleId === 2){
+                history.push('/staff-management');
+            }
+            if(user.roleId === 3){
+                history.push('/staff');
+            }
         }
 	};
 
@@ -67,14 +76,16 @@ const LoginPage = () => {
                                     >
                                         <Input.Password prefix={<LockOutlined />} placeholder="Nhập mật khẩu" />
                                     </Form.Item>
-                                    <Link className="forgot-password" >Quên mật khẩu?</Link>
+                                    <Link className="forgot-password" onClick={() => {setIsFogotPasswordModalOpen(true)}}>Quên mật khẩu?</Link>
+                                        {isFogotPasswordModalOpen && <ForgotPasswordModal onClose={() => {setIsFogotPasswordModalOpen(false)}}></ForgotPasswordModal>}
                                         <br/>
                                     <Form.Item >
                                         <Button className="button border-radius" block type="primary" htmlType="submit" >
                                             Đăng nhập
                                         </Button>
                                     </Form.Item>
-                                    <Text>Hoặc <Link  className="register" style={{color: "red"}}> Đăng ký </Link></Text>
+                                    <Text>Hoặc <Link  className="register" onClick={() => {setIsRegisterModalOpen(true)}} style={{color: "red"}}> Đăng ký </Link></Text>
+                                        {isRegisterModalOpen && <RegisterModal onClose={() => {setIsRegisterModalOpen(false)}}></RegisterModal>}
                                 </Form>
                             </Card>
                         </Col>

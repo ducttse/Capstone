@@ -1,29 +1,33 @@
 import {
     LOGIN_FAIL,
     LOGIN_SUCCESS,
-    LOGOUT
+    LOGOUT,
+    REGISTER
 } from "../constants/auth.constant.js";
 
 
-const loginSuccess = (payload) => {
+export function loginSuccess (payload) {
     return {
         type: LOGIN_SUCCESS,
         payload: payload,
     }
 }
 
-const loginFail = (payload) => {
+export function loginFail () {
     return {
         type: LOGIN_FAIL,
-        payload: payload,
     }
 }
 
 
-const logout = () => {
+export function logout() {
     return {
         type: LOGOUT,
     }
 }
 
-export {loginSuccess, loginFail, logout};
+export function register(){
+    return {
+        type: REGISTER,
+    }
+}

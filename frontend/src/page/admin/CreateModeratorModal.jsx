@@ -3,7 +3,7 @@ import { useState } from "react";
 const {Title} = Typography;
 
 
-const UpdateModeratorModal = ({onClose}) => {
+const CreateModeratorModal = ({onClose}) => {
 
     const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -108,4 +108,4 @@ const UpdateModeratorModal = ({onClose}) => {
 }
 
 
-export default UpdateModeratorModal;
+export default CreateModeratorModal;
