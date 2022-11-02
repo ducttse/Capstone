@@ -8,6 +8,12 @@ import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
 import QuestionPage from "./page/question/QuestionPage.jsx";
 import QuestionCardPage from "./page/questions/QuestionCardPage.jsx";
 import { getMeetingId } from "./api/meetingApi.js";
+import LoginPage from "./page/auth/LoginPage";
+import AdminTest from "./page/auth/page-nav-test/AdminTest";
+import UserTest from "./page/auth/page-nav-test/UserTest";
+import StaffTest from "./page/auth/page-nav-test/StaffTest";
+import AdminLayout from "./page/admin/AdminLayout";
+import ModeratorManagementPage from "./page/admin/ModeratorManagementPage";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -18,6 +24,31 @@ const openNotification = (message, description) => {
 	});
 };
 
+const UserComponents = () => {
+	return (
+		<CustomLayout>
+			<Route path="/create-question">
+				<CreateQuestionPage />
+			</Route>
+			<Route path="/edit-question/:id">
+				<EditQuestionPage />
+			</Route>
+			<Route path="/questions">
+				<QuestionCardPage />
+			</Route>
+			<Route path="/question/:id">
+				<QuestionPage />
+			</Route>
+		</CustomLayout>
+	);
+};
+
+const componentsBaseOnRole = (role) => {
+	switch (role) {
+		default:
+			return <UserComponents />;
+	}
+};
 const App = () => {
 	// TODO: implement notification
 	// eslint-disable-next-line no-unused-vars
@@ -33,27 +64,28 @@ const App = () => {
 		})
 		.catch((err) => console.log("failed: ", err));
 	// inside the jsx being returned:
-
 	return (
 		<BrowserRouter>
 			<Switch>
-				<CustomLayout>
-					<Route path="/create-question">
-						<CreateQuestionPage />
-					</Route>
-					<Route path="/edit-question/:id">
-						<EditQuestionPage />
-					</Route>
-					<Route path="/questions">
-						<QuestionCardPage />
-					</Route>
-					<Route path="/question/:id">
-						<QuestionPage />
-					</Route>
-					<Route path="/question/:id/requests">
-						<QuestionPage />
-					</Route>
-				</CustomLayout>
+				<Route exact path="/">
+					<LoginPage />
+				</Route>
+				{componentsBaseOnRole("user")}
+				{/* {user?.roleId === 2 && (
+         <AdminLayout>
+			<Route path="/staff-management">
+              <ModeratorManagementPage />
+            </Route>
+		 </AdminLayout>
+        )}
+        {user?.roleId === 1 && (
+          <UserComponents />
+        )}
+        {user?.roleId === 3 && (
+          <Route path="/staff">
+            <StaffTest />
+          </Route>
+        )} */}
 			</Switch>
 		</BrowserRouter>
 	);
