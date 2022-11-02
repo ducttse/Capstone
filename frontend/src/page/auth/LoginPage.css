@@ -1,0 +1,25 @@
+.login-layout {
+    background: EFEFEF;
+}
+
+.content {
+    padding: 5%;
+}
+
+.border-radius {
+    border-radius: 10px;
+}
+
+.forgot-password {
+    float: right;
+}
+
+.button {
+    margin-top: 10px;
+}
+
+
+.footer {
+  background-color: #c5c5c5;
+  text-align: center;
+}
