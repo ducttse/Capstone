@@ -9,76 +9,96 @@ const questions = [
 		content: `<p class="ql-align-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p class="ql-align-justify">Aliquam vel sem in diam dictum auctor consequat non neque. Fusce mollis consectetur ligula, ac euismod elit finibus fnsalknklad eu. <strong>Mauris nunc turpis</strong>, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</p><ul><li class="ql-align-justify">Proin rutrum metus at massa tincidunt ultricies. Mauris laoreet sagittis sodales. Nunc ultricies nulla sed dolor aliquam ultrices. Vivamus at hendrerit augue, ut dignissim tortor. Aenean enim neque, vehicula sed dignissim sit amet, consectetur ac nisi. Cras orci nisl, viverra id augue at, pellentesque tempor odio. Duis cursus ac lectus vitae ultricies. Mauris at fermentum nulla.</li><li class="ql-align-justify">Nullam in laoreet eros, sollicitudin euismod augue. Quisque ante ex, lobortis consectetur lectus ac, varius condimentum sem. Vestibulum elementum sapien ut vehicula cursus. Cras in tincidunt diam, id euismod purus. Suspendisse sit amet nulla hendrerit ex ultrices accumsan a vel magna. In metus diam, feugiat pretium hendrerit non, lobortis vitae lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam quis sollicitudin eros, vitae condimentum nulla. Mauris cursus bibendum nunc, sit amet egestas magna lobortis sodales. </li></ul><p class="ql-align-justify">Nam ullamcorper finibus ligula vitae tincidunt. Donec sed nisi ac neque elementum scelerisque. Vestibulum ante odio, tempus eu mollis aliquet, porttitor eu enim. Etiam tincidunt ornare massa, non tempor est vulputate ut. Phasellus ut felis vel orci semper lacinia.</p><p><br></p>`,
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `<p><span>auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `<p><span >auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
 			}
-		]
+		],
+		requestedAnswer: [
+			{
+				id: "1",
+				fullName: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: ""
+			}
+		],
+		price: 10000
 	},
 	{
 		id: "2",
-		title: "Câu hỏi về cách mạng tháng ",
+		title:
+			"Donec a placerat magna. Phasellus facilisis, tortor at rutrum ultrices",
 		shortContent:
 			"Proin rutrum metus at massa tincidunt ultricies. Mauris laoreet sagittis sodales.",
-		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
+		content:
+			"Aenean vehicula arcu ante, non ultricies nunc tempor vitae. Aliquam ultricies, magna quis fringilla finibus, metus erat consequat enim, in pellentesque metus massa ut velit. Nunc eu nisi ligula. Sed tempor posuere turpis, nec pharetra libero fringilla ornare. Vivamus eleifend iaculis eros, eu pellentesque felis iaculis eget. Nunc efficitur, odio id egestas mattis, mauris lorem luctus risus, ac pulvinar mi leo non dui. Fusce ac lobortis mi, in tristique ligula. Duis vehicula, urna vel accumsan congue, ligula tortor malesuada elit, ac congue lectus lacus ac risus.",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `<p><span>auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `<p><span >auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
 			}
-		]
+		],
+		requestedAnswer: [
+			{
+				id: "1",
+				fullName: "Vũ Thị Thuỳ Dương",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: ""
+			}
+		],
+		price: 20000
 	},
 	{
 		id: "3",
-		title: "Câu hỏi về cách mạng tháng ",
+		title: "Quisque ornare leo non eros bibendum mattis at et elit.",
 		shortContent:
 			"Proin rutrum metus at massa tincidunt ultricies. Mauris laoreet sagittis sodales.",
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
@@ -93,20 +113,20 @@ const questions = [
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
@@ -121,20 +141,20 @@ const questions = [
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
@@ -149,20 +169,20 @@ const questions = [
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
@@ -177,20 +197,20 @@ const questions = [
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
@@ -205,20 +225,20 @@ const questions = [
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
@@ -233,20 +253,20 @@ const questions = [
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
@@ -261,20 +281,20 @@ const questions = [
 		content: "Cách mạng tháng 8 xảy ra lúc nào, có ý nghĩa là gì?",
 		user: {
 			id: "1",
-			name: "Từ Trọng Đức"
+			fullName: "Từ Trọng Đức"
 		},
 		createdTime: "2022-09-08 03:13:10",
 		comments: [
 			{
 				id: "1",
-				name: "Vũ Thị Thuỳ Dương",
+				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
 			},
 			{
 				id: "2",
-				name: "Trần Bảo Long",
+				fullName: "Trần Bảo Long",
 				createdTime: "2022-09-08 06:46:10",
 				avatar: "",
 				content: `"<p><span style="color: rgb(252, 229, 102);">auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>"`
@@ -299,7 +319,7 @@ export const createComment = async (id, { comment }) => {
 	const question = questions.filter((q) => q.id == id)[0];
 	const mockedComment = {
 		id: "2",
-		name: "Trần Bảo Long",
+		fullName: "Trần Bảo Long",
 		createdTime: "2022-09-08 06:46:10",
 		avatar: "",
 		content: comment
@@ -312,6 +332,8 @@ export const editQuestion = async (id, { content, shortContent, title }) => {
 	await fakeCallApi(1000);
 	const question = questions.filter((q) => q.id == id)[0];
 	question.content = content;
-	question.shortContent = shortContent;
+	if (shortContent) {
+		question.shortContent = shortContent;
+	}
 	question.title = title;
 };

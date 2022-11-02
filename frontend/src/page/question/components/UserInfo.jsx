@@ -20,7 +20,7 @@ const UserInfo = ({ user, createdTime }) => {
 			</Col>
 			<Col style={{ marginLeft: "20px", paddingTop: "5px" }}>
 				<Title style={{ marginBottom: "0px" }} level={5}>
-					{user.name}
+					{user.fullName}
 				</Title>
 				<Text style={{ paddingBottom: "10px" }} type="secondary">
 					{vnMoment(createdTime).format("LLL")}

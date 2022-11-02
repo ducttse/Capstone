@@ -48,7 +48,7 @@ const CommentSection = ({ comments, handleComment, loading }) => {
 							<Button
 								htmlType="submit"
 								type="primary"
-								size="large"
+								size="default"
 								style={{ marginTop: "20px" }}
 							>
 								Bình luận

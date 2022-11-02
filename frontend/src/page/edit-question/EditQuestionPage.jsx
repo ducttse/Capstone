@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import BackButton from "../questions/components/BackButton.jsx";
 import RichTextEditor from "../../common/RichTextEditor.jsx";
@@ -28,6 +28,12 @@ const EditQuestionPage = () => {
 		console.log(values);
 		console.log(data);
 		requestEdit(id, values);
+		Modal.success({
+			content: "Lưu thành công",
+			onOk() {
+				history.push(`/question/${id}`);
+			}
+		});
 	};
 
 	const onValuesChange = (_, values) => {
@@ -37,6 +43,10 @@ const EditQuestionPage = () => {
 	useEffect(() => {
 		loadQuestionAsync(id);
 	}, []);
+
+	useEffect(() => {
+		form.setFieldsValue(data);
+	}, [loading]);
 
 	return loading ? (
 		<CustomSpin />

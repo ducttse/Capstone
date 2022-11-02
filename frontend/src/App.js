@@ -7,6 +7,7 @@ import EditQuestionPage from "./page/edit-question/EditQuestionPage.jsx";
 import CreateQuestionPage from "./page/create-question/CreateQuestionPage.jsx";
 import QuestionPage from "./page/question/QuestionPage.jsx";
 import QuestionCardPage from "./page/questions/QuestionCardPage.jsx";
+import { getMeetingId } from "./api/meetingApi.js";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -47,6 +48,9 @@ const App = () => {
 						<QuestionCardPage />
 					</Route>
 					<Route path="/question/:id">
+						<QuestionPage />
+					</Route>
+					<Route path="/question/:id/requests">
 						<QuestionPage />
 					</Route>
 				</CustomLayout>

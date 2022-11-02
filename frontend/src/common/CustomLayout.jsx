@@ -7,6 +7,7 @@ import { Col, Layout, Menu, Row, Input } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CustomeLayout.css";
+import CustomeHeader from "./header/Header.jsx";
 const { Header, Content, Sider } = Layout;
 const { Search } = Input;
 
@@ -30,22 +31,9 @@ const getSideBarItems = () =>
 		);
 	});
 
-const onSearch = (value) => console.log(value);
-
 const CustomLayout = (props) => (
 	<Layout>
-		<Header className="header">
-			<Row>
-				<Col offset={6} span={10}>
-					<Search
-						size="large"
-						placeholder="Tìm kiếm câu hỏi"
-						onSearch={onSearch}
-						style={{ width: "100%", marginTop: 10 }}
-					/>
-				</Col>
-			</Row>
-		</Header>
+		<CustomeHeader />
 		<Layout>
 			<Sider width={200} className="site-layout-background">
 				<Menu

@@ -5,7 +5,7 @@ import dummyAva from "./ava.jpeg";
 
 const formatRawData = (data) => {
 	return {
-		author: data.name,
+		author: data.fullName,
 		avatar: dummyAva,
 		content: data.content,
 		datetime: vnMoment(data.createdTime).format("LLL")

@@ -1,12 +1,18 @@
 import { Button } from "antd";
 
-const QuestionActions = ({ id, onTriggleDelete, onTriggleEdit }) => {
+const QuestionActions = ({
+	id,
+	onTriggleDelete,
+	onTriggleEdit,
+	onTriggleViewRequestList,
+	numberOfRequest
+}) => {
 	return (
 		<>
 			{id == 2 ? (
 				<>
 					<Button
-						size="large"
+						size="default"
 						type="primary"
 						style={{ marginTop: "5px", minWidth: "100%" }}
 						onClick={() => onTriggleEdit()}
@@ -14,7 +20,7 @@ const QuestionActions = ({ id, onTriggleDelete, onTriggleEdit }) => {
 						Chỉnh sửa
 					</Button>
 					<Button
-						size="large"
+						size="default"
 						type="primary"
 						style={{ marginTop: "5px", minWidth: "100%" }}
 						onClick={() => onTriggleDelete()}
@@ -22,15 +28,21 @@ const QuestionActions = ({ id, onTriggleDelete, onTriggleEdit }) => {
 						Xoá
 					</Button>
 					<Button
-						size="large"
+						size="default"
 						type="primary"
 						style={{ marginTop: "5px", minWidth: "100%" }}
+						onClick={() => onTriggleViewRequestList()}
 					>
-						Tạo meeting
+						Danh sách trả lời {`(${numberOfRequest})`}
 					</Button>{" "}
 				</>
 			) : (
-				<Button size="large" type="primary" style={{ minWidth: "100%" }}>
+				<Button
+					onClick={() => onTriggleViewRequestList()}
+					size="default"
+					type="primary"
+					style={{ minWidth: "100%" }}
+				>
 					Đăng ký trả lời
 				</Button>
 			)}

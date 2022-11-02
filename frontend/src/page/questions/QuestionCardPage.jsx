@@ -10,7 +10,7 @@ import { resetForm } from "../../redux/actions/questionForm.action.js";
 
 const ITEM_PER_PAGE = 10;
 
-const QuestionCards = ({ questions }) => {
+const QuestionCards = ({ questions, loading }) => {
 	return Array.isArray(questions)
 		? questions.map((question, i) => {
 				return (

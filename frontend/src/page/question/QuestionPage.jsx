@@ -1,15 +1,14 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Col, Modal, Row } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { getMeetingId } from "../../api/meetingApi.js";
 import CustomSpin from "../../common/CustomSpin.jsx";
-import { loadEditQuestionForm } from "../../redux/actions/editQuestionForm.action.js";
 import {
 	createCommentAsync,
 	loadDetailAsync
 } from "../../redux/actions/question.action.js";
-import { loadEditQuestionFormAsync } from "../../redux/sagas/editQuestionForm.saga.js";
 import CommentSection from "./components/CommentSection.jsx";
 import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";
@@ -45,10 +44,20 @@ const QuestionPage = () => {
 		});
 	};
 
+	// const handleCreateMeeting = async () => {
+	// 	const res = await getMeetingId();
+	// 	if (res.status < 300) {
+	// 		console.log(res.data);
+	// 	}
+	// };
+
 	const handleComment = (commentContent) => {
-		console.log("submit content: ", commentContent);
 		dispatchCreateComment(id, commentContent);
 		dispatchLoadQuestion(id);
+	};
+
+	const handleViewRequest = () => {
+		history.push(`/question/${id}/requests`);
 	};
 
 	useEffect(() => {
@@ -71,6 +80,8 @@ const QuestionPage = () => {
 					id={id}
 					onTriggleDelete={handleDelete}
 					onTriggleEdit={handleEdit}
+					onTriggleViewRequestList={handleViewRequest}
+					numberOfRequest={data?.requestedAnswer?.length}
 				/>
 			</Col>
 		</Row>
