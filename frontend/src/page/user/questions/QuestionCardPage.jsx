@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import MultiSelection from "./components/MultiSelection.jsx";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadQuestionsListAsync } from "../../../redux/actions/questionList.action.js";
+import { loadQuestionsListAsync } from "../../../redux/user/actions/questionList.action.js";
 import CustomSpin from "../../../common/CustomSpin.jsx";
-import { resetForm } from "../../../redux/actions/questionForm.action.js";
+import { resetForm } from "../../../redux/user/actions/questionForm.action.js";
 
 const ITEM_PER_PAGE = 10;
 

@@ -8,7 +8,7 @@ import {
 	loadEditQuestionFormAsync,
 	requestEditQuestion,
 	updateEditQuestionForm
-} from "../../../redux/actions/editQuestionForm.action.js";
+} from "../../../redux/user/actions/editQuestionForm.action.js";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from "react";
 

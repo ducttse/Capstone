@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	loadForm,
 	updateQuestionForm
-} from "../../../redux/actions/questionForm.action.js";
+} from "../../../redux/user/actions/questionForm.action.js";
 
 import BackButton from "../questions/components/BackButton.jsx";
 import RichTextEditor from "../../../common/RichTextEditor.jsx";

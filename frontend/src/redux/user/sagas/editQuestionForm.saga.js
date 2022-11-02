@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { editQuestion, getQuestionByID } from "../../api/questions.js";
+import { editQuestion, getQuestionByID } from "../../../api/questions.js";
 import { loadEditQuestionForm } from "../actions/editQuestionForm.action.js";
 import {
 	LOAD_EDIT_FORM_ASYNC,

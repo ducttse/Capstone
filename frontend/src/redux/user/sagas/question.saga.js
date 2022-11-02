@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { createComment, getQuestionByID } from "../../api/questions.js";
+import { createComment, getQuestionByID } from "../../../api/questions.js";
 import { requestEditQuestion } from "../actions/editQuestionForm.action.js";
 import {
 	loadDetailAsync,

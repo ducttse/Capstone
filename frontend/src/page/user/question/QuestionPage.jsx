@@ -8,7 +8,7 @@ import CustomSpin from "../../../common/CustomSpin.jsx";
 import {
 	createCommentAsync,
 	loadDetailAsync
-} from "../../../redux/actions/question.action.js";
+} from "../../../redux/user/actions/question.action.js";
 import CommentSection from "./components/CommentSection.jsx";
 import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";
