@@ -292,3 +292,26 @@ export const getQuestionByID = async (id) => {
 	await fakeCallApi(1000);
 	return questions.filter((q) => q.id == id)[0];
 };
+
+export const createComment = async (id, { comment }) => {
+	console.log("createComment", id, comment);
+	await fakeCallApi(1000);
+	const question = questions.filter((q) => q.id == id)[0];
+	const mockedComment = {
+		id: "2",
+		name: "Trần Bảo Long",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		content: comment
+	};
+	question.comments.push(mockedComment);
+	console.log("question", question);
+};
+
+export const editQuestion = async (id, { content, shortContent, title }) => {
+	await fakeCallApi(1000);
+	const question = questions.filter((q) => q.id == id)[0];
+	question.content = content;
+	question.shortContent = shortContent;
+	question.title = title;
+};

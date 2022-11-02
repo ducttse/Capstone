@@ -1,9 +1,15 @@
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Col, Modal, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import CustomSpin from "../../common/CustomSpin.jsx";
-import { loadDetailAsync } from "../../redux/actions/question.action.js";
+import { loadEditQuestionForm } from "../../redux/actions/editQuestionForm.action.js";
+import {
+	createCommentAsync,
+	loadDetailAsync
+} from "../../redux/actions/question.action.js";
+import { loadEditQuestionFormAsync } from "../../redux/sagas/editQuestionForm.saga.js";
 import CommentSection from "./components/CommentSection.jsx";
 import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";
@@ -13,27 +19,40 @@ const QuestionPage = () => {
 	const { data, loading, error } = useSelector((state) => state.question);
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const dispatchLoadQuestions = (id) => dispatch(loadDetailAsync(id));
+	const dispatchLoadQuestion = (id) => dispatch(loadDetailAsync(id));
+	const dispatchCreateComment = (id, comment) =>
+		dispatch(createCommentAsync(id, comment));
 
 	const handleEdit = () => {
 		history.push(`/edit-question/${id}`);
 	};
 
-	const showModal = () => {
-		setIsModalOpen(true);
+	const handleDelete = () => {
+		Modal.confirm({
+			title: "Xác nhận",
+			icon: <ExclamationCircleOutlined />,
+			content: "Bạn có chắc muốn xoá câu hỏi này không?",
+			okText: "Xác nhận",
+			okType: "danger",
+			cancelText: "Không",
+			onOk() {
+				// TODO: call delete question api
+				console.log("deleted");
+			},
+			onCancel() {
+				console.log("Cancel");
+			}
+		});
 	};
 
-	const handleOk = () => {
-		setIsModalOpen(false);
-	};
-
-	const handleCancel = () => {
-		setIsModalOpen(false);
+	const handleComment = (commentContent) => {
+		console.log("submit content: ", commentContent);
+		dispatchCreateComment(id, commentContent);
+		dispatchLoadQuestion(id);
 	};
 
 	useEffect(() => {
-		dispatchLoadQuestions(id);
+		dispatchLoadQuestion(id);
 	}, []);
 
 	return loading ? (
@@ -42,24 +61,17 @@ const QuestionPage = () => {
 		<Row>
 			<Col span={20}>
 				<QuestionDetail data={data} loading={loading} />
-				<CommentSection comments={data.comments} />
+				<CommentSection
+					comments={data.comments}
+					handleComment={handleComment}
+				/>
 			</Col>
 			<Col span={3}>
 				<QuestionActions
 					id={id}
-					onTriggleDelete={showModal}
+					onTriggleDelete={handleDelete}
 					onTriggleEdit={handleEdit}
 				/>
-				<Modal
-					title="Modal"
-					visible={isModalOpen}
-					onOk={handleOk}
-					onCancel={handleCancel}
-					okText="Xác nhận"
-					cancelText="Huỷ"
-				>
-					<p></p>
-				</Modal>
 			</Col>
 		</Row>
 	);

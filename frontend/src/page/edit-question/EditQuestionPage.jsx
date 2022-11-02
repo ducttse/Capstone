@@ -6,9 +6,10 @@ import UploadFileButton from "../questions/components/UploadFileButton.jsx";
 import CustomSpin from "../../common/CustomSpin.jsx";
 import {
 	loadEditQuestionFormAsync,
+	requestEditQuestion,
 	updateEditQuestionForm
 } from "../../redux/actions/editQuestionForm.action.js";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const EditQuestionPage = () => {
@@ -16,11 +17,17 @@ const EditQuestionPage = () => {
 	const [form] = Form.useForm();
 	const { data, loading } = useSelector((state) => state.editQuestionForm);
 	const dispatch = useDispatch();
+	const history = useHistory();
+
 	const dispatchUpdate = (value) => dispatch(updateEditQuestionForm(value));
 	const loadQuestionAsync = (id) => dispatch(loadEditQuestionFormAsync(id));
+	const requestEdit = (id, data) => dispatch(requestEditQuestion(id, data));
+
 	const onFinish = (values) => {
+		// TODO: call edit question api
 		console.log(values);
 		console.log(data);
+		requestEdit(id, values);
 	};
 
 	const onValuesChange = (_, values) => {
