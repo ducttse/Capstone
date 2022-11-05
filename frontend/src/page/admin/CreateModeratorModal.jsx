@@ -3,27 +3,21 @@ import { useState } from "react";
 const {Title} = Typography;
 
 
-const CreateModeratorModal = ({onClose}) => {
+const CreateModeratorModal = () => {
 
-    const [isModalOpen, setIsModalOpen] = useState(true);
+
 
     const onFinish = (values) => {
         console.log(values);
-        closeModal();
         message.success("Đăng ký thành công")
     }
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-        onClose();
-    };
 
 
     return (
-        <Modal open={isModalOpen} onCancel={closeModal} footer={null}>
             <Row justify="center" align="middle">
-                <Title level={1}  align="middle">Tạo tài khoản</Title>
-                <Col  span={20}>
+                <Col  span={6}>
+                    <Title level={1}  align="middle">Tạo tài khoản</Title>
                     <Form layout="vertical"
                             autoComplete="off"
                             onFinish={onFinish}
@@ -103,7 +97,6 @@ const CreateModeratorModal = ({onClose}) => {
                     </Form>
                 </Col> 
             </Row>
-        </Modal>
     )
 }
 
