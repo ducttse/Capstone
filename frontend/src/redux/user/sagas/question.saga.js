@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { createComment, getQuestionByID } from "../../../api/questions.js";
+import { createComment } from "../../../api/questions.js";
+import { getQuestionByID } from "../../../api/user/questions/index.js";
 import { loadQuestionDetail } from "../actions/question.action.js";
 
 export function* loadQuestionAsync(action) {

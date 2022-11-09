@@ -2,7 +2,7 @@ import QuestionCard from "./components/QuestionCard.jsx";
 import { Button, Col, Pagination, Row } from "antd";
 import { useEffect, useState } from "react";
 import MultiSelection from "./components/MultiSelection.jsx";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadQuestionsListAsync } from "../../../redux/user/actions/questionList.action.js";
 import CustomSpin from "../../../common/CustomSpin.jsx";
@@ -16,7 +16,7 @@ const QuestionCards = ({ questions, loading }) => {
 				return (
 					<QuestionCard
 						key={i}
-						title={question.title + " " + question.id}
+						title={question.title}
 						content={question.shortContent}
 						to={`/question/${question.id}`}
 						questionId={question.id}

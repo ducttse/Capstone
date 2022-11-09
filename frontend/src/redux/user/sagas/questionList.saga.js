@@ -1,5 +1,5 @@
 import { call, put } from "redux-saga/effects";
-import { getQuestions } from "../../../api/questions.js";
+import { getQuestions } from "../../../api/user/questions/index.js";
 import { loadQuestionsList } from "../actions/questionList.action.js";
 
 export function* loadListAsync() {

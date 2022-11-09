@@ -13,6 +13,66 @@ import CommentSection from "./components/CommentSection.jsx";
 import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";
 
+const fakeComment = [
+	{
+		id: "1",
+		fullName: "Vũ Thị Thuỳ Dương",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		content: `<p><span>auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
+	},
+	{
+		id: "2",
+		fullName: "Trần Bảo Long",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		content: `<p><span >auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
+	}
+];
+
+const fakeRequests = [
+	{
+		id: "1",
+		fullName: "Vũ Thị Thuỳ Dương",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		reputation: 3.4,
+		questionAnswered: 10
+	},
+	{
+		id: "2",
+		fullName: "Micheal",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		reputation: 4,
+		questionAnswered: 6
+	},
+	{
+		id: "3",
+		fullName: "Nguyễn Ngọc Bình",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		reputation: 2,
+		questionAnswered: 3
+	},
+	{
+		id: "3",
+		fullName: "Long Trần",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		reputation: 2,
+		questionAnswered: 3
+	},
+	{
+		id: "3",
+		fullName: "Hiếu",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		reputation: 2,
+		questionAnswered: 3
+	}
+];
+
 const QuestionPage = () => {
 	const { id } = useParams();
 	const { data, loading, error } = useSelector((state) => state.question);
@@ -60,7 +120,12 @@ const QuestionPage = () => {
 		history.push(`/question/${id}/requests`);
 	};
 
+	const handleViewBooking = () => {
+		history.push(`/question/${id}/booking`);
+	};
+
 	useEffect(() => {
+		console.log(id);
 		dispatchLoadQuestion(id);
 	}, []);
 
@@ -71,7 +136,7 @@ const QuestionPage = () => {
 			<Col span={20}>
 				<QuestionDetail data={data} loading={loading} />
 				<CommentSection
-					comments={data.comments}
+					comments={data.comments ?? fakeComment}
 					handleComment={handleComment}
 				/>
 			</Col>
@@ -81,7 +146,8 @@ const QuestionPage = () => {
 					onTriggleDelete={handleDelete}
 					onTriggleEdit={handleEdit}
 					onTriggleViewRequestList={handleViewRequest}
-					numberOfRequest={data?.requestedAnswer?.length}
+					handleViewBooking={handleViewBooking}
+					numberOfRequest={data?.requestedAnswer?.length ?? fakeRequests.length}
 				/>
 			</Col>
 		</Row>

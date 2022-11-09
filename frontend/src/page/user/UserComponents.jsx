@@ -1,8 +1,10 @@
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import CustomLayout from "../../common/CustomLayout.jsx";
 import CreateQuestionPage from "./create-question/CreateQuestionPage.jsx";
 import EditQuestionPage from "./edit-question/EditQuestionPage.jsx";
 import QuestionPage from "./question/QuestionPage.jsx";
+import QuestionRoute from "./question/QuestionRoute.jsx";
+import RequestListPage from "./question/RequestListPage.jsx";
 import QuestionCardPage from "./questions/QuestionCardPage.jsx";
 
 const UserComponents = () => {
@@ -18,7 +20,7 @@ const UserComponents = () => {
 				<QuestionCardPage />
 			</Route>
 			<Route path="/question/:id">
-				<QuestionPage />
+				<QuestionRoute />
 			</Route>
 		</CustomLayout>
 	);

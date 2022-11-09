@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { editQuestion, getQuestionByID } from "../../../api/questions.js";
+import { editQuestion } from "../../../api/questions.js";
+import { getQuestionByID } from "../../../api/user/questions/index.js";
 import { loadEditQuestionForm } from "../actions/editQuestionForm.action.js";
 import {} from "../constants/editQuestionForm.constant.js";
 
