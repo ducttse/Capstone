@@ -14,12 +14,10 @@ import {
 	Modal,
 	message
 } from "antd";
-import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import CreateModeratorModal from "./CreateModeratorModal";
-import DeleteModeratorModal from "./DeleteModeratorModal";
-import DetailModeratorModal from "./DetailModerator";
-import UpdateModeratorModal from "./UpdateModerator";
 const { Text } = Typography;
 const { Search } = Input;
 
@@ -48,12 +46,10 @@ const staff = [
 ];
 
 const ModeratorManagementPage = () => {
-	const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-	const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-	const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
 	const [dataSource, setDataSource] = useState(staff);
+	const history = useHistory() ;
+	const dispatch = useDispatch();
 
 	const onSearch = (value) => {
 		let searchResult = dataSource.filter((staff) =>
@@ -65,22 +61,22 @@ const ModeratorManagementPage = () => {
 		{
 			title: "Id",
 			dataIndex: "id",
-			key: "id"
+			key: "1"
 		},
 		{
 			title: "Tên hiển thị",
 			dataIndex: "displayName",
-			key: "displayName"
+			key: "2"
 		},
 		{
 			title: "Email",
 			dataIndex: "email",
-			key: "email"
+			key: "3"
 		},
 		{
 			title: "Chức danh",
 			dataIndex: "roleId",
-			key: "role",
+			key: "4",
 			render: (record) => {
 				let role;
 				if (record.roleId == 1) role = "Nhân viên quản lý nhân sự";
@@ -95,7 +91,7 @@ const ModeratorManagementPage = () => {
 		{
 			title: "Trạng thái",
 			dataIndex: "status",
-			key: "status",
+			key: "5",
 			render: (_, record) => {
 				let color;
 				if (record.status == "Enable") color = "Green";
@@ -110,23 +106,19 @@ const ModeratorManagementPage = () => {
 		{
 			title: "",
 			dataIndex: "action",
-			key: "action",
-			render: (_, record) => {
+			key: "6",
+			render: (_,record) => {
 				return (
 					<Space size="large">
 						<EyeOutlined
 							style={{ color: "#1e81b0" }}
-							onClick={() => {
-								setIsDetailModalOpen(true);
-							}}
 						/>
 						<EditOutlined
 							style={{ color: "#e28743" }}
-							onClick={showUpdateModal}
+							onClick={logrecord(record)}
 						/>
 						<MinusCircleOutlined
 							style={{ color: "red" }}
-							onClick={showDeleteConfirm}
 						/>
 					</Space>
 				);
@@ -134,24 +126,19 @@ const ModeratorManagementPage = () => {
 		}
 	];
 
-	const showDetailModal = () => {
-		setIsDetailModalOpen(true);
-	};
+	const logrecord = (id) => {
+		console.log(id);
+	}
 
-	const showUpdateModal = () => {
-		setIsUpdateModalOpen(true);
-	};
+	// const createModerator = () => {
+	// 	history.push('/create-moderator')
+	// }
 
-	const showDeleteConfirm = () => {
-		setIsDeleteModalOpen(true);
-	};
+	// const updateModerator = (id) => {
+	// 	history.push(`/update-moderator/${id}`);
+	// 	console.log(id);
+	// }
 
-	const onClose = () => {
-		setIsCreateModalOpen(false);
-		setIsDetailModalOpen(false);
-		setIsUpdateModalOpen(false);
-		setIsDeleteModalOpen(false);
-	};
 
 	return (
 		<>
@@ -172,19 +159,15 @@ const ModeratorManagementPage = () => {
 								type="primary"
 								htmlType="submit"
 								onClick={() => {
-									setIsCreateModalOpen(true);
+									// createModerator()
 								}}
 								style={{ marginBottom: "20px", width: "150px" }}
 							>
 								Tạo nhân viên
 							</Button>
-							{isCreateModalOpen && <CreateModeratorModal onClose={onClose} />}
 						</Col>
 
 						<Table columns={columns} dataSource={dataSource} pagination>
-							{isDetailModalOpen && <DetailModeratorModal onClose={onClose} />}
-							{isUpdateModalOpen && <UpdateModeratorModal onClose={onClose} />}
-							{isDeleteModalOpen && <DeleteModeratorModal onClose={onClose} />}
 						</Table>
 					</Col>
 				</Row>

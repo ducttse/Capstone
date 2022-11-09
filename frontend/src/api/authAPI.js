@@ -50,22 +50,9 @@ const login = (formData) => {
 
 
 
-const logout   = () => {
+const logoutAPI   = () => {
   localStorage.removeItem("user");
 };
 
-const authHeader = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
 
-  if (user && user.accessToken) {
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    if (user && user.accessToken) {
-      return { Authorization: 'Bearer ' + user.accessToken };
-    } else {
-      return {};
-    }
-  }
-};
-
-export {login, logout, authHeader};
+export {login, logoutAPI};

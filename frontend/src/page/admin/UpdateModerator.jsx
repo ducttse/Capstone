@@ -3,26 +3,15 @@ import { useState } from "react";
 const {Title} = Typography;
 
 
-const UpdateModeratorModal = ({onClose}) => {
-
-    const [isModalOpen, setIsModalOpen] = useState(true);
-
+const UpdateModeratorModal = () => {
     const onFinish = (values) => {
         console.log(values);
-        closeModal();
         message.success("Đăng ký thành công")
     }
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-        onClose();
-    };
-
-
     return (
-        <Modal open={isModalOpen} onCancel={closeModal} footer={null}>
             <Row justify="center" align="middle">
-                <Title level={1}  align="middle">Tạo tài khoản</Title>
+                <Title level={1}  align="middle">Chỉnh sử thông tin tài khoản</Title>
                 <Col  span={20}>
                     <Form layout="vertical"
                             autoComplete="off"
@@ -41,24 +30,6 @@ const UpdateModeratorModal = ({onClose}) => {
                         >
                             <Input placeholder="Nhập tên hiển thị" />
                         </Form.Item>  
-
-                        <Form.Item
-                            name="email"
-                            label="Email"
-                            rules={[
-                            {
-                                required: true,
-                                message: "Vui lòng nhập email",
-                            },
-                            { 
-                                type: "email", 
-                                message: "Vui lòng nhập email hợp lệ" 
-                            },
-                            ]}
-                            hasFeedback
-                        >
-                            <Input placeholder="Nhập email" />
-                        </Form.Item>
 
                         <Form.Item
                             name="password"
@@ -103,7 +74,6 @@ const UpdateModeratorModal = ({onClose}) => {
                     </Form>
                 </Col> 
             </Row>
-        </Modal>
     )
 }
 

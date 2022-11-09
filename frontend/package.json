@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "firebase": "^9.9.3",
-    "react-quill": "^2.0.0"
+    "react-quill": "^2.0.0",
+    "redux-devtools-extension": "^2.13.9"
   }
 }

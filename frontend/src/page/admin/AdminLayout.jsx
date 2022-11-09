@@ -9,7 +9,7 @@ const { Search } = Input;
 const SideBarItemsArr = [
 	{
 		name: "Quản lý nhân viên",
-		path: "/staff"
+		path: "/staff-management"
 	},
 	// {
 	// 	name: "Quản lý cộng tác viên",
