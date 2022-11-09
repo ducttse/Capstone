@@ -58,7 +58,7 @@ const CustomLayout = (props) => (
 					style={{
 						padding: 24,
 						margin: 24,
-						minHeight: 280,
+						minHeight: "80vh",
 						background: "#fff"
 					}}
 				>

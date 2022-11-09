@@ -44,10 +44,10 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
+				{componentsBaseOnRole("user")}
 				<Route exact path="/">
 					<LoginPage />
 				</Route>
-				{componentsBaseOnRole("user")}
 				{/* {user?.roleId === 2 && (
          <AdminLayout>
 			<Route path="/staff-management">

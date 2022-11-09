@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import BackButton from "../questions/components/BackButton.jsx";
+import BackButton from "../../../common/BackButton.jsx";
 import RichTextEditor from "../../../common/RichTextEditor.jsx";
 import UploadFileButton from "../questions/components/UploadFileButton.jsx";
 import CustomSpin from "../../../common/CustomSpin.jsx";

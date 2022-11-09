@@ -36,7 +36,15 @@ const questions = [
 				avatar: ""
 			}
 		],
-		price: 10000
+		price: 10000,
+		subject: {
+			id: 1,
+			name: "test"
+		},
+		major: {
+			id: 2,
+			name: "test"
+		}
 	},
 	{
 		id: "2",
@@ -72,7 +80,41 @@ const questions = [
 				id: "1",
 				fullName: "Vũ Thị Thuỳ Dương",
 				createdTime: "2022-09-08 06:46:10",
-				avatar: ""
+				avatar: "",
+				reputation: 3.4,
+				questionAnswered: 10
+			},
+			{
+				id: "2",
+				fullName: "Micheal",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				reputation: 4,
+				questionAnswered: 6
+			},
+			{
+				id: "3",
+				fullName: "Nguyễn Ngọc Bình",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				reputation: 2,
+				questionAnswered: 3
+			},
+			{
+				id: "3",
+				fullName: "Long Trần",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				reputation: 2,
+				questionAnswered: 3
+			},
+			{
+				id: "3",
+				fullName: "Hiếu",
+				createdTime: "2022-09-08 06:46:10",
+				avatar: "",
+				reputation: 2,
+				questionAnswered: 3
 			}
 		],
 		price: 20000

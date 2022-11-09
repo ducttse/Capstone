@@ -5,7 +5,7 @@ import {
 	updateQuestionForm
 } from "../../../redux/user/actions/questionForm.action.js";
 
-import BackButton from "../questions/components/BackButton.jsx";
+import BackButton from "../../../common/BackButton.jsx";
 import RichTextEditor from "../../../common/RichTextEditor.jsx";
 import UploadFileButton from "../questions/components/UploadFileButton.jsx";
 import CustomSpin from "../../../common/CustomSpin.jsx";
@@ -47,20 +47,7 @@ const CreateQuestionPage = () => {
 					>
 						<Input />
 					</Form.Item>
-					<Form.Item
-						rules={[{ required: false, message: "Phải chọn ít nhất 1 thẻ" }]}
-						name="tags"
-						label="Thẻ"
-					>
-						<Select
-							mode="multiple"
-							allowClear
-							style={{
-								width: "100%"
-							}}
-							placeholder="Tìm kiếm thẻ"
-						></Select>
-					</Form.Item>
+
 					<Form.Item
 						rules={[
 							{ required: true, message: "Nội dung không được để trống" }
