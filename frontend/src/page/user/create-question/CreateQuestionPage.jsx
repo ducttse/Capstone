@@ -47,6 +47,13 @@ const CreateQuestionPage = () => {
 					>
 						<Input />
 					</Form.Item>
+					<Form.Item
+						rules={[{ required: true, message: "Tiêu đề không được bỏ trống" }]}
+						name="shortContent"
+						label="Tóm tắt nội dung"
+					>
+						<Input />
+					</Form.Item>
 
 					<Form.Item
 						rules={[

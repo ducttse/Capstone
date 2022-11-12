@@ -5,6 +5,8 @@ const QuestionActions = ({
 	onTriggleDelete,
 	onTriggleEdit,
 	onTriggleViewRequestList,
+	onTriggleRequestAnswer,
+	isRequested,
 	handleViewBooking,
 	numberOfRequest
 }) => {
@@ -45,9 +47,19 @@ const QuestionActions = ({
 						Meeting
 					</Button>
 				</>
+			) : isRequested ? (
+				<Button
+					onClick={() => onTriggleRequestAnswer()}
+					size="default"
+					type="primary"
+					style={{ minWidth: "100%" }}
+					danger
+				>
+					Huỷ đăng ký
+				</Button>
 			) : (
 				<Button
-					onClick={() => onTriggleViewRequestList()}
+					onClick={() => onTriggleRequestAnswer()}
 					size="default"
 					type="primary"
 					style={{ minWidth: "100%" }}

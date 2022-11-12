@@ -1,9 +1,8 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Col, Modal, Row } from "antd";
-import { useEffect } from "react";
+import { Col, message, Modal, Row } from "antd";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getMeetingId } from "../../../api/meetingApi.js";
 import CustomSpin from "../../../common/CustomSpin.jsx";
 import {
 	createCommentAsync,
@@ -13,71 +12,12 @@ import CommentSection from "./components/CommentSection.jsx";
 import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";
 
-const fakeComment = [
-	{
-		id: "1",
-		fullName: "Vũ Thị Thuỳ Dương",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		content: `<p><span>auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
-	},
-	{
-		id: "2",
-		fullName: "Trần Bảo Long",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		content: `<p><span >auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
-	}
-];
-
-const fakeRequests = [
-	{
-		id: "1",
-		fullName: "Vũ Thị Thuỳ Dương",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 3.4,
-		questionAnswered: 10
-	},
-	{
-		id: "2",
-		fullName: "Micheal",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 4,
-		questionAnswered: 6
-	},
-	{
-		id: "3",
-		fullName: "Nguyễn Ngọc Bình",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 2,
-		questionAnswered: 3
-	},
-	{
-		id: "3",
-		fullName: "Long Trần",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 2,
-		questionAnswered: 3
-	},
-	{
-		id: "3",
-		fullName: "Hiếu",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 2,
-		questionAnswered: 3
-	}
-];
-
 const QuestionPage = () => {
 	const { id } = useParams();
 	const { data, loading, error } = useSelector((state) => state.question);
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [isRequested, setIsRequested] = useState(false);
 	const dispatchLoadQuestion = (id) => dispatch(loadDetailAsync(id));
 	const dispatchCreateComment = (id, comment) =>
 		dispatch(createCommentAsync(id, comment));
@@ -104,13 +44,6 @@ const QuestionPage = () => {
 		});
 	};
 
-	// const handleCreateMeeting = async () => {
-	// 	const res = await getMeetingId();
-	// 	if (res.status < 300) {
-	// 		console.log(res.data);
-	// 	}
-	// };
-
 	const handleComment = (commentContent) => {
 		dispatchCreateComment(id, commentContent);
 		dispatchLoadQuestion(id);
@@ -124,8 +57,16 @@ const QuestionPage = () => {
 		history.push(`/question/${id}/booking`);
 	};
 
+	const handleRequestToAnswer = () => {
+		// TODO: call api to request answer
+		setIsRequested(!isRequested);
+
+		message.success(
+			isRequested ? "Huỷ đăng ký thành công" : "Đăng ký thành công"
+		);
+	};
+
 	useEffect(() => {
-		console.log(id);
 		dispatchLoadQuestion(id);
 	}, []);
 
@@ -136,7 +77,7 @@ const QuestionPage = () => {
 			<Col span={20}>
 				<QuestionDetail data={data} loading={loading} />
 				<CommentSection
-					comments={data.comments ?? fakeComment}
+					comments={data.comments}
 					handleComment={handleComment}
 				/>
 			</Col>
@@ -147,7 +88,9 @@ const QuestionPage = () => {
 					onTriggleEdit={handleEdit}
 					onTriggleViewRequestList={handleViewRequest}
 					handleViewBooking={handleViewBooking}
-					numberOfRequest={data?.requestedAnswer?.length ?? fakeRequests.length}
+					isRequested={isRequested}
+					numberOfRequest={data?.requestedAnswer?.length}
+					onTriggleRequestAnswer={handleRequestToAnswer}
 				/>
 			</Col>
 		</Row>

@@ -4,17 +4,17 @@ import StaffRoutes from "./routes-based-on-roles/StaffRoutes";
 import UserRoutes from "./routes-based-on-roles/UserRoutes";
 
 function AuthorizedRoutes() {
+	const auth = useSelector((state) => state.auth);
 
-    const auth = useSelector((state) => state.auth);
-    
-    switch (auth.user?.roleId) {
-      case 1:
-        return <UserRoutes/>;
-      case 2:
-        return <AdminRoutes/>; 
-      case 3: 
-        return <StaffRoutes/>;
-    }
-  }
+	// eslint-disable-next-line default-case
+	switch (auth.user?.roleId) {
+		case 1:
+			return <UserRoutes />;
+		case 2:
+			return <AdminRoutes />;
+		case 3:
+			return <StaffRoutes />;
+	}
+}
 
-  export default AuthorizedRoutes;
+export default AuthorizedRoutes;

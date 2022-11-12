@@ -1,18 +1,26 @@
 import QuestionCard from "./components/QuestionCard.jsx";
-import { Button, Col, Pagination, Row } from "antd";
+import { Button, Col, Pagination, Row, Space } from "antd";
 import { useEffect, useState } from "react";
-import MultiSelection from "./components/MultiSelection.jsx";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadQuestionsListAsync } from "../../../redux/user/actions/questionList.action.js";
 import CustomSpin from "../../../common/CustomSpin.jsx";
 import { resetForm } from "../../../redux/user/actions/questionForm.action.js";
+import MajorCollapse from "./components/MajorCollapse.jsx";
+import { loadMajorsAsync } from "../../../redux/user/actions/majorItems.action.js";
 
 const ITEM_PER_PAGE = 10;
 
 const QuestionCards = ({ questions, loading }) => {
-	return Array.isArray(questions)
-		? questions.map((question, i) => {
+	return Array.isArray(questions) ? (
+		<Space
+			direction="vertical"
+			size="middle"
+			style={{
+				display: "flex"
+			}}
+		>
+			{questions.map((question, i) => {
 				return (
 					<QuestionCard
 						key={i}
@@ -22,21 +30,32 @@ const QuestionCards = ({ questions, loading }) => {
 						questionId={question.id}
 					/>
 				);
-		  })
-		: [];
+			})}
+		</Space>
+	) : (
+		[]
+	);
 };
 
 const QuestionCardPage = () => {
 	const { data, loading, pagination, error } = useSelector(
 		(state) => state.questionsList
 	);
+	const {
+		data: majors,
+		loading: majorLoading,
+		error: majorError
+	} = useSelector((state) => state.majorItems);
+
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const dispathResetForm = () => dispatch(resetForm());
 	const dispatchLoadQuestions = () => dispatch(loadQuestionsListAsync());
+	const dispatchloadMajors = () => dispatch(loadMajorsAsync());
 
 	useEffect(() => {
 		dispatchLoadQuestions();
+		dispatchloadMajors();
 	}, []);
 
 	const [currentPage, setCurrentPage] = useState(1);
@@ -54,7 +73,7 @@ const QuestionCardPage = () => {
 		<CustomSpin />
 	) : (
 		<>
-			<Row style={{ marginBottom: 20 }}>
+			<Row>
 				<Button onClick={handleCreateQuestion} type="primary">
 					Đặt câu hỏi
 				</Button>
@@ -69,8 +88,8 @@ const QuestionCardPage = () => {
 						onChange={onChangeCurrentPage}
 					/>
 				</Col>
-				<Col span={6} offset={2} style={{ padding: 10 }}>
-					<MultiSelection />
+				<Col span={6} offset={1}>
+					<MajorCollapse majors={majors} />
 				</Col>
 			</Row>
 		</>

@@ -14,7 +14,7 @@ const initState = {
 const requestedAnswer = [
 	{
 		id: "1",
-		fullName: "Vũ Thị Thuỳ Dương",
+		fullName: "AAAAAA",
 		createdTime: "2022-09-08 06:46:10",
 		avatar: "",
 		reputation: 3.4,
@@ -54,12 +54,29 @@ const requestedAnswer = [
 	}
 ];
 
+const comments = [
+	{
+		id: "1",
+		fullName: "Vũ Thị Thuỳ Dương",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		content: `<p><span>auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
+	},
+	{
+		id: "2",
+		fullName: "Trần Bảo Long",
+		createdTime: "2022-09-08 06:46:10",
+		avatar: "",
+		content: `<p><span >auris nunc turpis, facilisis quis purus non, sollicitudin cursus enim. Integer non tortor bibendum, euismod orci nec, fermentum urna.</span></p>`
+	}
+];
+
 export default function question(state = initState, action) {
 	switch (action.type) {
 		case LOAD_QUESTION_DETAIL:
 			return {
 				...state,
-				data: { ...action.payload, requestedAnswer },
+				data: { ...action.payload, requestedAnswer, comments },
 				loading: false
 			};
 		case LOAD_QUESTION_DETAIL_ASYNC:

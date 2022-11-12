@@ -11,5 +11,3 @@ export function* loadQuestionAsync(action) {
 export function* createCommentAsync(action) {
 	yield call(createComment, action.questionId, action.commentContent);
 }
-
-export function* watchCreateCommentAsync() {}
