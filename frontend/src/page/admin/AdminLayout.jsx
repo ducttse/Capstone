@@ -1,15 +1,14 @@
 
-import { Col, Layout, Menu, Row, Input } from "antd";
+import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../common/CustomeLayout.css";
 const { Header, Content, Sider } = Layout;
-const { Search } = Input;
 
 const SideBarItemsArr = [
 	{
 		name: "Quản lý nhân viên",
-		path: "/staff-management"
+		path: "/admin"
 	},
 	// {
 	// 	name: "Quản lý cộng tác viên",
@@ -48,7 +47,8 @@ const AdminLayout = (props) => (
 			</Sider>
 			<Layout
 				style={{
-					padding: "0 24px 24px"
+					padding: "0 24px 24px",
+					minHeight: "85vh"
 				}}
 			>
 				<Content
