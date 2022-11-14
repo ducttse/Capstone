@@ -18,7 +18,7 @@ const QuestionDetail = ({ data, loading }) => {
 		<CustomSpin />
 	) : (
 		<>
-			<UserInfo user={fakeUser.user} createdTime={fakeUser.createdTime} />
+			<UserInfo user={data.student} createdTime={data.createdTime} />
 			<Title level={3}>{data.title}</Title>
 			<Interweave content={data.content} />
 		</>

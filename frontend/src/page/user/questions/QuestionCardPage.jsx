@@ -49,19 +49,19 @@ const QuestionCardPage = () => {
 
 	const history = useHistory();
 	const dispatch = useDispatch();
+
 	const dispathResetForm = () => dispatch(resetForm());
-	const dispatchLoadQuestions = () => dispatch(loadQuestionsListAsync());
+	const dispatchLoadQuestions = (page) =>
+		dispatch(loadQuestionsListAsync(ITEM_PER_PAGE, page));
 	const dispatchloadMajors = () => dispatch(loadMajorsAsync());
 
 	useEffect(() => {
-		dispatchLoadQuestions();
+		dispatchLoadQuestions(1);
 		dispatchloadMajors();
 	}, []);
 
-	const [currentPage, setCurrentPage] = useState(1);
-
-	const onChangeCurrentPage = (page, pageSize) => {
-		setCurrentPage(page);
+	const onChangeCurrentPage = (page) => {
+		dispatchLoadQuestions(page);
 	};
 
 	const handleCreateQuestion = () => {
@@ -82,9 +82,9 @@ const QuestionCardPage = () => {
 				<Col span={16}>
 					<QuestionCards questions={data} />
 					<Pagination
-						total={data.length}
-						defaultCurrent={currentPage}
-						pageSize={ITEM_PER_PAGE}
+						total={pagination.totalCount}
+						current={pagination.currentPage}
+						pageSize={pagination.pageSize}
 						onChange={onChangeCurrentPage}
 					/>
 				</Col>

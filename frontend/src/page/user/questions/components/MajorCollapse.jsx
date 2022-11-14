@@ -12,7 +12,6 @@ function getItem(key, label, icon, children, type) {
 }
 
 const items = (arr) => {
-	console.log(arr);
 	return arr.map((m) => {
 		const subjects = m.subjects.map((s) => {
 			return getItem(`subject#${s.id}`, s.name);

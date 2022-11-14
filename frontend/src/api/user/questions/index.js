@@ -1,11 +1,31 @@
 import AxiosInstance from "../../axiosInstance.js";
 
-export const getQuestions = async () => {
-	const pagination = { pageSize: 10, pageNumber: 1 };
-	const { statusCode, message, data } = await AxiosInstance.get("/questions", {
-		pagination
+export const getQuestions = async (pageSize = 1, pageNumber = 1) => {
+	const queryParams = {
+		pageSize,
+		pageNumber
+	};
+
+	const { data } = await AxiosInstance.get("/questions", {
+		params: queryParams
 	});
-	return data.data.content ?? [];
+	const {
+		statusCode,
+		message,
+		data: questionsData,
+		metaData: pagination
+	} = data;
+	return statusCode < 300 && message === "Success"
+		? {
+				questions: questionsData,
+				pagination
+		  }
+		: {
+				questions: [],
+				pagination: {
+					totalCount: 0
+				}
+		  };
 };
 
 export const getQuestionByID = async (id) => {
