@@ -14,7 +14,7 @@ const initState = {
 const requestedAnswer = [
 	{
 		id: "1",
-		fullName: "Vũ Thị Thuỳ Dương",
+		fullName: "AAAAAA",
 		createdTime: "2022-09-08 06:46:10",
 		avatar: "",
 		reputation: 3.4,

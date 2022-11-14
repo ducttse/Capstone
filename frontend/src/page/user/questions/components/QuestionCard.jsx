@@ -10,7 +10,6 @@ const QuestionCard = ({ to, title, content }) => {
 			<Card
 				style={{
 					width: "100%",
-					marginBottom: 20,
 					cursor: "pointer",
 					maxHeight: "25vh"
 				}}

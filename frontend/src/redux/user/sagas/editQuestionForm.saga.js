@@ -1,5 +1,4 @@
 import { call, put } from "redux-saga/effects";
-import { editQuestion } from "../../../api/questions.js";
 import { getQuestionByID } from "../../../api/user/questions/index.js";
 import { loadEditQuestionForm } from "../actions/editQuestionForm.action.js";
 import {} from "../constants/editQuestionForm.constant.js";
@@ -11,5 +10,5 @@ export function* loadEditQuestionFormAsync(action) {
 }
 
 export function* requestEdit(action) {
-	yield call(editQuestion, action.questionId, action.payload);
+	// yield call(editQuestion, action.questionId, action.payload);
 }

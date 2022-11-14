@@ -1,0 +1,2 @@
+export const LOAD_MAJORS = "LOAD_MAJORS";
+export const LOAD_MAJORS_ASYNC = "LOAD_MAJORS_ASYNC";
