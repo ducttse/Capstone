@@ -12,7 +12,7 @@ const UnAuthenticatedRoutes = () => {
                 <LoginPage />
             </Route>
 
-            <Route path="/register">
+            {/* <Route path="/register">
                 <RegisterPage/>
             </Route>
 
@@ -23,7 +23,7 @@ const UnAuthenticatedRoutes = () => {
             
             <Route path="/otp-verification">
                 <OtpVerification/>
-            </Route>
+            </Route> */}
         </>
      );
 }
