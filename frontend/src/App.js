@@ -2,14 +2,13 @@ import { notification } from "antd";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { getFireBaseToken, onMessageListener } from "./firebase";
-import LoginPage from "./page/auth/LoginPage";
-import UserComponents from "./page/user/UserComponents.jsx";
-import Logout from "./page/auth/Logout";
-import { useSelector } from "react-redux";
+// import LoginPage from "./page/auth/login-logout/LoginPage";
+import LoginPage from "./page/auth/login-logout/LoginPage";
 import AuthorizedRoutes from "./route/AuthorizedRoutes";
 import AuthenticatedRoute from "./route/AuthenticatedRoutes";
 import CommonRoutes from "./route/routes-based-on-roles/CommonRoutes";
 import UnAuthorizedPage from "./page/auth/UnAuthorizedPage";
+import UnAuthenticatedRoutes from "./route/UnAuthenticatedRoutes";
 const openNotification = (message, description) => {
   notification.open({
     message: message,
@@ -37,15 +36,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <LoginPage />
-        </Route>
-        <Route exact path="/unauthorized">
-          <UnAuthorizedPage />
-        </Route>
+        <UnAuthenticatedRoutes />
         <AuthenticatedRoute>
-          <CommonRoutes/>
-          <AuthorizedRoutes/>
+          <CommonRoutes />
+          <AuthorizedRoutes />
         </AuthenticatedRoute>
       </Switch>
     </BrowserRouter>
