@@ -1,7 +1,7 @@
 import AxiosInstance from "../axiosInstance";
 
 const checkLogin = async (user) => {
-    const { statusCode, message, data } = await AxiosInstance.post("/auth/sign-in", user);
+    const { statusCode, message, data } = await AxiosInstance.post("/v1/auth/sign-in", user);
     localStorage.setItem("user", JSON.stringify(data));
     return data;
 };
