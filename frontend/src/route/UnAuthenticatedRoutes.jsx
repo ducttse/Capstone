@@ -1,18 +1,17 @@
 import { Route } from "react-router-dom";
-import ForgotPasswordPage from "../page/auth/forgot-password/FogotPasswordPage";
+// import ForgotPasswordPage from "../page/auth/forgot-password/FogotPasswordPage";
 import LoginPage from "../page/auth/login-logout/LoginPage";
-import OtpVerification from "../page/auth/Otp-verification/OtpVerification";
-import RegisterPage from "../page/auth/register/RegisterPage";
-
+// import OtpVerification from "../page/auth/Otp-verification/OtpVerification";
+// import RegisterPage from "../page/auth/register/RegisterPage";
 
 const UnAuthenticatedRoutes = () => {
-    return ( 
-        <>
-            <Route exact path="/">
-                <LoginPage />
-            </Route>
+	return (
+		<>
+			<Route exact path="/">
+				<LoginPage />
+			</Route>
 
-            {/* <Route path="/register">
+			{/* <Route path="/register">
                 <RegisterPage/>
             </Route>
 
@@ -24,8 +23,8 @@ const UnAuthenticatedRoutes = () => {
             <Route path="/otp-verification">
                 <OtpVerification/>
             </Route> */}
-        </>
-     );
-}
- 
+		</>
+	);
+};
+
 export default UnAuthenticatedRoutes;
