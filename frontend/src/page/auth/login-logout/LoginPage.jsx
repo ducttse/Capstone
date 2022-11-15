@@ -15,11 +15,9 @@ import "./LoginPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	loginAsync,
-	loginFail,
-	loginSuccess
 } from "../../../redux/auth/actions/auth.action.js";
 import { getAuthHeader } from "../../../utils/auth.js";
-import { checkLogin } from "../../../api/auth/authApi";
+import AxiosInstance from "../../../api/axiosInstance";
 
 const { Content, Footer } = Layout;
 const { Title, Text, Link } = Typography;
@@ -34,6 +32,7 @@ const LoginPage = () => {
 	};
 
 	const onLoggedIn = (roleId) => {
+		AxiosInstance.defaults.headers.common['Authorization'] = getAuthHeader()?.Authorization;
 		switch(roleId) {
 			case 1: 
 				history.push("/questions");
