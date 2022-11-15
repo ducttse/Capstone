@@ -6,8 +6,6 @@ import LoginPage from "./page/auth/login-logout/LoginPage";
 import AuthorizedRoutes from "./route/AuthorizedRoutes";
 import AuthenticatedRoute from "./route/AuthenticatedRoutes";
 import CommonRoutes from "./route/routes-based-on-roles/CommonRoutes";
-import UnAuthorizedPage from "./page/auth/UnAuthorizedPage";
-import UnAuthenticatedRoutes from "./route/UnAuthenticatedRoutes";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -35,7 +33,9 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<UnAuthenticatedRoutes />
+				<Route exact path="/">
+					<LoginPage />
+				</Route>
 				<AuthenticatedRoute>
 					<CommonRoutes />
 					<AuthorizedRoutes />
@@ -44,5 +44,4 @@ const App = () => {
 		</BrowserRouter>
 	);
 };
-
 export default App;
