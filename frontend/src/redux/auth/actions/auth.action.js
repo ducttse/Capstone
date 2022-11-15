@@ -1,6 +1,7 @@
 import {
 	LOGIN_FAIL,
 	LOGIN_SUCCESS,
+	LOGIN_ASYNC,
 	LOGOUT,
 	REGISTER
 } from "../constants/auth.constant.js";
@@ -17,6 +18,13 @@ export function loginFail() {
 		type: LOGIN_FAIL
 	};
 }
+
+export function loginAsync(payload) {
+	return {
+	  type: LOGIN_ASYNC,
+	  payload: payload,
+	};
+  }
 
 export function logout() {
 	return {

@@ -2,14 +2,15 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
 	LOGOUT,
-	REGISTER
+	REGISTER,
+	LOGIN_ASYNC
 } from "../constants/auth.constant.js";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = user
-	? { isLoggedIn: true, user }
-	: { isLoggedIn: false, user: null };
+	? { isLoggedIn: true, user, loading: false }
+	: { isLoggedIn: false, user: null , loading: false};
 
 export default function auth(state = initialState, action) {
 	switch (action.type) {
@@ -24,6 +25,12 @@ export default function auth(state = initialState, action) {
 				...state,
 				isLoggedIn: false,
 				user: null
+			};
+		case LOGIN_ASYNC:
+			return {
+				...state,
+				isLoggedIn: false,
+				loading: true,
 			};
 		case LOGOUT:
 			return {
