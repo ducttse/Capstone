@@ -13,14 +13,16 @@ import {
 	Row,
 	Space,
 	Menu,
-	message
+	Typography,
+	Avatar
 } from "antd";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 const { Header } = Layout;
 const { Search } = Input;
+const {Title, Link} = Typography;
 
 const routeBaseItem = ["/profile", "/wallet", "/logout"];
-const username = "Từ Trọng Dức";
 
 const CustomeHeader = () => {
 	const history = useHistory();
@@ -29,6 +31,9 @@ const CustomeHeader = () => {
 		// TODO :call logout
 		history.push(route);
 	};
+
+	const {user} = useSelector(state => state.auth);
+
 	const menu = (
 		<Menu
 			onClick={handleMenuClick}
@@ -56,7 +61,10 @@ const CustomeHeader = () => {
 	return (
 		<Header className="header">
 			<Row>
-				<Col offset={6} span={10}>
+				<Col>
+				<Link onClick={() => {history.push("/")}}><Title level={2}>MindStone Q&A</Title></Link>
+				</Col>
+				<Col offset={4} span={10}>
 					<Search
 						size="large"
 						placeholder="Tìm kiếm câu hỏi"
@@ -65,10 +73,11 @@ const CustomeHeader = () => {
 					/>
 				</Col>
 				<Col offset={5}>
+					<Avatar shape="square" size={45} icon={<UserOutlined />} src={user.avatarUrl}/>
 					<Dropdown overlay={menu}>
 						<Button type="text">
 							<Space>
-								{username}
+								{user.fullName}
 								<DownOutlined />
 							</Space>
 						</Button>
