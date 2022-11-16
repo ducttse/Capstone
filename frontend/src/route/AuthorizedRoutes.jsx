@@ -5,7 +5,6 @@ import UserRoutes from "./routes-based-on-roles/UserRoutes";
 
 function AuthorizedRoutes() {
 	const auth = useSelector((state) => state.auth);
-	console.log(auth.user);
 
 	// eslint-disable-next-line default-case
 	switch (auth.user?.roleId) {

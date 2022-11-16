@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import Logout from "../../page/auth/Logout";
+import Logout from "../../page/auth/login-logout/Logout";
 
 
 const CommonRoutes = () => {
