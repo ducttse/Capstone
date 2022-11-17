@@ -61,7 +61,7 @@ const CustomeHeader = () => {
 	return (
 		<Header className="header">
 			<Row>
-				<Col>
+				<Col style={{marginTop: "10px"}}>
 					<Link
 						onClick={() => {
 							history.push("/");
@@ -80,7 +80,7 @@ const CustomeHeader = () => {
 				</Col>
 				<Col offset={3}>
 					<Avatar
-						shape="square"
+						shape="circle"
 						size={45}
 						icon={<UserOutlined />}
 						src={user.avatarUrl}

@@ -8,4 +8,6 @@ const AxiosInstance = axios.create({
 	headers: header
 });
 
+AxiosInstance.defaults.headers.common['Authorization'] = getAuthHeader()?.Authorization;
+
 export default AxiosInstance;
