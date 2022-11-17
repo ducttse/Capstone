@@ -7,4 +7,6 @@ const AxiosInstance = axios.create({
 	baseURL: "https://mindstone.azurewebsites.net/api"
 });
 
+AxiosInstance.defaults.headers.common['Authorization'] = getAuthHeader()?.Authorization;
+
 export default AxiosInstance;

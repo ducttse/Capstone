@@ -32,7 +32,6 @@ const LoginPage = () => {
 	};
 
 	const onLoggedIn = (roleId) => {
-		AxiosInstance.defaults.headers.common['Authorization'] = getAuthHeader()?.Authorization;
 		switch(roleId) {
 			case 1: 
 				history.push("/questions");
