@@ -40,5 +40,9 @@ export const comment = async (id, payload, parentId) => {
 		content: comment,
 		studentId: getUserId()
 	};
-	console.log(request);
+	const { data } = await AxiosInstance.post("/comments", request);
+
+	console.log(data);
+	const { message, statusCode } = data;
+	return message === "Success" && statusCode === 200;
 };

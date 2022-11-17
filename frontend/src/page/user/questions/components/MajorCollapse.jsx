@@ -1,4 +1,5 @@
 import { Menu } from "antd";
+import { isArray } from "lodash";
 import React from "react";
 
 function getItem(key, label, icon, children, type) {
@@ -12,12 +13,14 @@ function getItem(key, label, icon, children, type) {
 }
 
 const items = (arr) => {
-	return arr.map((m) => {
-		const subjects = m.subjects.map((s) => {
-			return getItem(`subject#${s.id}`, s.name);
+	if (isArray(arr)) {
+		return arr.map((m) => {
+			const subjects = m.subjects.map((s) => {
+				return getItem(`subject#${s.id}`, s.name);
+			});
+			return getItem(`major#${m.id}`, m.name, null, subjects);
 		});
-		return getItem(`major#${m.id}`, m.name, null, subjects);
-	});
+	} else return [];
 };
 
 const MajorCollapse = ({ majors }) => {

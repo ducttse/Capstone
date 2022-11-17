@@ -1,7 +1,14 @@
 import AxiosInstance from "../../axiosInstance.js";
 
 export const getMajors = async () => {
-	const { data } = await AxiosInstance.get("/majors/");
-	const { statusCode, message, data: majors } = data;
-	return statusCode < 300 && message === "Success" ? majors : [];
+	try {
+		const { data } = await AxiosInstance.get("/majors/");
+		const { statusCode, message, data: majors } = data;
+		if (statusCode < 300 && message === "Success") return majors;
+		else throw new Error("get failed");
+	} catch (error) {
+		console.log(error);
+	}
+
+	return [];
 };

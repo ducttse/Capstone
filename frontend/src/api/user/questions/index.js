@@ -5,33 +5,43 @@ export const getQuestions = async (pageSize = 1, pageNumber = 1) => {
 		pageSize,
 		pageNumber
 	};
-
-	const { data } = await AxiosInstance.get("/questions", {
-		params: queryParams
-	});
-	const {
-		statusCode,
-		message,
-		data: questionsData,
-		metaData: pagination
-	} = data;
-	return statusCode < 300 && message === "Success"
-		? {
+	try {
+		const { data } = await AxiosInstance.get("/questions", {
+			params: queryParams
+		});
+		const {
+			statusCode,
+			message,
+			data: questionsData,
+			metaData: pagination
+		} = data;
+		if (statusCode < 300 && message === "Success")
+			return {
 				questions: questionsData,
 				pagination
-		  }
-		: {
-				questions: [],
-				pagination: {
-					totalCount: 0
-				}
-		  };
+			};
+		else throw new Error("get failed");
+	} catch (error) {
+		console.log(error);
+	}
+	return {
+		questions: [],
+		pagination: {
+			totalCount: 0,
+			pageSize: 0
+		}
+	};
 };
 
 export const getQuestionByID = async (id) => {
-	const { statusCode, message, data } = await AxiosInstance.get(
-		`/questions/${id}`
-	);
-	console.log(data.data);
-	return data.data ?? {};
+	try {
+		const { statusCode, message, data } = await AxiosInstance.get(
+			`/questions/${id}`
+		);
+		console.log(statusCode);
+		return data.data ?? {};
+	} catch (error) {
+		console.log(error);
+	}
+	return {};
 };

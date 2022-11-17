@@ -46,7 +46,6 @@ const QuestionPage = () => {
 
 	const handleComment = (commentContent) => {
 		dispatchCreateComment(id, commentContent);
-		dispatchLoadQuestion(id);
 	};
 
 	const handleViewRequest = () => {
