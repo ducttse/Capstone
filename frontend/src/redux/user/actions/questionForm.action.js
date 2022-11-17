@@ -1,5 +1,7 @@
 import {
+	CREATE_FAILED,
 	CREATE_QUESTION,
+	CREATE_SUCCESS,
 	QUESTION_FORM_UPDATE,
 	RESET_FORM
 } from "../constants/questionForm.constant.js";
@@ -21,5 +23,17 @@ export function createQuestion(payload) {
 	return {
 		type: CREATE_QUESTION,
 		payload
+	};
+}
+
+export function createSuccess() {
+	return {
+		type: CREATE_SUCCESS
+	};
+}
+
+export function createFailed() {
+	return {
+		type: CREATE_FAILED
 	};
 }

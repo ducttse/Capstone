@@ -15,7 +15,7 @@ import AxiosInstance from "../../axiosInstance.js";
 }
 */
 
-export const createQuestion = (payload) => {
+export const createQuestion = async (payload) => {
 	console.log(payload);
 	const {
 		title,
@@ -23,18 +23,24 @@ export const createQuestion = (payload) => {
 		shortContent,
 		subjectId,
 		majorId,
-		questionImageUrls
+		questionImageUrls,
+		price
 	} = payload;
 
-	const { data } = AxiosInstance.post("/questions", {
+	const { data } = await AxiosInstance.post("/questions", {
 		studentId: 4,
 		title,
 		content,
 		shortContent,
 		createdTime: new Date().toISOString(),
-		price: 0,
+		price,
 		subjectId,
 		majorId,
 		questionImageUrls
 	});
+
+	console.log(data);
+
+	const { message, statusCode } = data;
+	return message === "Success" && statusCode === 200;
 };

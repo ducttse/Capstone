@@ -1,4 +1,13 @@
-import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
+import {
+	Button,
+	Col,
+	Form,
+	Input,
+	InputNumber,
+	Modal,
+	Row,
+	Select
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import BackButton from "../../../common/BackButton.jsx";
 import RichTextEditor from "../../../common/RichTextEditor.jsx";
@@ -10,7 +19,15 @@ import {
 	updateEditQuestionForm
 } from "../../../redux/user/actions/editQuestionForm.action.js";
 import { useHistory, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const SubjectsMap = (majors = []) => {
+	const map = {};
+	for (const m of majors) {
+		map[m.id] = m.subjects;
+	}
+	return map;
+};
 
 const EditQuestionPage = () => {
 	const { id } = useParams();
@@ -18,6 +35,8 @@ const EditQuestionPage = () => {
 	const { data, loading } = useSelector((state) => state.editQuestionForm);
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const { data: majors } = useSelector((state) => state.majorItems);
+	const [subjects, setSubjects] = useState([]);
 
 	const dispatchUpdate = (value) => dispatch(updateEditQuestionForm(value));
 	const loadQuestionAsync = (id) => dispatch(loadEditQuestionFormAsync(id));
@@ -40,6 +59,10 @@ const EditQuestionPage = () => {
 		dispatchUpdate(values);
 	};
 
+	const handleMajorChange = (value) => {
+		setSubjects(SubjectsMap(majors)[value]);
+	};
+
 	useEffect(() => {
 		loadQuestionAsync(id);
 	}, []);
@@ -53,7 +76,7 @@ const EditQuestionPage = () => {
 	) : (
 		<Row>
 			<Col span={4}>
-				<BackButton to={`/question/${id}`} />
+				<BackButton to="/questions" />
 			</Col>
 			<Col span={14}>
 				<Form
@@ -65,40 +88,67 @@ const EditQuestionPage = () => {
 					initialValues={{ ...data }}
 				>
 					<Form.Item
-						rules={[{ required: true, message: "Tiêu đề không được bỏ trống" }]}
+						rules={[{ required: true, message: "Không được bỏ trống" }]}
 						name="title"
 						label="Tiêu đề"
 					>
 						<Input />
 					</Form.Item>
 					<Form.Item
-						rules={[{ required: false, message: "Phải chọn ít nhất 1 thẻ" }]}
-						name="tags"
-						label="Thẻ"
+						rules={[{ required: true, message: "Không được bỏ trống" }]}
+						name="shortContent"
+						label="Tóm tắt nội dung"
 					>
-						<Select
-							mode="multiple"
-							allowClear
-							style={{
-								width: "100%"
-							}}
-							placeholder="Tìm kiếm thẻ"
-						></Select>
+						<Input />
 					</Form.Item>
 					<Form.Item
-						rules={[
-							{ required: true, message: "Nội dung không được để trống" }
-						]}
+						rules={[{ required: true, message: "Không được để trống" }]}
 						name="content"
 						label="Nội dung"
 					>
 						<RichTextEditor />
 					</Form.Item>
-					<Form.Item rules={[{ required: false }]} name="file" label="">
+					<Form.Item
+						rules={[{ required: true, message: "Không được để trống" }]}
+						name="price"
+						label="Giá"
+					>
+						<InputNumber />
+					</Form.Item>
+					<Form.Item
+						rules={[{ required: true, message: "Không được để trống" }]}
+						name="majorId"
+						label="Ngành học"
+					>
+						<Select
+							onChange={handleMajorChange}
+							options={majors.map((m) => ({
+								label: m.name,
+								value: m.id
+							}))}
+						/>
+					</Form.Item>
+					<Form.Item
+						rules={[{ required: true, message: "Không được để trống" }]}
+						name="subjetcId"
+						label="Môn học"
+					>
+						<Select
+							options={subjects.map((m) => ({
+								label: m.name,
+								value: m.id
+							}))}
+						/>
+					</Form.Item>
+					<Form.Item
+						rules={[{ required: false }]}
+						name="questionImageUrls"
+						label=""
+					>
 						<UploadFileButton />
 					</Form.Item>
 					<Button type="primary" htmlType="submit">
-						Lưu thay đổi
+						Tạo câu hỏi
 					</Button>
 				</Form>
 			</Col>

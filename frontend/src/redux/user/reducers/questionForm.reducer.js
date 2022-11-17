@@ -1,4 +1,5 @@
 import {
+	CREATE_SUCCESS,
 	LOAD_EDIT_QUESTION,
 	LOAD_EDIT_QUESTION_ASYNC,
 	QUESTION_FORM_UPDATE,
@@ -7,14 +8,18 @@ import {
 
 const formData = {
 	title: "",
+	shortContent: "",
 	content: "",
-	tags: [],
-	file: []
+	price: 0,
+	majorId: 1,
+	subjetcId: 1,
+	questionImageUrls: []
 };
 
 const initState = {
 	loading: false,
-	data: formData
+	data: formData,
+	isCreated: false
 };
 
 export default function questionForm(state = initState, action) {
@@ -25,6 +30,11 @@ export default function questionForm(state = initState, action) {
 				data: {
 					...action.payload
 				}
+			};
+		case CREATE_SUCCESS:
+			return {
+				...initState,
+				isCreated: true
 			};
 		case RESET_FORM:
 			return {

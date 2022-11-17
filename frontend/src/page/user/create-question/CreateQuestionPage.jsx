@@ -1,6 +1,16 @@
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import {
+	Button,
+	Col,
+	Form,
+	Input,
+	InputNumber,
+	message,
+	Row,
+	Select
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
+	createQuestion,
 	loadForm,
 	updateQuestionForm
 } from "../../../redux/user/actions/questionForm.action.js";
@@ -9,8 +19,8 @@ import BackButton from "../../../common/BackButton.jsx";
 import RichTextEditor from "../../../common/RichTextEditor.jsx";
 import UploadFileButton from "../questions/components/UploadFileButton.jsx";
 import CustomSpin from "../../../common/CustomSpin.jsx";
-import { useState } from "react";
-import { createQuestion } from "../../../api/user/question/index.js";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const SubjectsMap = (majors = []) => {
 	const map = {};
@@ -22,15 +32,24 @@ const SubjectsMap = (majors = []) => {
 
 const CreateQuestionPage = () => {
 	const [form] = Form.useForm();
-	const { data, loading } = useSelector((state) => state.questionForm);
+	const history = useHistory();
+	const { data, loading, isCreated } = useSelector(
+		(state) => state.questionForm
+	);
 	const { data: majors } = useSelector((state) => state.majorItems);
 	const [subjects, setSubjects] = useState([]);
 	const dispatch = useDispatch();
 	const dispatchUpdate = (value) => dispatch(updateQuestionForm(value));
+	const dispatchCreateQuestion = (payload) => dispatch(createQuestion(payload));
 
 	const onFinish = (values) => {
-		console.log(values);
-		createQuestion(values);
+		dispatchCreateQuestion(values);
+		if (isCreated) {
+			message.success("Đặt câu hỏi thành công");
+			setTimeout(() => {
+				history.push("/questions");
+			}, 1500);
+		} else message.error("Có lỗi xảy ra");
 	};
 
 	const onValuesChange = (_, values) => {
@@ -38,7 +57,6 @@ const CreateQuestionPage = () => {
 	};
 
 	const handleMajorChange = (value) => {
-		console.log(value);
 		setSubjects(SubjectsMap(majors)[value]);
 	};
 
@@ -81,7 +99,14 @@ const CreateQuestionPage = () => {
 					</Form.Item>
 					<Form.Item
 						rules={[{ required: true, message: "Không được để trống" }]}
-						name="major"
+						name="price"
+						label="Giá"
+					>
+						<InputNumber />
+					</Form.Item>
+					<Form.Item
+						rules={[{ required: true, message: "Không được để trống" }]}
+						name="majorId"
 						label="Ngành học"
 					>
 						<Select
@@ -94,7 +119,7 @@ const CreateQuestionPage = () => {
 					</Form.Item>
 					<Form.Item
 						rules={[{ required: true, message: "Không được để trống" }]}
-						name="subject"
+						name="subjetcId"
 						label="Môn học"
 					>
 						<Select
