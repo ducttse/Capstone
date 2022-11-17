@@ -3,7 +3,6 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_ASYNC,
 	LOGOUT,
-	REGISTER
 } from "../constants/auth.constant.js";
 
 export function loginSuccess(payload) {
@@ -32,8 +31,5 @@ export function logout() {
 	};
 }
 
-export function register() {
-	return {
-		type: REGISTER
-	};
-}
+
+
