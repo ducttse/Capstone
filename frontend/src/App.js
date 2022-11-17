@@ -6,6 +6,7 @@ import LoginPage from "./page/auth/login-logout/LoginPage";
 import AuthorizedRoutes from "./route/AuthorizedRoutes";
 import AuthenticatedRoute from "./route/AuthenticatedRoutes";
 import CommonRoutes from "./route/routes-based-on-roles/CommonRoutes";
+import ForgotPasswordPage from "./page/auth/forgot-password/FogotPasswordPage";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -35,6 +36,9 @@ const App = () => {
 			<Switch>
 				<Route exact path="/">
 					<LoginPage />
+				</Route>
+				<Route exact path="/forgot-password">
+					<ForgotPasswordPage />
 				</Route>
 				<AuthenticatedRoute>
 					<CommonRoutes />

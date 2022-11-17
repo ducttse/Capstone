@@ -1,22 +1,8 @@
 import AxiosInstance from "../../axiosInstance.js";
 
-/* 
-{
-  "studentId": 4,
-  "title": "Test",
-  "description": "test",
-  "content": "test",
-  "shortContent": "test",
-  "createdTime": "2022-11-13T17:08:18.502Z",
-  "status": 1,
-  "price": 0,
-  "subjectId": 1,
-  "majorId": 1
-}
-*/
+const getUserId = () => JSON.parse(localStorage.user).accountId;
 
 export const createQuestion = async (payload) => {
-	console.log(payload);
 	const {
 		title,
 		content,
@@ -28,7 +14,7 @@ export const createQuestion = async (payload) => {
 	} = payload;
 
 	const { data } = await AxiosInstance.post("/questions", {
-		studentId: 4,
+		studentId: getUserId(),
 		title,
 		content,
 		shortContent,
@@ -43,4 +29,16 @@ export const createQuestion = async (payload) => {
 
 	const { message, statusCode } = data;
 	return message === "Success" && statusCode === 200;
+};
+
+export const comment = async (id, payload, parentId) => {
+	const { comment } = payload;
+	const request = {
+		questionId: id,
+		parentId: parentId ?? null,
+		createdTime: new Date().toISOString(),
+		content: comment,
+		studentId: getUserId()
+	};
+	console.log(request);
 };
