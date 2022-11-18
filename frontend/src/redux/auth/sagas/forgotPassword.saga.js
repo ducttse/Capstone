@@ -4,12 +4,13 @@ import { forgotPasswordFail, forgotPasswordSuccess } from "../actions/forgotPass
 
 export function* forgotPasswordAsync(action) {
 	const {confirmPassword, ...forgotPassInfo} = action.user;
-	const {statusCode, message} = yield call(forgotPasswordApi, forgotPassInfo);
-	if(statusCode < 300) 
-		yield put(forgotPasswordSuccess());
-
-	else 
-		yield put(forgotPasswordFail(message));
+	try {
+		const {statusCode, message} = yield call(forgotPasswordApi, forgotPassInfo);
+		if(statusCode < 300) 
+			yield put(forgotPasswordSuccess());
+	} catch (error) {
+		yield put(forgotPasswordFail(error.response.data.message));
+	}
 }
 
 

@@ -5,9 +5,9 @@ import { loginFail, loginSuccess } from "../actions/auth.action";
 export function* loginAsync(action) {
 	try {
 		const user = yield call(checkLogin, action.payload);
-		if (!user) throw new Error("login fail");
 		yield put(loginSuccess(user));
 	} catch (error) {
-		yield put(loginFail());
+		const message = "Email hoặc mật khẩu không đúng";
+		yield put(loginFail(message));
 	}
 }
