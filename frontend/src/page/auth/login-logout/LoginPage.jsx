@@ -14,10 +14,12 @@ import { useHistory } from "react-router-dom";
 import "./LoginPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+	clearLoginMessage,
 	loginAsync,
 } from "../../../redux/auth/actions/auth.action.js";
 import { getAuthHeader } from "../../../utils/auth.js";
 import AxiosInstance from "../../../api/axiosInstance";
+import { useEffect } from "react";
 
 const { Content, Footer } = Layout;
 const { Title, Text, Link } = Typography;
@@ -27,9 +29,20 @@ const LoginPage = () => {
 	const dispatch = useDispatch();
 	const authState = useSelector((state) => state.auth);
 
-	const onFinish = async (data) => {
+	useEffect(() => {
+		loginMessage();
+	}, [authState])
+
+	const onFinish = (data) => {
 		dispatch(loginAsync(data));
+		dispatch(clearLoginMessage());
 	};
+
+	const loginMessage = () => {
+		if(authState.error != ""){
+			message.error(authState.error);
+		}
+	}
 
 	const onLoggedIn = (roleId) => {
 		switch(roleId) {

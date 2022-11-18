@@ -15,40 +15,43 @@ const ForgotPasswordPage = () => {
     const otpState = useSelector(state => state.otp);
 
     useEffect(() => {
+        finishMessage();
+    },[forgotPassState])
+
+    useEffect(() => {
+        sendOtpMessage();
+    },[otpState]);
+
+    const onFinish = (values) => {
+        dispatch(forgotPasswordAsync(values));
+        dispatch(clearForgotPasswordState());
+    }
+
+    const finishMessage = () => {
         if(forgotPassState.isSuccess){
             message.success("Cập nhật mật khẩu mới thành công");
-            dispatch(clearForgotPasswordState());
             backLogin();
         }
         else if (forgotPassState.error !== "") {
             message.error(forgotPassState.error);
         }
-    },[forgotPassState]);
-
-    useEffect(() => {
-        if(otpState.isSendSuccess){
-            message.success("Gửi OTP thành công");
-            dispatch(clearSendOtpState());
-        }
-        else if (otpState.error !== "") {
-            message.error(otpState.error);
-        }else if (otpState.loading === true){
-            message.loading({
-                content: 'Đang gửi',
-                duration: 3,
-            })
-        }
-    },[otpState]);
-
-    const onFinish = (values) => {
-        dispatch(forgotPasswordAsync(values));
     }
 
     const sendOtp = () => {
         const email = form.getFieldValue("email");
         dispatch(sendOtpAsync(email));
+        dispatch(clearSendOtpState());
     }
     
+    const sendOtpMessage = () => {
+        if(otpState.isSendSuccess){
+            message.success("Gửi OTP thành công");
+        }
+        else if (otpState.error !== "") {
+            message.error(otpState.error);
+        }
+    }
+
     const backLogin = () => {
         history.push("/")
     }

@@ -3,6 +3,7 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_ASYNC,
 	LOGOUT,
+	CLEAR_LOGIN_MESSAGE,
 } from "../constants/auth.constant.js";
 
 export function loginSuccess(payload) {
@@ -12,9 +13,10 @@ export function loginSuccess(payload) {
 	};
 }
 
-export function loginFail() {
+export function loginFail(payload) {
 	return {
-		type: LOGIN_FAIL
+		type: LOGIN_FAIL,
+		error: payload
 	};
 }
 
@@ -24,6 +26,12 @@ export function loginAsync(payload) {
 	  payload: payload,
 	};
   }
+
+export function clearLoginMessage(payload) {
+	return {
+		type: CLEAR_LOGIN_MESSAGE,
+	};
+}
 
 export function logout() {
 	return {
