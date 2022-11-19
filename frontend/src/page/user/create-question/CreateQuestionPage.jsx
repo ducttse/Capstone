@@ -119,7 +119,7 @@ const CreateQuestionPage = () => {
 					</Form.Item>
 					<Form.Item
 						rules={[{ required: true, message: "Không được để trống" }]}
-						name="subjetcId"
+						name="subjectId"
 						label="Môn học"
 					>
 						<Select

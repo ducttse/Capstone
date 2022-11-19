@@ -1,6 +1,8 @@
+import { async } from "@firebase/util";
+import { getStudenId } from "../../../utils/getStudentId.js";
 import AxiosInstance from "../../axiosInstance.js";
 
-const getUserId = () => JSON.parse(localStorage.user).accountId;
+const getUserId = () => JSON.parse(localStorage.user).id;
 
 export const createQuestion = async (payload) => {
 	const {
@@ -45,4 +47,46 @@ export const comment = async (id, payload, parentId) => {
 	console.log(data);
 	const { message, statusCode } = data;
 	return message === "Success" && statusCode === 200;
+};
+
+export const deleteQuestion = async (id) => {
+	const data = await AxiosInstance.delete(`/questions/${id}`);
+	const { message, statusCode } = data;
+	return message === "Success" && statusCode === 200;
+};
+
+export const getRequestList = async (id) => {
+	try {
+		const { statusCode, message, data } = await AxiosInstance.get(
+			`/questions/registerByQuestionId/${id}`
+		);
+		return data.data ?? {};
+	} catch (error) {
+		console.log(error);
+	}
+	return {};
+};
+
+export const registerAnswer = async (id) => {
+	try {
+		const { statusCode, message, data } = await AxiosInstance.post(
+			`/questions/register/${id}/${getStudenId()}`
+		);
+		return message === "Success" && statusCode === 200;
+	} catch (error) {
+		console.log(error);
+	}
+	return false;
+};
+
+export const cancelRegisterAnswer = async (id) => {
+	try {
+		const { statusCode, message, data } = await AxiosInstance.delete(
+			`/questions/register/${id}/${getStudenId()}`
+		);
+		return message === "Success" && statusCode === 200;
+	} catch (error) {
+		console.log(error);
+	}
+	return false;
 };

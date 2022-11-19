@@ -1,5 +1,7 @@
 import {
 	CREATE_COMMENT,
+	DELETE_QUESTION,
+	DELETE_QUESTION_SUCCESS,
 	LOAD_QUESTION_DETAIL,
 	LOAD_QUESTION_DETAIL_ASYNC
 } from "../constants/question.constant.js";
@@ -23,5 +25,18 @@ export function createCommentAsync(id, comment) {
 		type: CREATE_COMMENT,
 		questionId: id,
 		commentContent: comment
+	};
+}
+
+export function deleteQuestion(id) {
+	return {
+		type: DELETE_QUESTION,
+		questionId: id
+	};
+}
+
+export function deleteSuccess() {
+	return {
+		type: DELETE_QUESTION_SUCCESS
 	};
 }

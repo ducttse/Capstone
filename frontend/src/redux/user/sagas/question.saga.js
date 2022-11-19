@@ -1,5 +1,9 @@
 import { call, put } from "redux-saga/effects";
-import { comment } from "../../../api/user/question/index.js";
+import {
+	comment,
+	deleteQuestion,
+	getRequestList
+} from "../../../api/user/question/index.js";
 import { getQuestionByID } from "../../../api/user/questions/index.js";
 import {
 	loadDetailAsync,
@@ -9,7 +13,15 @@ import {
 export function* loadQuestionAsync(action) {
 	try {
 		const question = yield call(getQuestionByID, action.questionId);
-		yield put(loadQuestionDetail(question));
+		const requestList = yield call(getRequestList, action.questionId);
+
+		const requestedAnswer = requestList.map((q) => q.student);
+
+		const payload = {
+			...question,
+			requestedAnswer
+		};
+		yield put(loadQuestionDetail(payload));
 	} catch (error) {
 		console.log(error);
 	}
@@ -24,6 +36,15 @@ export function* createCommentAsync(action) {
 		);
 		if (!result) throw new Error("failed to comment");
 		yield put(loadDetailAsync(action.questionId));
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export function* requestDelete(action) {
+	try {
+		const result = yield call(deleteQuestion, action.questionId);
+		if (!result) throw new Error("failed to delete");
 	} catch (error) {
 		console.log(error);
 	}

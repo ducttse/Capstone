@@ -11,8 +11,8 @@ const formData = {
 	shortContent: "",
 	content: "",
 	price: 0,
-	majorId: 1,
-	subjetcId: 1,
+	majorId: null,
+	subjetcId: null,
 	questionImageUrls: []
 };
 

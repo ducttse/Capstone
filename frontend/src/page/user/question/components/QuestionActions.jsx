@@ -1,4 +1,5 @@
 import { Button } from "antd";
+import { getStudenId } from "../../../../utils/getStudentId.js";
 
 const QuestionActions = ({
 	id,
@@ -10,9 +11,10 @@ const QuestionActions = ({
 	handleViewBooking,
 	numberOfRequest
 }) => {
+	console.log(id);
 	return (
 		<>
-			{id == 1 ? (
+			{id === getStudenId() ? (
 				<>
 					<Button
 						size="default"

@@ -6,11 +6,17 @@ import { useHistory, useParams } from "react-router-dom";
 import CustomSpin from "../../../common/CustomSpin.jsx";
 import {
 	createCommentAsync,
+	deleteQuestion,
 	loadDetailAsync
 } from "../../../redux/user/actions/question.action.js";
+import { getStudenId } from "../../../utils/getStudentId.js";
 import CommentSection from "./components/CommentSection.jsx";
 import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";
+import {
+	registerAnswer,
+	cancelRegisterAnswer
+} from "../../../api/user/question/index.js";
 
 const QuestionPage = () => {
 	const { id } = useParams();
@@ -21,6 +27,7 @@ const QuestionPage = () => {
 	const dispatchLoadQuestion = (id) => dispatch(loadDetailAsync(id));
 	const dispatchCreateComment = (id, comment) =>
 		dispatch(createCommentAsync(id, comment));
+	const dispatchDeleteQuestion = (id) => dispatch(deleteQuestion(id));
 
 	const handleEdit = () => {
 		history.push(`/edit-question/${id}`);
@@ -36,7 +43,8 @@ const QuestionPage = () => {
 			cancelText: "Không",
 			onOk() {
 				// TODO: call delete question api
-				console.log("deleted");
+				dispatchDeleteQuestion(id);
+				history.push("/questions");
 			},
 			onCancel() {
 				console.log("Cancel");
@@ -56,9 +64,15 @@ const QuestionPage = () => {
 		history.push(`/question/${id}/booking`);
 	};
 
-	const handleRequestToAnswer = () => {
+	const handleRequestToAnswer = async () => {
 		// TODO: call api to request answer
 		setIsRequested(!isRequested);
+
+		if (isRequested) {
+			cancelRegisterAnswer(id);
+		} else {
+			registerAnswer(id);
+		}
 
 		message.success(
 			isRequested ? "Huỷ đăng ký thành công" : "Đăng ký thành công"
@@ -68,6 +82,17 @@ const QuestionPage = () => {
 	useEffect(() => {
 		dispatchLoadQuestion(id);
 	}, []);
+
+	useEffect(() => {
+		if (data?.requestedAnswer.length > 0) {
+			const isRequestedStudent = !!data.requestedAnswer.find(
+				(s) => s.id == getStudenId()
+			);
+			if (isRequestedStudent) {
+				setIsRequested(true);
+			}
+		} else setIsRequested(false);
+	}, [data]);
 
 	return loading ? (
 		<CustomSpin />
@@ -82,7 +107,7 @@ const QuestionPage = () => {
 			</Col>
 			<Col span={3}>
 				<QuestionActions
-					id={id}
+					id={data?.studentId}
 					onTriggleDelete={handleDelete}
 					onTriggleEdit={handleEdit}
 					onTriggleViewRequestList={handleViewRequest}

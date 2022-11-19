@@ -59,7 +59,7 @@ export default function question(state = initState, action) {
 		case LOAD_QUESTION_DETAIL:
 			return {
 				...state,
-				data: { ...action.payload, requestedAnswer },
+				data: { ...action.payload },
 				loading: false
 			};
 		case LOAD_QUESTION_DETAIL_ASYNC:
