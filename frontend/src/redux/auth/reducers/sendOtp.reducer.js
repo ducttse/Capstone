@@ -7,7 +7,7 @@ const initialState = {
 	loading: false
 };
 
-export default function otp(state = initialState, action) {
+export default function sendOtp(state = initialState, action) {
 	switch (action.type) {
 
 		case types.SEND_OTP_SUCCESS:
@@ -44,3 +44,6 @@ export default function otp(state = initialState, action) {
 			return state;
 	}
 }
+
+
+
