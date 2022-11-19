@@ -5,12 +5,14 @@ import AuthReducer from "../auth/reducers/index.js";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import rootSaga from "./rootSaga.js";
 import ModeratorReducer from "../moderator/reducers/index.js";
+import ProfileReducer from "../profile/reducers/index.js";
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
 	...AuthReducer,
 	...UserReducer,
 	...ModeratorReducer,
+	...ProfileReducer
 });
 
 const store = createStore(
