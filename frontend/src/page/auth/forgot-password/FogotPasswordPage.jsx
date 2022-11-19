@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clearForgotPasswordState, forgotPasswordAsync } from "../../../redux/auth/actions/forgotPassword.action";
-import { clearOtpState, clearSendOtpState, sendOtpAsync } from "../../../redux/auth/actions/otp.action";
+import { clearSendOtpState, sendOtpAsync } from "../../../redux/auth/actions/otp.action";
 import CustomLayout from "../CustomLayout";
 
 
@@ -12,7 +12,7 @@ const ForgotPasswordPage = () => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const forgotPassState = useSelector(state => state.forgotPassword);
-    const otpState = useSelector(state => state.otp);
+    const sendOtpState = useSelector(state => state.sendOtp);
 
     useEffect(() => {
         finishMessage();
@@ -20,7 +20,7 @@ const ForgotPasswordPage = () => {
 
     useEffect(() => {
         sendOtpMessage();
-    },[otpState]);
+    },[sendOtpState]);
 
     const onFinish = (values) => {
         dispatch(forgotPasswordAsync(values));
@@ -44,16 +44,17 @@ const ForgotPasswordPage = () => {
     }
     
     const sendOtpMessage = () => {
-        if(otpState.isSendSuccess){
+        if(sendOtpState.isSendSuccess){
             message.success("Gửi OTP thành công");
         }
-        else if (otpState.error !== "") {
-            message.error(otpState.error);
+        else if (sendOtpState.error !== "") {
+            message.error(sendOtpState.error);
         }
     }
 
     const backLogin = () => {
-        history.push("/")
+        history.push("/");
+        dispatch(clearForgotPasswordState());
     }
 
     return (

@@ -1,11 +1,12 @@
 import { Card, Col, Layout, Row, Typography } from "antd";
 import { useHistory } from "react-router-dom";
+import BackButton from "../../common/BackButton";
 const {Header, Content} = Layout;
 const {Title, Link} = Typography;
 
 
 
-const CustomLayout = ({children, title, ...restProps}) => {
+const CustomLayout = ({children, title,backTo, ...restProps}) => {
     const history = useHistory();
 
     const backLogin = () => {
@@ -20,6 +21,7 @@ const CustomLayout = ({children, title, ...restProps}) => {
             <Content>
                 <Row justify="center" align="middle" >
                     <Card style={{width: "25%", minWidth: "400px"}}>
+                    {backTo &&  <BackButton to={backLogin} />}
                     <Title level={2} style={{textAlign: "center"}}>{title}</Title>
                         <Col  style={{margin: "30px", minWidth: "300px"}} >
                             {children}

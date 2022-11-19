@@ -7,6 +7,8 @@ import AuthorizedRoutes from "./route/AuthorizedRoutes";
 import AuthenticatedRoute from "./route/AuthenticatedRoutes";
 import CommonRoutes from "./route/routes-based-on-roles/CommonRoutes";
 import ForgotPasswordPage from "./page/auth/forgot-password/FogotPasswordPage";
+import RegisterPage from "./page/auth/register/RegisterPage";
+import OtpVerification from "./page/auth/Otp-verification/OtpVerification";
 const openNotification = (message, description) => {
 	notification.open({
 		message: message,
@@ -37,6 +39,12 @@ const App = () => {
 				<Route exact path="/">
 					<LoginPage />
 				</Route>
+				<Route exact path="/register">
+					<RegisterPage />
+				</Route>
+				<Route path="/otp-verification">
+					<OtpVerification/>
+				</Route> 
 				<Route exact path="/forgot-password">
 					<ForgotPasswordPage />
 				</Route>

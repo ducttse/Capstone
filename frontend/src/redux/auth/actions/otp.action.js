@@ -26,3 +26,28 @@ export function clearSendOtpState() {
 	};
 }
 
+export function submitOtpSuccess() {
+	return {
+		type: types.SUBMIT_OTP_SUCCESS,
+	};
+}
+
+export function submitOtpFail(payload) {
+	return {
+		type: types.SUBMIT_OTP_FAIL,
+		payload: payload
+	};
+}
+
+export function submitOtpAsync(payload) {
+	return {
+	  type: types.SUBMIT_OTP_ASYNC,
+	  data: payload,
+	};
+}
+
+export function clearSubmitOtpState() {
+	return {
+		type: types.CLEAR_SUBMIT_OTP_STATE,
+	};
+}
