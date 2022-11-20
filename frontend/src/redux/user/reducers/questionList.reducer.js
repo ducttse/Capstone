@@ -7,7 +7,8 @@ const initState = {
 	loading: true,
 	error: null,
 	data: [],
-	pagination: {}
+	pagination: {},
+	filter: {}
 };
 
 export default function questionsList(state = initState, action) {

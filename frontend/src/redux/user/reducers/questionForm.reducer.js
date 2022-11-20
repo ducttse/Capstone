@@ -19,7 +19,7 @@ const formData = {
 const initState = {
 	loading: false,
 	data: formData,
-	isCreated: false
+	isCreated: null
 };
 
 export default function questionForm(state = initState, action) {

@@ -1,5 +1,5 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Col, message, Modal, Row } from "antd";
+import { Button, Col, message, Modal, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -15,7 +15,8 @@ import QuestionActions from "./components/QuestionActions.jsx";
 import QuestionDetail from "./components/QuestionDetail.jsx";
 import {
 	registerAnswer,
-	cancelRegisterAnswer
+	cancelRegisterAnswer,
+	getAcceptedUser
 } from "../../../api/user/question/index.js";
 
 const QuestionPage = () => {
@@ -24,6 +25,7 @@ const QuestionPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [isRequested, setIsRequested] = useState(false);
+	const [isAccepted, setIsAccepted] = useState(false);
 	const dispatchLoadQuestion = (id) => dispatch(loadDetailAsync(id));
 	const dispatchCreateComment = (id, comment) =>
 		dispatch(createCommentAsync(id, comment));
@@ -83,7 +85,16 @@ const QuestionPage = () => {
 		dispatchLoadQuestion(id);
 	}, []);
 
+	const handleCheckAcceptedUser = async () => {
+		const userId = await getAcceptedUser(id);
+		console.log("line 90", userId == getStudenId());
+		if (userId == getStudenId()) {
+			setIsAccepted(true);
+		} else setIsAccepted(false);
+	};
+
 	useEffect(() => {
+		// set isRequested
 		if (data?.requestedAnswer.length > 0) {
 			const isRequestedStudent = !!data.requestedAnswer.find(
 				(s) => s.id == getStudenId()
@@ -92,6 +103,11 @@ const QuestionPage = () => {
 				setIsRequested(true);
 			}
 		} else setIsRequested(false);
+
+		// check accepted User
+		if (data?.status == 1) {
+			handleCheckAcceptedUser();
+		}
 	}, [data]);
 
 	return loading ? (
@@ -107,12 +123,14 @@ const QuestionPage = () => {
 			</Col>
 			<Col span={3}>
 				<QuestionActions
+					status={data.status}
 					id={data?.studentId}
 					onTriggleDelete={handleDelete}
 					onTriggleEdit={handleEdit}
 					onTriggleViewRequestList={handleViewRequest}
 					handleViewBooking={handleViewBooking}
 					isRequested={isRequested}
+					isAccepted={isAccepted}
 					numberOfRequest={data?.requestedAnswer?.length}
 					onTriggleRequestAnswer={handleRequestToAnswer}
 				/>

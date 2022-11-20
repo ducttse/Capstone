@@ -21,6 +21,8 @@ import { LOAD_MAJORS_ASYNC } from "../constants/majorItems.contstant.js";
 import { loadMajorsAsync } from "./majorItems.saga.js";
 import { CREATE_QUESTION } from "../constants/questionForm.constant.js";
 import { requestCreate } from "./createQuestionForm.saga.js";
+import { GET_BOOKING_ASYNC } from "../constants/booking.constant.js";
+import { requestGetBooking } from "./booking.saga.js";
 
 export default function* userSaga() {
 	yield takeLatest(LOAD_QUESTIONS_LIST_ASYNC, loadListAsync);
@@ -31,4 +33,5 @@ export default function* userSaga() {
 	yield takeLatest(LOAD_MAJORS_ASYNC, loadMajorsAsync);
 	yield takeLatest(CREATE_QUESTION, requestCreate);
 	yield takeLatest(DELETE_QUESTION, requestDelete);
+	yield takeLatest(GET_BOOKING_ASYNC, requestGetBooking);
 }

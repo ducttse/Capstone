@@ -1,0 +1,2 @@
+export const GET_BOOKING = "GET_BOOKING";
+export const GET_BOOKING_ASYNC = "GET_BOOKING_ASYNC";

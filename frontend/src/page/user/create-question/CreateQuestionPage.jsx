@@ -44,12 +44,6 @@ const CreateQuestionPage = () => {
 
 	const onFinish = (values) => {
 		dispatchCreateQuestion(values);
-		if (isCreated) {
-			message.success("Đặt câu hỏi thành công");
-			setTimeout(() => {
-				history.push("/questions");
-			}, 1500);
-		} else message.error("Có lỗi xảy ra");
 	};
 
 	const onValuesChange = (_, values) => {
@@ -59,6 +53,15 @@ const CreateQuestionPage = () => {
 	const handleMajorChange = (value) => {
 		setSubjects(SubjectsMap(majors)[value]);
 	};
+
+	useEffect(() => {
+		if (isCreated) {
+			message.success("Đặt câu hỏi thành công");
+			setTimeout(() => {
+				history.push("/questions");
+			}, 1500);
+		} else if (isCreated === false) message.error("Có lỗi xảy ra");
+	}, [isCreated]);
 
 	return loading ? (
 		<CustomSpin />

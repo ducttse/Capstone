@@ -4,13 +4,14 @@ import questionsList from "./questionList.reducer.js";
 import question from "./question.reducer.js";
 import editQuestionForm from "./editQuestionForm.reducer.js";
 import majorItems from "./majorItems.reducer.js";
-
+import booking from "./booking.reducer.js";
 const UserReducer = {
 	questionForm,
 	questionsList,
 	question,
 	editQuestionForm,
-	majorItems
+	majorItems,
+	booking
 };
 
 export default UserReducer;

@@ -90,3 +90,51 @@ export const cancelRegisterAnswer = async (id) => {
 	}
 	return false;
 };
+
+export const acceptRegisterAnswer = async (
+	id,
+	requestStudentId,
+	time,
+	meetingId
+) => {
+	const request = {
+		studentId: getStudenId(),
+		questionId: id,
+		bookingTime: time,
+		meetingUrl: meetingId
+	};
+	try {
+		const { statusCode, message, data } = await AxiosInstance.put(
+			`/questions/register/${id}/${requestStudentId}`,
+			request
+		);
+		return message === "Success" && statusCode === 200;
+	} catch (error) {
+		console.log(error);
+	}
+	return false;
+};
+
+export const getBooking = async (id) => {
+	try {
+		const { statusCode, message, data } = await AxiosInstance.get(
+			`/booking/ByQuestionId/${id}`
+		);
+		return data.data ?? {};
+	} catch (error) {
+		console.log(error);
+	}
+	return {};
+};
+
+export const getAcceptedUser = async (id) => {
+	try {
+		const { statusCode, message, data } = await AxiosInstance.get(
+			`/questions/acceptedRegisterByQuestionId/${id}`
+		);
+		return data.data?.studentId ?? {};
+	} catch (error) {
+		console.log(error);
+	}
+	return {};
+};

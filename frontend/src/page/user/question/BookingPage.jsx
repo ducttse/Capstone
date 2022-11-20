@@ -1,16 +1,30 @@
 import { Descriptions, Typography } from "antd";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import BackButton, { getPreviousPath } from "../../../common/BackButton.jsx";
+import { getBookingAsync } from "../../../redux/user/actions/booking.action.js";
 
 const { Link } = Typography;
 
 const BookingPage = () => {
 	const history = useHistory();
 	const location = useLocation();
+	const dispatch = useDispatch();
+	const { data: question, loading: questionLoading } = useSelector(
+		(state) => state.question
+	);
+
+	const dispatchLoadBooking = (id) => dispatch(getBookingAsync(id));
 
 	const handleChooseProfile = (id) => {
 		history.push(`/profile/${id}`);
 	};
+
+	useEffect(() => {
+		console.log(question.id);
+		dispatchLoadBooking(question.id);
+	}, []);
 
 	return (
 		<>

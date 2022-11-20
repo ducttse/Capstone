@@ -1,6 +1,6 @@
 import AxiosInstance from "../../axiosInstance.js";
 
-export const getQuestions = async (pageSize = 1, pageNumber = 1) => {
+export const getQuestions = async (pageSize = 1, pageNumber = 1, filter) => {
 	const queryParams = {
 		pageSize,
 		pageNumber

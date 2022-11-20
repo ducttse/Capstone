@@ -5,7 +5,8 @@ import Button from "antd-button-color";
 import { useEffect, useState } from "react";
 import BookingForm from "./components/BookingForm.jsx";
 import BackButton, { getPreviousPath } from "../../../common/BackButton.jsx";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { acceptRegisterAnswer } from "../../../api/user/question/index.js";
 const { Meta } = Card;
 
 const DeclineButton = () => {
@@ -50,49 +51,6 @@ const RequestList = ({ data, onSelectRequest, onAcceptRequest }) => {
 	);
 };
 
-const requestedAnswer = [
-	{
-		id: "1",
-		fullName: "Vũ Thị Thuỳ Dương",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 3.4,
-		questionAnswered: 10
-	},
-	{
-		id: "2",
-		fullName: "Micheal",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 4,
-		questionAnswered: 6
-	},
-	{
-		id: "3",
-		fullName: "Nguyễn Ngọc Bình",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 2,
-		questionAnswered: 3
-	},
-	{
-		id: "3",
-		fullName: "Long Trần",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 2,
-		questionAnswered: 3
-	},
-	{
-		id: "3",
-		fullName: "Hiếu",
-		createdTime: "2022-09-08 06:46:10",
-		avatar: "",
-		reputation: 2,
-		questionAnswered: 3
-	}
-];
-
 const UserDetail = ({ data }) => {
 	// TODO: call api to get user details
 	return (
@@ -113,13 +71,16 @@ const RequestListPage = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedIndex, setIndex] = useState(1);
 	const location = useLocation();
+	const history = useHistory();
 
 	const showModal = () => {
 		setIsModalOpen(true);
 	};
 
-	const handleOk = () => {
-		setIsModalOpen(false);
+	const handleOk = (time) => {
+		// request accept
+		acceptRegisterAnswer(data.id, data.requestedAnswer[selectedIndex].id, time);
+		history.push(`/question/${data.id}`);
 	};
 
 	const handleCancel = () => {

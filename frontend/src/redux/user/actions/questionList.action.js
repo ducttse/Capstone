@@ -7,6 +7,6 @@ export function loadQuestionsList(payload) {
 	return { type: LOAD_QUESTIONS_LIST, payload };
 }
 
-export function loadQuestionsListAsync(pageSize, pageNumber) {
-	return { type: LOAD_QUESTIONS_LIST_ASYNC, pageSize, pageNumber };
+export function loadQuestionsListAsync(pageSize, pageNumber, filter) {
+	return { type: LOAD_QUESTIONS_LIST_ASYNC, pageSize, pageNumber, filter };
 }
