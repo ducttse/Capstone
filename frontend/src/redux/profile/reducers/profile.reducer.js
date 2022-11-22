@@ -1,3 +1,4 @@
+import moment from "moment";
 import * as types from "../constants/profile.constant.js";
 
 const initState = {
@@ -11,7 +12,10 @@ export default function profile(state = initState, action) {
     case types.GET_PROFILE_BY_ID_SUCCESS:
       return {
         ...state,
-        userInfo: { ...action.payload },
+        userInfo: { 
+              ...action.payload, 
+            dateOfBirth: moment(action.payload.dateOfBirth)
+            },
         error: "",
         loading: false,
       };

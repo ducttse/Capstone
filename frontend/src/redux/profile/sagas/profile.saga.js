@@ -4,7 +4,7 @@ import { getProfileByIdFail, getProfileByIdSuccess } from "../actions/profile.ac
 
 export function* getProfileByIdAsync(action) {
 	try {
-		const {data: userInfo, statusCode} = yield call(getProfileApi, action.id);
+		const {data: userInfo, statusCode} = yield call(getProfileApi, action.roleId, action.id);
 		if(statusCode < 300){
 			yield put(getProfileByIdSuccess(userInfo));
 		}

@@ -1,9 +1,11 @@
 import { Avatar, Col, Row, Typography } from "antd";
+import { Link } from "react-router-dom";
 import { vnMoment } from "../../../../utils/vnMoment.js";
 
 const { Text, Title } = Typography;
 
 const UserInfo = ({ user, createdTime }) => {
+	const path = `/profile/${user.id}`;
 	return (
 		<Row style={{ marginBottom: "10px" }}>
 			<Col>
@@ -20,7 +22,7 @@ const UserInfo = ({ user, createdTime }) => {
 			</Col>
 			<Col style={{ marginLeft: "20px", paddingTop: "5px" }}>
 				<Title style={{ marginBottom: "0px" }} level={5}>
-					{user.fullName}
+					<Link to={path}>{user.fullName}</Link> 
 				</Title>
 				<Text style={{ paddingBottom: "10px" }} type="secondary">
 					{vnMoment(createdTime).format("LLL")}

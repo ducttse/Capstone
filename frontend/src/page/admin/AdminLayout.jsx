@@ -3,6 +3,7 @@ import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../common/CustomeLayout.css";
+import CustomeHeader from "../../common/header/Header";
 const { Header, Content, Sider } = Layout;
 
 const SideBarItemsArr = [
@@ -28,9 +29,7 @@ const getSideBarItems = () =>
 
 const AdminLayout = (props) => (
 	<Layout>
-		<Header className="header">
-
-		</Header>
+		<CustomeHeader/>
 		<Layout>
 			<Sider width={200} className="site-layout-background">
 				<Menu
