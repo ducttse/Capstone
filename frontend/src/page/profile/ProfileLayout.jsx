@@ -11,6 +11,10 @@ const SideBarItemsArr = [
 		name: "Hồ sơ cá nhân",
 		path: "/profile"
 	},
+	{
+		name: "Thay đổi mật khẩu",
+		path: "/change-password"
+	},
 
 ];
 const getSideBarItems = () =>

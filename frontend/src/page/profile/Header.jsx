@@ -60,7 +60,7 @@ const CustomHeader = () => {
 	return (
 		<Header className="header">
 			<Row justify="space-between">
-				<Col span={4} style={{marginTop: "10px", minWidth: "300px"}}>
+				<Col span={5} style={{marginTop: "10px", minWidth: "300px"}}>
 					<Link
 						onClick={() => {
 							history.push("/");
@@ -69,8 +69,7 @@ const CustomHeader = () => {
 						<Title level={2}>MindStone Q&A</Title>
 					</Link>
 				</Col>
-				<Col span={16} />
-				<Col span={4} style={{ minWidth: "300px"}} >
+				<Col span={5} style={{ minWidth: "300px"}} >
 					<Avatar
 						shape="circle"
 						size={45}
