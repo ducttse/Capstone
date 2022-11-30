@@ -1,12 +1,12 @@
 import AxiosInstance from "../../axiosInstance";
 
 export const getCollaboratorsApi = async () => {
-  const response = await AxiosInstance.get(`/collaborators`,{});
+  const response = await AxiosInstance.get(`/collaborators`);
   return response.data;
 };
 
 export const searchCollaboratorsApi = async (searchValue) => {
-  const response = await AxiosInstance.get(`/collaborators`, null, {
+  const response = await AxiosInstance.get(`/collaborators`, {
     params: {
       searchText: searchValue,
     },

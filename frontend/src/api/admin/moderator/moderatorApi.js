@@ -1,12 +1,12 @@
 import AxiosInstance from "../../axiosInstance";
 
 export const getModeratorsApi = async () => {
-  const response = await AxiosInstance.get(`/mods`, {});
+  const response = await AxiosInstance.get(`/mods`);
   return response.data;
 };
 
 export const searchModeratorsApi = async (searchValue) => {
-  const response = await AxiosInstance.get(`/mods`, null, {
+  const response = await AxiosInstance.get(`/mods`, {
     params: {
       searchText: searchValue,
     },
