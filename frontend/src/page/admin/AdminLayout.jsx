@@ -3,18 +3,18 @@ import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../common/CustomeLayout.css";
-import CustomeHeader from "../../common/header/Header";
+import CustomHeader from "../profile/Header";
 const { Header, Content, Sider } = Layout;
 
 const SideBarItemsArr = [
 	{
 		name: "Quản lý nhân viên",
-		path: "/admin"
+		path: "/moderator"
 	},
-	// {
-	// 	name: "Quản lý cộng tác viên",
-	// 	path: "/questions"
-	// }
+	{
+		name: "Quản lý cộng tác viên",
+		path: "/collaborator"
+	},
 ];
 const getSideBarItems = () =>
 	SideBarItemsArr.map((item, index) => {
@@ -29,7 +29,7 @@ const getSideBarItems = () =>
 
 const AdminLayout = (props) => (
 	<Layout>
-		<CustomeHeader/>
+		<CustomHeader/>
 		<Layout>
 			<Sider width={200} className="site-layout-background">
 				<Menu

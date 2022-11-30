@@ -62,8 +62,9 @@ const ProfilePage = () => {
             break;
       }
 
+
       return (
-         Object.entries(studentLabels).map(([key, value]) => {    
+         Object.entries(labels).map(([key, value]) => {    
             return (
                <Descriptions.Item label={value}> 
                   {key === "dateOfBirth" ? profileState.userInfo[key].format("DD/MM/YYYY") : profileState.userInfo[key]} 
@@ -83,7 +84,7 @@ const ProfilePage = () => {
         <Row justify="center" align="middle" >
             <Col span={18} >
                     <Descriptions title="" bordered column={1} 
-                                 contentStyle={{fontSize: "18px" , textAlign:"center"}} 
+                                 contentStyle={{fontSize: "18px" , marginLeft: "20%"}} 
                                  labelStyle={{fontWeight: "bold",fontSize: "20px", width: "210px"}}>
                            {descriptionItems()}
                     </Descriptions>

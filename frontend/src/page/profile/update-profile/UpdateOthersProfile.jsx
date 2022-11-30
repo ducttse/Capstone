@@ -100,12 +100,19 @@ const UpdateOthersProfile = () => {
                         <Form.Item
                             name="address"
                             label="Địa chỉ"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng nhập địa chỉ",
+                                },
+                                ]}
+                            hasFeedback
                         >
                             <TextArea
                                 showCount
                                 maxLength={150}
                                 style={{
-                                    height: 800,
+                                    height: 80,
                                     resize: 'none',
                                 }}
                                 placeholder="Nhập địa chỉ"
@@ -115,6 +122,12 @@ const UpdateOthersProfile = () => {
                         <Form.Item
                             name="dateOfBirth"
                             label="Ngày sinh"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng chọn ngày sinh",
+                                },
+                                ]}
                         >
                             <DatePicker format={'DD/MM/YYYY'}  />
                         </Form.Item>
