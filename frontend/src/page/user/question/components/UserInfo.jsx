@@ -4,8 +4,8 @@ import { vnMoment } from "../../../../utils/vnMoment.js";
 
 const { Text, Title } = Typography;
 
-const UserInfo = ({ user, createdTime }) => {
-	const path = `/profile/${user.id}`;
+const UserInfo = ({id, user, createdTime }) => {
+	const path = `/profile/${id}`;
 	return (
 		<Row style={{ marginBottom: "10px" }}>
 			<Col>
