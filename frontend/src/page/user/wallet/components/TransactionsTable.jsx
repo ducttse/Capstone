@@ -3,6 +3,41 @@ import moment from "moment";
 
 const dateFormat = "DD/MM/YYYY HH:mm";
 
+const getTransactionType = (type) => {
+	switch (type) {
+		case 1:
+			return "Donate";
+		case 2:
+			return "Rút tiền";
+		case 3:
+			return "Nạp tiền";
+		case 4:
+			return "Phí";
+		default:
+			return "Trả tiền";
+	}
+};
+
+const getTransactionStatus = (status) => {
+	console.log(status);
+	switch (status) {
+		case 1:
+			return "Thành công";
+		case 2:
+			return "Không thành công";
+		default:
+			return "Đang chờ";
+	}
+};
+
+const calculateRealAmount = (type, amount) => {
+	if (type == 3) {
+		return amount;
+	} else {
+		return -amount;
+	}
+};
+
 const columns = [
 	{
 		title: "Thời gian",
@@ -18,68 +53,51 @@ const columns = [
 		key: "description"
 	},
 	{
-		title: "Address",
-		dataIndex: "address",
-		key: "address"
+		title: "Loại giao dịch",
+		dataIndex: "transactionType",
+		key: "transactionType",
+		render: (transactionType) => {
+			return <p>{getTransactionType(transactionType)}</p>;
+		}
 	},
 	{
-		title: "Tags",
-		key: "tags",
-		dataIndex: "tags",
-		render: (_, { tags }) => (
-			<>
-				{tags.map((tag) => {
-					let color = tag.length > 5 ? "geekblue" : "green";
-					if (tag === "loser") {
-						color = "volcano";
-					}
-					return (
-						<Tag color={color} key={tag}>
-							{tag.toUpperCase()}
-						</Tag>
-					);
-				})}
-			</>
-		)
+		title: "Số tiền",
+		dataIndex: "realAmount",
+		key: "realAmount",
+		render: (amount) => {
+			return <p>{amount}</p>;
+		}
 	},
 	{
-		title: "Action",
-		key: "action",
-		render: (_, record) => (
-			<Space size="middle">
-				<a>Invite {record.name}</a>
-				<a>Delete</a>
-			</Space>
-		)
+		title: "Trạng thái",
+		dataIndex: "status",
+		key: "status",
+		render: (statusType) => {
+			const color =
+				statusType == 1 ? "green" : statusType == 2 ? "red" : "gold";
+			return <Tag color={color}>{getTransactionStatus(statusType)}</Tag>;
+		}
 	}
+	// {
+	// 	key: "action",
+	// 	render: (_, record) => (
+	// 		<Space size="middle">
+	// 			<a>Xem chi tiết</a>
+	// 		</Space>
+	// 	)
+	// }
 ];
-const data = [
-	{
-		key: "1",
-		createdTime: "2011-10-05T14:48:00.000Z",
-		description: 32,
-		address: "New York No. 1 Lake Park",
-		tags: ["nice", "developer"]
-	},
-	{
-		key: "2",
-		createdTime: "2011-10-05T14:48:00.000Z",
-		description: 42,
-		address: "London No. 1 Lake Park",
-		tags: ["loser"]
-	},
-	{
-		key: "3",
-		createdTime: "2011-10-05T14:48:00.000Z",
-		description: 32,
-		address: "Sidney No. 1 Lake Park",
-		tags: ["cool", "teacher"]
-	}
-];
-const TransactionsTable = () => {
+
+const TransactionsTable = ({ data }) => {
+	const ProceedData = data?.map((t) => {
+		return {
+			...t,
+			realAmount: calculateRealAmount(t.transactionType, t.amount)
+		};
+	});
 	return (
 		<>
-			<Table columns={columns} dataSource={data} />;
+			<Table columns={columns} dataSource={ProceedData} />
 		</>
 	);
 };

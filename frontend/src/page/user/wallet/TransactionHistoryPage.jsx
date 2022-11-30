@@ -1,6 +1,7 @@
 import { Typography } from "antd";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CustomSpin from "../../../common/CustomSpin.jsx";
 import { loadTransactionAsync } from "../../../redux/wallet/actions/transactions.action.js";
 import TransactionsTable from "./components/TransactionsTable.jsx";
 const { Title } = Typography;
@@ -14,10 +15,12 @@ const TransactionHistoryPage = () => {
 	useEffect(() => {
 		dispatchLoadTrans();
 	}, []);
-	return (
+	return loading ? (
+		<CustomSpin />
+	) : (
 		<>
 			<Title level={5}>Lịch sử giao dịch</Title>
-			<TransactionsTable />
+			<TransactionsTable data={data} />
 		</>
 	);
 };

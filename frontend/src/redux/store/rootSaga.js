@@ -9,18 +9,20 @@ import majorSaga from "../staff/category/major/sagas/index.js";
 import subjectSaga from "../staff/category/subject/sagas/index.js";
 import transactionSaga from "../staff/transaction/sagas/index.js";
 import issueSaga from "../collaborator/issue/sagas/index.js";
+import walletSaga from "../wallet/sagas/index.js";
 
 export default function* rootSaga() {
-  yield all([
-    userSaga(),
-    moderatorSaga(),
-    collaboratorSaga(),
-    majorSaga(),
-    subjectSaga(),
-    studentSaga(),
-    transactionSaga(),
-    issueSaga(),
-    authSaga(),
-    profileSaga(),
-  ]);
+	yield all([
+		userSaga(),
+		moderatorSaga(),
+		collaboratorSaga(),
+		majorSaga(),
+		subjectSaga(),
+		studentSaga(),
+		transactionSaga(),
+		walletSaga(),
+		issueSaga(),
+		authSaga(),
+		profileSaga()
+	]);
 }

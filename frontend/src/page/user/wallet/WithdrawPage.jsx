@@ -21,7 +21,7 @@ const WithdrawPapge = () => {
 					addonAfter="VND"
 					defaultValue={0}
 				/>
-				<Button onClick={handleWithdraw}>Nạp tiền</Button>
+				<Button onClick={handleWithdraw}>Rút tiền</Button>
 			</Col>
 		</>
 	);

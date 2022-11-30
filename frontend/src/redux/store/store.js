@@ -12,25 +12,26 @@ import MajorReducer from "../staff/category/major/reducers/index.js";
 import SubjectReducer from "../staff/category/subject/reducers/index.js";
 import TransactionReducer from "../staff/transaction/reducers/index.js";
 import IssueReducer from "../collaborator/issue/reducers/index.js";
+import walletReducer from "../wallet/reducers/index.js";
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-  ...AuthReducer,
-  ...UserReducer,
-  ...ModeratorReducer,
-  ...CollaboratorReducer,
-  ...MajorReducer,
-  ...SubjectReducer,
-  ...StudentReducer,
-  ...TransactionReducer,
-  ...IssueReducer,
-  ...ProfileReducer,
-
+	...AuthReducer,
+	...UserReducer,
+	...ModeratorReducer,
+	...CollaboratorReducer,
+	...walletReducer,
+	...MajorReducer,
+	...SubjectReducer,
+	...StudentReducer,
+	...TransactionReducer,
+	...IssueReducer,
+	...ProfileReducer
 });
 
 const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware))
+	rootReducer,
+	composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 sagaMiddleware.run(rootSaga);
 

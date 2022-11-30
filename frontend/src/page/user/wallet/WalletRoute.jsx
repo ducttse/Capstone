@@ -6,7 +6,6 @@ import WithdrawPapge from "./WithdrawPage.jsx";
 
 const WalletRoute = () => {
 	const { path } = useRouteMatch();
-	console.log(path);
 	return (
 		<>
 			<Route path={`${path}/withdraw`}>
