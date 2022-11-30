@@ -7,11 +7,13 @@ import {
 
 const formData = {
 	title: "",
+	shortContent: "",
 	content: "",
-	tags: [],
-	file: []
+	price: 0,
+	majorId: null,
+	subjetcId: null,
+	questionImageUrls: []
 };
-
 const initState = {
 	loading: false,
 	data: formData

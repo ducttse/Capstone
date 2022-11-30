@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { getStudenId } from "../../../utils/getStudentId.js";
 import AxiosInstance from "../../axiosInstance.js";
 

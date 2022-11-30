@@ -1,0 +1,2 @@
+export const LOAD_WALLET_ASYNC = "LOAD_WALLET_ASYNC";
+export const LOAD_WALLET = "LOAD_WALLET";

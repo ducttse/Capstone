@@ -11,10 +11,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
 	createQuestion,
-	loadForm,
 	updateQuestionForm
 } from "../../../redux/user/actions/questionForm.action.js";
-import { _ } from "lodash";
 import BackButton from "../../../common/BackButton.jsx";
 import RichTextEditor from "../../../common/RichTextEditor.jsx";
 import UploadFileButton from "../questions/components/UploadFileButton.jsx";
