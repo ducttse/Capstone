@@ -2,6 +2,8 @@ import { Button, Col, InputNumber } from "antd";
 import { Typography } from "antd";
 import { useState } from "react";
 import { createPayment } from "../../../api/momo/index.js";
+import { deposit } from "../../../api/wallet/index.js";
+import { getFullname } from "../../../utils/getStudentId.js";
 const { Title, Text } = Typography;
 
 const DepositPage = () => {
@@ -17,9 +19,14 @@ const DepositPage = () => {
 	};
 
 	const handleDeposit = async () => {
+		const des = `${getFullname()} nạp tiền`;
+		console.log(isValid());
 		if (isValid()) {
-			const url = await createPayment("test fe app", number);
-			window.location.href = url;
+			console.log(des, number);
+			const { payUrl, orderId } = await createPayment(des, number);
+			localStorage.setItem("orderId", orderId);
+			await deposit(number, orderId, des);
+			window.location.href = payUrl;
 		}
 	};
 	return (
