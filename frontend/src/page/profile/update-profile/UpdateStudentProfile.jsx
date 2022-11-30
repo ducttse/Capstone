@@ -26,8 +26,9 @@ const UpdateStudentProfile = () => {
 
     const onFinish = (value) => {
         const updateInfo = {
+            ...profileState.userInfo,
             fullName: value.fullName, 
-            avatarUrl: "" , 
+            // avatarUrl: "" , 
             dateOfBirth: moment(value.dateOfBirth).format("YYYY-MM-DD") ,
             bio: value.bio
         };
@@ -80,6 +81,12 @@ const UpdateStudentProfile = () => {
                         <Form.Item
                             name="dateOfBirth"
                             label="Ngày sinh"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Vui lòng chọn ngày sinh",
+                                },
+                                ]}
                         >
                             <DatePicker format={'DD/MM/YYYY'}  />
                         </Form.Item>

@@ -26,8 +26,9 @@ const UpdateOthersProfile = () => {
 
     const onFinish = (value) => {
         const updateInfo = {
+            ...profileState.userInfo,
             fullName: value.fullName, 
-            avatarUrl: "" , 
+            // avatarUrl: "" , 
             dateOfBirth: moment(value.dateOfBirth).format("YYYY-MM-DD") ,
             phone: value.phone,
             address: value.address

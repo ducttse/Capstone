@@ -3,6 +3,7 @@ import * as types from "../constants/updateProfile.constant";
 const initState = {
   loading: false,
   error: "",
+  userInfo: null,
   isSuccess: false,
 };
 
@@ -19,6 +20,7 @@ export default function updateProfile(state = initState, action) {
         return {
           ...state,
           error: action.error,
+          userInfo: null,
           loading: false,
           isSuccess: false,
         };
@@ -26,6 +28,7 @@ export default function updateProfile(state = initState, action) {
       return {
         ...state,
         loading: true,
+        userInfo: action.changeInfo,
         error: "",
         isSuccess: false,
       };
@@ -33,6 +36,7 @@ export default function updateProfile(state = initState, action) {
         return {
           ...state,
           loading: false,
+          userInfo: null,
           error: "",
           isSuccess: false,
         };
