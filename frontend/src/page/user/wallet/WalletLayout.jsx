@@ -1,18 +1,26 @@
 import { Layout, Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import "./CustomeLayout.css";
-import CustomeHeader from "./header/Header.jsx";
+import CustomeHeader from "../../../common/header/Header.jsx";
+// import "./CustomeLayout.css";
 const { Content, Sider } = Layout;
 
 const SideBarItemsArr = [
 	{
-		name: "Tất cả câu hỏi",
-		path: "/questions"
+		name: "Thông tin ví",
+		path: "/wallet"
 	},
 	{
-		name: "Câu hỏi đã đăng",
-		path: "/questions"
+		name: "Lịch sử giao dịch",
+		path: "/wallet/transactions"
+	},
+	{
+		name: "Nạp tiền",
+		path: "/wallet/deposit"
+	},
+	{
+		name: "Rút tiền",
+		path: "/wallet/withdraw"
 	}
 ];
 const getSideBarItems = () =>
@@ -25,7 +33,7 @@ const getSideBarItems = () =>
 		);
 	});
 
-const CustomLayout = (props) => (
+const WalletLayout = (props) => (
 	<Layout>
 		<CustomeHeader />
 		<Layout>
@@ -63,4 +71,4 @@ const CustomLayout = (props) => (
 	</Layout>
 );
 
-export default CustomLayout;
+export default WalletLayout;

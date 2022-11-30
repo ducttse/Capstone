@@ -2,10 +2,10 @@ import BookingPage from "./BookingPage.jsx";
 import QuestionPage from "./QuestionPage.jsx";
 import RequestListPage from "./RequestListPage.jsx";
 
-const { Switch, Route, useRouteMatch } = require("react-router-dom");
+const { Route, useRouteMatch } = require("react-router-dom");
 
 const QuestionRoute = () => {
-	const { path, url } = useRouteMatch();
+	const { path } = useRouteMatch();
 	return (
 		<>
 			<Route path={`${path}/requests`}>

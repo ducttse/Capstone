@@ -37,6 +37,7 @@ const EditQuestionPage = () => {
 	const history = useHistory();
 	const { data: majors } = useSelector((state) => state.majorItems);
 	const [subjects, setSubjects] = useState([]);
+	const [subjectId, setSubjectId] = useState(null);
 
 	const dispatchUpdate = (value) => dispatch(updateEditQuestionForm(value));
 	const loadQuestionAsync = (id) => dispatch(loadEditQuestionFormAsync(id));
@@ -68,15 +69,24 @@ const EditQuestionPage = () => {
 	}, []);
 
 	useEffect(() => {
-		form.setFieldsValue(data);
+		const { subjectId, majorId, ...rest } = data;
+		handleMajorChange(data.majorId);
+		setSubjectId(subjectId);
+		form.setFieldsValue(rest);
 	}, [loading]);
+
+	useEffect(() => {
+		if (!data.subject) {
+			form.setFieldsValue({ ...data, subjectId });
+		}
+	}, [subjects]);
 
 	return loading ? (
 		<CustomSpin />
 	) : (
 		<Row>
 			<Col span={4}>
-				<BackButton to="/questions" />
+				<BackButton to={`/question/${id}`} />
 			</Col>
 			<Col span={14}>
 				<Form
@@ -85,7 +95,6 @@ const EditQuestionPage = () => {
 					autoComplete="off"
 					onFinish={onFinish}
 					onValuesChange={onValuesChange}
-					initialValues={{ ...data }}
 				>
 					<Form.Item
 						rules={[{ required: true, message: "Không được bỏ trống" }]}
@@ -148,7 +157,7 @@ const EditQuestionPage = () => {
 						<UploadFileButton />
 					</Form.Item>
 					<Button type="primary" htmlType="submit">
-						Tạo câu hỏi
+						Lưu
 					</Button>
 				</Form>
 			</Col>

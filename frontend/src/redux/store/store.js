@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
   ...TransactionReducer,
   ...IssueReducer,
   ...ProfileReducer,
+
 });
 
 const store = createStore(
