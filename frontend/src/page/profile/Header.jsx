@@ -32,7 +32,7 @@ const CustomHeader = () => {
 		history.push(route);
 	};
 
-	const { user } = useSelector((state) => state.auth);
+	const user = JSON.parse(localStorage.getItem("user"));
 
 	const menu = (
 		<Menu

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clearupdateProfileMessage } from "../../../redux/profile/actions/updateProfile.action";
+import { updateLocalInfo } from "../../../utils/auth";
 import UpdateOthersProfile from "./UpdateOthersProfile";
 import UpdateStudentProfile from "./UpdateStudentProfile";
 
@@ -20,6 +21,7 @@ const UpdateProfile = () => {
     const finishMessage = () => {
         if(updateProfileState.isSuccess){
             message.success("Cập nhật thông tin thành công");
+            updateLocalInfo(updateProfileState.userInfo);
             dispatch(clearupdateProfileMessage());
             history.push("/profile");
         }

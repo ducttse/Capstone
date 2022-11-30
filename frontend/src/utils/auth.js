@@ -6,3 +6,9 @@ export const getAuthHeader = () => {
 		return {};
 	}
 };
+
+export const updateLocalInfo = (changeInfo) => {
+	const user = JSON.parse(localStorage.getItem("user"));
+	const newUser = {...user, ...changeInfo}
+	localStorage.setItem("user",JSON.stringify(newUser));
+};

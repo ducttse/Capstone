@@ -5,7 +5,7 @@ export const transactionTypes = [
     },
     {
         id: "1",
-        type: "Quyên tặng"
+        type: "Donate"
     },
     {
         id: "2",

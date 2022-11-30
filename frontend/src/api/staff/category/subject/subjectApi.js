@@ -6,7 +6,7 @@ export const getSubjectsApi = async () => {
 };
 
 export const searchSubjectsApi = async (searchValue) => {
-  const response = await AxiosInstance.get(`/subjects`, null, {
+  const response = await AxiosInstance.get(`/subjects`,{
     params: {
       searchText: searchValue,
     },

@@ -6,7 +6,7 @@ export const getMajorsApi = async () => {
 };
 
 export const searchMajorsApi = async (searchValue) => {
-  const response = await AxiosInstance.get(`/majors/all`, null, {
+  const response = await AxiosInstance.get(`/majors/all`, {
     params: {
       searchText: searchValue,
     },
