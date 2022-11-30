@@ -57,17 +57,17 @@ const RegisterPage = () => {
                     <Form.Item
                         name="email"
                         label="Email"
-                        // rules={[
-                        //     {    required: true,
-                        //         type: "email",
-                        //         validator(_, value) {
-                        //         if (value.endsWith("@fpt.edu.vn")) {
-                        //             return Promise.resolve();
-                        //         }
-                        //         return Promise.reject(new Error('Vui lòng nhập FPT email'));
-                        //         },
-                        //     },
-                        // ]}
+                        rules={[
+                            {    required: true,
+                                type: "email",
+                                validator(_, value) {
+                                if (value.endsWith("@fpt.edu.vn")) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('Vui lòng nhập FPT email'));
+                                },
+                            },
+                        ]}
                         hasFeedback
                     >
                         <Input placeholder="Nhập email" />
