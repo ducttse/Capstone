@@ -35,12 +35,12 @@ const LoginPage = () => {
 
 	const onFinish = (data) => {
 		dispatch(loginAsync(data));
-		dispatch(clearLoginMessage());
 	};
 
 	const loginMessage = () => {
 		if(authState.error != ""){
 			message.error(authState.error);
+			dispatch(clearLoginMessage());
 		}
 	}
 
@@ -50,10 +50,13 @@ const LoginPage = () => {
 				history.push("/questions");
 				break;
 			case 2:
-				history.push("/admin");
+				history.push("/moderator");
 				break;
 			case 3:
-				history.push("/staff/major");
+				history.push("/student");
+				break;
+			case 4:
+				history.push("/issue");
 				break;
 			}
 		

@@ -26,7 +26,6 @@ export const roles = [
   };
   
   export const getRolesApi = async () => {
-    await fakeCallApi(100);
     const roleList = roles.filter((role) => role.name.includes("Sinh viên") === false);
     return roleList ;
 };
