@@ -14,9 +14,10 @@ export function getProfileByIdFail(payload) {
   };
 }
 
-export function getProfileByIdAsync(id) {
+export function getProfileByIdAsync(roleId, id) {
   return {
     type: types.GET_PROFILE_BY_ID_ASYNC,
     id: id,
+    roleId: roleId
   };
 }

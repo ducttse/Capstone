@@ -1,61 +1,95 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Col, Descriptions, Row, Space } from "antd";
+import { Avatar, Button, Col, Descriptions, Row, Space } from "antd";
 import moment from "moment";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import BackButton from "../../../common/BackButton";
+import CustomSpin from "../../../common/CustomSpin";
 import { getProfileByIdAsync } from "../../../redux/profile/actions/profile.action";
 
 const ProfilePage = () => {
 
    const dispatch = useDispatch();
+   const history = useHistory();
    const {data} = useSelector(state => state.question);
    const profileState = useSelector(state => state.profile);
-   const authState = useSelector(state => state.auth);
+   const user = JSON.parse(localStorage.getItem("user"));
    const {id} = useParams();
    const path = `/question/${data?.id}`;
 
    useEffect(() => {
-      let profileId = id ? id : authState.user.id;
-      dispatch(getProfileByIdAsync(profileId));
+      let profileId = id ? id : user.id;
+      dispatch(getProfileByIdAsync(user.roleId, profileId));
    } ,[])
 
-   const descriptionItems = (
-      <>
-         <Descriptions.Item label="Họ tên">{profileState.userInfo?.fullName}</Descriptions.Item>
-         <Descriptions.Item label="Email">{profileState.userInfo?.email}</Descriptions.Item>
-         <Descriptions.Item label="Đánh giá">{profileState.userInfo?.reputation} / 5</Descriptions.Item>
-         <Descriptions.Item label="Cảnh cáo">{profileState.userInfo?.flag} lần</Descriptions.Item>
-         <Descriptions.Item label="Câu hỏi đã trả lời">{profileState.userInfo?.questionAnswered} câu</Descriptions.Item>
-         <Descriptions.Item label=""></Descriptions.Item>
-         <Descriptions.Item label="Ngày sinh">{moment(profileState.userInfo?.dateOfBirth).format('DD/MM/YYYY')}</Descriptions.Item>
-         <Descriptions.Item label=""></Descriptions.Item>
-         <Descriptions.Item span={2} label="Mô tả bản thân">{profileState.userInfo?.bio}</Descriptions.Item>
-      </>
-   )
+   const studentLabels =  {
+      fullName: "Họ tên",
+      email: "Email",
+      reputation: "Đánh giá",
+      flag: "Cảnh cáo",
+      questionAnswered: "Câu hỏi đã trả lời",
+      dateOfBirth: "Ngày sinh",
+      bio: "Mô tả bản thân"
+   }
 
-    return ( 
+   const moderatorLabels =  {
+      fullName: "Họ tên",
+      email: "Email",
+      phone: "Điện thoại",
+      address: "Địa chỉ",
+      dateOfBirth: "Ngày sinh",
+   }
+
+   const colaboratorLabels = {
+      ...moderatorLabels,
+      major: "Chuyên ngành"
+   }
+
+   const descriptionItems = () => {
+      let labels;
+      const roleId = user.roleId;
+      switch(roleId){
+         case 1:
+            labels = studentLabels;
+            break;
+         case 2:
+         case 3:
+            labels = moderatorLabels;
+            break;
+         case 4: 
+            labels = colaboratorLabels;
+            break;
+      }
+
+      return (
+         Object.entries(studentLabels).map(([key, value]) => {    
+            return (
+               <Descriptions.Item label={value}> 
+                  {key === "dateOfBirth" ? profileState.userInfo[key].format("DD/MM/YYYY") : profileState.userInfo[key]} 
+               </Descriptions.Item>  
+            ) ;  
+         })
+      )
+   } 
+
+    return profileState.loading ? <CustomSpin/> : ( 
         <>
         {id && data && <BackButton to={path} />}
-        <Space direction="vertical" size="large" style={{justifySelf: "center"}}>
-            <Row justify="center" align="middle" >
-               <Col justify="center" align="middle">
-                  <Avatar shape="circle" size={200} icon={<UserOutlined />} src={profileState.userInfo?.avatarUrl}/>
-               </Col>
-            </Row>
-            <Row justify="center" align="middle">
-                  <Col justify="center" align="middle" >
-                     <Descriptions layout="horizontal" column={2} 
-                        labelStyle={{paddingLeft: "50px", fontSize: "25px"}} 
-                        contentStyle={{justifyContent: "start", margin:"0 100px",fontSize: "25px"}}
-                     >
-                        {descriptionItems}
-                     </Descriptions>
-                  </Col>
-            </Row>
-        </Space>
-        
+        <Button type="primary" onClick={() => {history.push("/update-profile")}} style={{float: "right"}}> Chỉnh sửa </Button>
+        <Row justify="center" align="middle" style={{marginBottom: "50px"}}>
+               <Avatar  shape="circle" size={200} icon={<UserOutlined />} src={profileState.userInfo?.avatarUrl}/>
+         </Row>
+        <Row justify="center" align="middle" >
+            <Col span={18} >
+                    <Descriptions title="" bordered column={1} 
+                                 contentStyle={{fontSize: "18px" , textAlign:"center"}} 
+                                 labelStyle={{fontWeight: "bold",fontSize: "20px", width: "210px"}}>
+                           {descriptionItems()}
+                    </Descriptions>
+            </Col>
+        </Row>
+
         </>
      );
 }

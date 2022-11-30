@@ -1,10 +1,12 @@
 import { Comment, List } from "antd";
 import { Interweave } from "interweave";
+import { Link } from "react-router-dom";
 import { vnMoment } from "../../../../utils/vnMoment.js";
 import dummyAva from "./ava.jpeg";
 
 const formatRawData = (data) => {
 	return {
+		id: data.id,
 		author: data.fullName,
 		avatar: dummyAva,
 		content: data.content,
@@ -13,8 +15,9 @@ const formatRawData = (data) => {
 };
 
 const CustomeComment = ({ data }) => {
-	const { content, ...rest } = { ...data };
-	return <Comment {...rest} content={<Interweave content={content} />} />;
+	const { content,author,id, ...rest } = { ...data };
+	const path = `/profile/${id}`;
+	return <Comment {...rest} author={<Link to={path}>{author}</Link>} content={<Interweave content={content} />} />;
 };
 
 const ListComments = ({ comments }) => {
