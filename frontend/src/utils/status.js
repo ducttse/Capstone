@@ -22,7 +22,7 @@ export const getStatus = (id) => {
 export const transactionStatus = [
     {
         id : "0",
-        state: "Đang chờ xử lý",
+        state: "Đang chờ",
     },
     {
         id: "1",

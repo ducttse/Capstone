@@ -6,7 +6,7 @@ import dummyAva from "./ava.jpeg";
 
 const formatRawData = (data) => {
 	return {
-		id: data.id,
+		id: data.studentId,
 		author: data.fullName,
 		avatar: dummyAva,
 		content: data.content,
