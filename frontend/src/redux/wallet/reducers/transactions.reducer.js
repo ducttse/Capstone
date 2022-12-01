@@ -1,4 +1,5 @@
 import {
+	CHANGE_PAGE,
 	LOAD_TRANSACTION,
 	LOAD_TRANSACTION_ASYNC
 } from "../constants/transactions.constant.js";
@@ -6,7 +7,8 @@ import {
 const initState = {
 	loading: true,
 	error: null,
-	data: null
+	data: null,
+	pagination: {}
 };
 
 export default function transactions(state = initState, action) {

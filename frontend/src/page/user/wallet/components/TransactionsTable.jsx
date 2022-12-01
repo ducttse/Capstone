@@ -88,16 +88,28 @@ const columns = [
 	// }
 ];
 
-const TransactionsTable = ({ data }) => {
+const TransactionsTable = ({ data, pagination, onChange }) => {
 	const ProceedData = data?.map((t) => {
 		return {
 			...t,
 			realAmount: calculateRealAmount(t.transactionType, t.amount)
 		};
 	});
+
+	const { totalCount, currentPage, pageSize } = pagination;
+
 	return (
 		<>
-			<Table columns={columns} dataSource={ProceedData} />
+			<Table
+				columns={columns}
+				dataSource={ProceedData}
+				pagination={{
+					total: totalCount,
+					current: currentPage,
+					pageSize: pageSize,
+					onChange: onChange
+				}}
+			/>
 		</>
 	);
 };
