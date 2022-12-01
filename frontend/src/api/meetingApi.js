@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getMeetingId = async () => {
 	try {
-		const res = await axios.post(
+		const { data } = await axios.post(
 			"https://api.zujonow.com/api/meetings",
 			{},
 			{
@@ -11,7 +11,7 @@ export const getMeetingId = async () => {
 				}
 			}
 		);
-		return res;
+		return data;
 	} catch (e) {
 		console.log(e);
 	}

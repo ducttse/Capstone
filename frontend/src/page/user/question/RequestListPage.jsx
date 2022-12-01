@@ -77,9 +77,14 @@ const RequestListPage = () => {
 		setIsModalOpen(true);
 	};
 
-	const handleOk = (time) => {
+	const handleOk = (time, meetingId) => {
 		// request accept
-		acceptRegisterAnswer(data.id, data.requestedAnswer[selectedIndex].id, time);
+		acceptRegisterAnswer(
+			data.id,
+			data.requestedAnswer[selectedIndex].id,
+			time,
+			meetingId
+		);
 		history.push(`/question/${data.id}`);
 	};
 

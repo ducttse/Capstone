@@ -15,10 +15,9 @@ const BookingForm = ({ title, open, onOk, onCancel }) => {
 
 	const onFinish = async ({ date }) => {
 		//TODO : call api to submit booking
-		// const res = await getMeetingId();
-		// console.log("Call create meeting", res);
+		const { meetingId } = await getMeetingId();
 		const time = moment(date).toISOString();
-		onOk(time);
+		onOk(time, meetingId);
 	};
 
 	const handleFinish = () => {
